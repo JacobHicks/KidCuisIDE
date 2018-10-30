@@ -1,0 +1,2 @@
+# KidCuisIDE
+Text editor

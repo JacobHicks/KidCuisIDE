@@ -11,26 +11,58 @@
 	</head>
 	<body>
 	<p th:text="'Hello, ' + ${name} + '!'" />
-	<p class="test">blahhhhh </p>
 	<div class="main">
 		<form></form><!--The main code writing window.-->
 		<form></form> <!--the console   `DONT TOUCH`--><!--main code writing window/console-->
 	</div>
 	<div class="sidenav">
-		<button></button>
-
 	</div>
-	<div class="topRibbon">
-		
+	<div class="ribbon">
+		<button class="topButton" id="runButton">Run</button>
+		<button class="topButton" id="saveButton">Save</button>
+		<button class="topButton" id="debugButton">Debug</button>
+		<button class="topButton" id="newButton">New</button>
+		<button class="topButton" id="openButton">Open</button>
+		<button class="topButton" id="compileButtton">Compile</button>
 	</div>
 	</body>
 
 
 	<style>
-		.test {
-			color:blue;
-			font-size: 64px;
+		html {
+			margin: 0;
+			height: 100;
+			font-family: monospace;
+			color: black;
 		}
+		body {
+			display: grid;
+			grid-template-columns: 75px, auto; 
+			grid-template-rows: 50px, auto;
+			grid-template-areas:
+			"ribbon ribbon"
+			"sidenav main";
+		}
+		.topButton {
+			background-color: rgb(189, 179, 179);
+			border-radius: 5px;
+			font-size: 18px;
+			border-width: 5px;
+			border-style: outset;
+		}
+		.sidenav {
+			grid-area: sidenav;
+			border: red, 2px, solid;
+		}
+		.ribbon {
+			grid-area: ribbon;
+			border: blue, 20px, solid;
+		}
+		.main {
+			grid-area: main;
+			border: green, 2px, solid;
+		}
+
 
 	</style>
 </html>

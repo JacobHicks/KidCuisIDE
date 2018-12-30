@@ -14,8 +14,10 @@
 	<div class="main">
 		<form></form><!--The main code writing window.-->
 		<form></form> <!--the console   `DONT TOUCH`--><!--main code writing window/console-->
+		<form>
 	</div>
 	<div class="sidenav">
+		<h3>Open Files</h3>
 	</div>
 	<div class="ribbon">
 		<button class="topButton" id="runButton">Run</button>
@@ -45,6 +47,7 @@
 		}
 		.topButton {
 			background-color: rgb(189, 179, 179);
+			font-family: monospace;
 			border-radius: 5px;
 			font-size: 18px;
 			border-width: 5px;
@@ -52,15 +55,21 @@
 		}
 		.sidenav {
 			grid-area: sidenav;
-			border: red, 2px, solid;
+			border-color: black;
+			border-width: 5px;
+			border-style: solid;
 		}
 		.ribbon {
 			grid-area: ribbon;
-			border: blue, 20px, solid;
+			border-color: black;
+			border-width: 5px;
+			border-style: solid;
 		}
 		.main {
 			grid-area: main;
-			border: green, 2px, solid;
+			border-color: black;
+			border-width: 5px;
+			border-style: solid;
 		}
 
 

@@ -15,7 +15,9 @@
 		<form></form><!--The main code writing window.-->
 		<form></form> <!--the console   `DONT TOUCH`--><!--main code writing window/console-->
 		<form>
-	</div>
+			<input id="mainWritingWindow" placeholder="<Insert amazing code here>">
+		</form>
+	</div> 
 	<div class="sidenav">
 		<h3>Open Files</h3>
 	</div>
@@ -52,12 +54,21 @@
 			font-size: 18px;
 			border-width: 5px;
 			border-style: outset;
+			outline:none;
+		}
+		.topButton:active {
+			transition: all, 450ms, ease;
+			border-color: green;
+			background-color: green;
+			border-style:inset;
+			color: white;
 		}
 		.sidenav {
 			grid-area: sidenav;
 			border-color: black;
 			border-width: 5px;
 			border-style: solid;
+
 		}
 		.ribbon {
 			grid-area: ribbon;
@@ -71,7 +82,16 @@
 			border-width: 5px;
 			border-style: solid;
 		}
-
+		#mainWritingWindow {
+			font-family: monospace;
+			color: black;
+			font-size: 14px;
+			border-color: blue;
+			border-style: solid;
+			border-width: 5px;
+			height: auto;
+			width: auto;
+		}
 
 	</style>
 </html>

@@ -1,6 +1,5 @@
 <component name="libraryTable">
-  <library name="Spring-4.3.18.RELEASE" type="spring">
-    <properties version="4.3.18.RELEASE" />
+  <library name="Spring-4.3.18.RELEASE">
     <CLASSES>
       <root url="jar://$PROJECT_DIR$/Server/lib/spring-aspects-4.3.18.RELEASE.jar!/" />
       <root url="jar://$PROJECT_DIR$/Server/lib/spring-context-support-4.3.18.RELEASE.jar!/" />

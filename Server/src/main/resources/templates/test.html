@@ -1,22 +1,26 @@
 <!--YOUR TASKS WILL APPEAR HERE
 			TODO
-~	Set up the CSS grid form/header/everything else setup.
-~
+~	Set up the main window
+~	Set up the multi window interface that we need
+~	Make sure the form works
+~	Get the console going
+~	Make it all look nice
+~ 	Import font awesome
 -->
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 	<head>
-    <title>Getting Started: Serving Web Content</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    	<title>WebIDE</title>
+    	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	</head>
 	<body>
-	<p th:text="'Hello, ' + ${name} + '!'" />
 	<div class="main">
-		<form></form><!--The main code writing window.-->
-		<form></form> <!--the console   `DONT TOUCH`--><!--main code writing window/console-->
 		<form>
-			<input id="mainWritingWindow" placeholder="<Insert amazing code here>">
-		</form>
+			<textarea id="mainWritingWindow" placeholder="<Insert amazing code here>">
+			</textarea>
+		</form><!--The main code writing window.-->
+		<form></form> <!--the console   `DONT TOUCH`--><!--main code writing window/console-->
+		
 	</div> 
 	<div class="sidenav">
 		<h3>Open Files</h3>
@@ -81,6 +85,8 @@
 			border-color: black;
 			border-width: 5px;
 			border-style: solid;
+			width: auto;
+			height: auto;
 		}
 		#mainWritingWindow {
 			font-family: monospace;
@@ -89,8 +95,9 @@
 			border-color: blue;
 			border-style: solid;
 			border-width: 5px;
-			height: auto;
-			width: auto;
+			height: 60%;
+			width: 90%;
+			resize: none;
 		}
 
 	</style>

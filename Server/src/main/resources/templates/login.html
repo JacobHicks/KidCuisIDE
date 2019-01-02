@@ -17,15 +17,60 @@
 	<body>
 		<div class="loginDiv">
 			<form>
-				<input type="text" placeholder="Username" id=usernameId"">
-				<input type="text" placeholder="Password" id="passwordId">
+				<h1>WebIDE</h1>
+				<input type="text" placeholder="Username" id="usernameId" class="forms">
+				<input type="text" placeholder="Password" id="passwordId" class="forms">
+				<button id="loginButton">Enter</button>
 				<p>Don't have an account? Make one <a href="">here</a>.</p>
 				<p><a href="">Forgot password?</a></p>
 			</form>
 		</div> 
 	</body>
+	<footer>
+		<p class="copyrightJazz">Copyright 2019 SEJI Corporation LLC.</p>
+	</footer>
 	<style>
-		
+		.loginDiv {
+			display:grid;
+			height: 90vh;
+			border-style: solid;
+			border-width: 2px;
+			border-color: black;
+			justify-content: center;
+			align-items: center;
+			font-family: monospace;
+			font-size: 18px;
+		}
+		.copyrightJazz {
+			font-family: monospace;
+			color: black;
+			font-size: 12px;
+		}
+		.forms {
+			border: none;
+			border-bottom: solid black 3px;
+			color: black;
+			font-family: monospace;
+			font-size: 16px;
+			background-color: rgb(200, 200, 200);
+		}
+		.forms:active {
+			transition: all 500ms ease;
+			border-bottom: solid green 3px;
+		}
+		#loginButton {
+			background-color: blue;
+			border-radius: 15%;
+			font-family: monospace;
+			font-size: 16px;
+			color: white;
+			outline: none;
+		}
+		footer {
+			height: 5vh;
+			background-color: rgb(157, 157, 157);
+			margin-top: none;
+		}
 	</style>
 
 </html>

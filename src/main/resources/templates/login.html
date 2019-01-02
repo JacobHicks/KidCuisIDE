@@ -11,15 +11,15 @@
 	</head>
 	<body>
 		<div class="loginDiv">
-			<form>
+			<form action="#" th:action="@{/login}" th:object="${login}" method="post">
 				<h1>WebIDE</h1>
-				<input type="text" placeholder="Username" id="usernameId" class="forms">
-				<input type="password" placeholder="Password" id="passwordId" class="forms">
-				<button id="loginButton">Enter</button>
+				<input type="text"  th:field="*{username}" placeholder="Username" id="usernameId" class="forms" >
+				<input type="password" th:field="*{password}" placeholder="Password" id="passwordId" class="forms">
+				<input type="submit" id="loginButton">
 				<p>Don't have an account? Make one <a href="">here</a>.</p>
 				<p><a href="">Forgot password?</a></p>
 			</form>
-		</div> 
+		</div>
 	</body>
 	<footer>
 		<p class="copyrightJazz">Copyright 2019 SEJI Corporation LLC.</p>

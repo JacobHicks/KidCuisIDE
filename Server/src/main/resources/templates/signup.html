@@ -1,9 +1,9 @@
 <!-- YOUR MAIN TASKS WILL APPEAR HERE
 			TODO
-~
-~
-~
-~
+~	Set up some of the types for the form (email and password)
+~	Set the required fields (all of them)
+~	Set password security
+~	
 ~
 -->
 <!DOCTYPE HTML>
@@ -13,10 +13,18 @@
     	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	</head>
 	<body>
-		<div>
-			<h1>WebIDE</h1>
+		<div class="titleDiv">
+			<h1 class="title">WebIDE</h1>
 			<p>Signup</p>
-
+			<form>
+				<input type="text" placeholder="First Name"></input>
+				<input type="text" placeholder="Last Name"></input>
+				<input type="text" placeholder="Username"></input>
+				<input placeholder="Email"></input>
+				<input placeholder="Password"></input>
+				<input placeholder="Password"></input>
+				<button type="submit" id="submitButtonSignup">Submit</button>
+			</form>
 		</div>
 	</body>
 	<footer>		
@@ -25,5 +33,27 @@
 		html {
 			font-family: monospace;
 		}
+		.titleDiv {
+			justify-content:center;
+			align-items: center;
+			height: 90vh;
+		}
+		input {
+			display: block;
+			margin-bottom: 15px;
+			border:none;
+			border-bottom: solid black 3px;
+			font-family: monospace;
+			color: black;
+			background-color: rgb(200, 200, 200);
+			font-size: 16px;
+		}	
+		button {
+			font-size: 16px;
+			background-color: blue;
+			color: white;
+			border-radius: 15%;
+
+		}	
 	</style>			
 </html>	

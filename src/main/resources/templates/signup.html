@@ -1,0 +1,59 @@
+<!-- YOUR MAIN TASKS WILL APPEAR HERE
+			TODO
+~	Set up some of the types for the form (email and password)
+~	Set the required fields (all of them)
+~	Set password security
+~	
+~
+-->
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+    	<title>WebIDE</title>
+    	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	</head>
+	<body>
+		<div class="titleDiv">
+			<h1 class="title">WebIDE : Signup</h1>
+			<form>
+				<input type="text" placeholder="First Name"></input>
+				<input type="text" placeholder="Last Name"></input>
+				<input type="text" placeholder="Username"></input>
+				<input type="email" placeholder="Email"></input>
+				<input type="password" placeholder="Password"></input>
+				<input type="password" placeholder="Password"></input>
+				<button type="submit" id="submitButtonSignup">Submit</button>
+			</form>
+		</div>
+	</body>
+	<footer>		
+	</footer>
+	<style>
+		html {
+			font-family: monospace;
+		}
+		.titleDiv {
+			display: grid;
+			justify-content:center;
+			align-items: center;
+			height: 90vh;
+		}
+		input {
+			display: block;
+			margin-bottom: 15px;
+			border:none;
+			border-bottom: solid black 3px;
+			font-family: monospace;
+			color: black;
+			background-color: rgb(200, 200, 200);
+			font-size: 20px;
+		}	
+		button {
+			font-size: 20px;
+			background-color: blue;
+			color: white;
+			border-radius: 15%;
+			outline: none;
+		}	
+	</style>			
+</html>	

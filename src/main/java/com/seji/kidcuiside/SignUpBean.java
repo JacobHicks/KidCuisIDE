@@ -2,6 +2,7 @@ package com.seji.kidcuiside;
 
 public class SignUpBean {
     private String firstname;
+    private String lastname;
     private String username;
     private String email;
     private String password;
@@ -13,6 +14,14 @@ public class SignUpBean {
 
     public void setFirstname(String firstname) {
         this.firstname = firstname;
+    }
+
+    public String getLastname() {
+        return lastname;
+    }
+
+    public void setLastname(String lastname) {
+        this.lastname = lastname;
     }
 
     public String getEmail() {

@@ -47,6 +47,7 @@ public class LoginController {
         System.out.println(signup);
         if(signup.getPassword().equals(signup.getConfirmPassword()) && isValidInput(signup.getUsername(), signup.getPassword())) {
             return "redirect:/login";
+            //TODO register user in db
         }
         //Try again skrub
         return "redirect:/signup";

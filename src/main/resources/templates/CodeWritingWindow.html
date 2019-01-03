@@ -31,9 +31,9 @@
 		<button class="topButton" id="debugButton">Debug</button>
 		<button class="topButton" id="newButton">New</button>
 		<button class="topButton" id="openButton">Open</button>
-		<button class="topButton" id="compileButtton">Compile</button>
+		<button class="topButton" id="compileButton">Compile</button>
 		<form action="#" th:action="@{/logout}" method="post">
-			<input type="submit" id="loginButton" name="Log Out">
+			<button class="topRightButton" id="logoutButton" name="Log Out">LogOut</button>
 		</form>
 	</div>
 	</body>
@@ -70,6 +70,25 @@
 			border-style:inset;
 			color: white;
 		}
+        .topRightButton {
+            background-color: rgb(189, 179, 179);
+            font-family: monospace;
+            border-radius: 5px;
+            font-size: 18px;
+            border-width: 5px;
+            border-style: outset;
+            outline:none;
+			position:absolute;
+			top:13px;
+			right:13px;
+        }
+        .topRightButton:active {
+            transition: all, 450ms, ease;
+            border-color: green;
+            background-color: green;
+            border-style:inset;
+            color: white;
+        }
 		.sidenav {
 			grid-area: sidenav;
 			border-color: black;

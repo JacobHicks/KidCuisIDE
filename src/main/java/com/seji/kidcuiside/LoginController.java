@@ -11,9 +11,14 @@ import javax.servlet.http.HttpServletResponse;
 @Controller
 public class LoginController {
     @GetMapping("/login")
-    public String login(Model model) {
-        model.addAttribute("login", new LoginBean());
-        return "login";
+    public String login(Model model, @CookieValue(value = "id", defaultValue = "NotLoggedIn") String id) {
+        if(id.equals("NotLoggedIn")) {
+            model.addAttribute("login", new LoginBean());
+            return "login";
+        }
+        else {  //TODO check if id is valid
+            return "redirect:/code";
+        }
     }
 
     @PostMapping("/login")

@@ -46,7 +46,7 @@ public class LoginController {
     public String signUp(@ModelAttribute SignUpBean signup) {
         System.out.println(signup);
         if(signup.getPassword().equals(signup.getConfirmPassword()) && isValidInput(signup.getUsername(), signup.getPassword())) {
-            return "redirect:/login";
+            return "redirect:/signupconfirm";
             //TODO register user in db
         }
         //Try again skrub

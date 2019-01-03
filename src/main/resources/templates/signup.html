@@ -18,15 +18,16 @@
 			<form>
 				<input type="text" placeholder="First Name" required minlength="1" maxlength="25">
 				<input type="text" placeholder="Last Name" required minlength="1" maxlength="25">
-				<input type="text" placeholder="Username" required minlength="5">
-				<input type="email" placeholder="Email" required>
+				<input type="text" placeholder="Username" required minlength="5" maxlength="25">
+				<input type="email" placeholder="Email" required maxlength="25">
 				<input type="password" placeholder="Password" required>
 				<input type="password" placeholder="Password" required>
 				<button type="submit" id="submitButtonSignup">Submit</button>
 			</form>
 		</div>
 	</body>
-	<footer>		
+	<footer>
+        <p class="copyrightJazz">Copyright 2019 SEJI Corporation LLC.</p>
 	</footer>
 	<style>
 		html {
@@ -36,6 +37,9 @@
 			display: grid;
 			justify-content:center;
 			align-items: center;
+            border-color: black;
+            border-width: 3px;
+            border-style: solid;
 			height: 90vh;
 		}
 		input {
@@ -54,6 +58,11 @@
 			color: white;
 			border-radius: 15%;
 			outline: none;
-		}	
+		}
+        footer {
+            height: 4vh;
+            background-color: rgb(157, 157, 157);
+            margin-top: 0;
+        }
 	</style>			
 </html>	

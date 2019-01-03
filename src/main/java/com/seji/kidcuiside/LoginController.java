@@ -44,8 +44,8 @@ public class LoginController {
 
     @PostMapping("/signup")
     public String signUp(@ModelAttribute SignUpBean signup) {
-        System.out.println(signup);
         if(signup.getPassword().equals(signup.getConfirmPassword()) && isValidInput(signup.getUsername(), signup.getPassword())) {
+            String hash = Cryptor.hash("Kid" + signup.getUsername() + "Cuis" + signup.getPassword() + "IDE");
             return "redirect:/signupconfirm";
             //TODO register user in db
         }

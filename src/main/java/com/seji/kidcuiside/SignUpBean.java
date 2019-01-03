@@ -55,15 +55,4 @@ public class SignUpBean {
     public void setConfirmPassword(String confirmPassword) {
         this.confirmPassword = confirmPassword;
     }
-
-    @Override
-    public String toString() {
-        return "SignUpBean{" +
-                "firstname='" + firstname + '\'' +
-                ", username='" + username + '\'' +
-                ", email='" + email + '\'' +
-                ", password='" + password + '\'' +
-                ", confirmPassword='" + confirmPassword + '\'' +
-                '}';
-    }
 }

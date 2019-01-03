@@ -25,6 +25,10 @@ public class LoginController {
     public String loginRequest(@ModelAttribute LoginBean login, HttpServletResponse response) {
         String user = login.getUsername();
         String password = login.getPassword();
+        FileData tst = new FileData(75,"ABBCCCDDDDEEEEEFFFFFF", "ABBCCCDDDDEEEEEFFFFFFABBCCCDDDDEEEEEFFFFFFABBCCCDDDDEEEEEFFFFFFABBCCCDDDDEEEEEFFFFFFABBCCCDDDDEEEEEFFFFFFABBCCCDDDDEEEEEFFFFFFABBCCCDDDDEEEEEFFFFFF");
+        String t = tst.serialize();
+        tst = new FileData(t);
+        System.out.println(tst);
         if(!isValidInput(user, password)) {
             return "redirect:/login";
         }

@@ -53,7 +53,7 @@ public class Cryptor {
         for(int i = 0; i < binbody.length(); i+=8) {
             body.append((char)(Integer.parseInt(binbody.substring(i, i+8), 2)));
         }
-        header.append("#").append(body);
+        header.append("##").append(body);
         return header.toString();
     }
 
@@ -65,18 +65,19 @@ public class Cryptor {
         String output = "";
         String parsed = "";
         scanner.useDelimiter("");
-        int length = 0;
         do {
+            scanner.next();
             parsed = scanner.next();
-            if(!parsed.equals("#")) {
-                char data = parsed.charAt(0);
+            char data = parsed.charAt(0);
+            if(scanner.hasNextInt()) {
                 scanner.useDelimiter("#");
                 int val = scanner.nextInt();
                 queue.offer(new HuffNode(null, null, data, val));
                 scanner.useDelimiter("");
                 scanner.next();
             }
-        } while (!parsed.equals("#"));
+            else break;
+        } while (true);
         parsed = "";
         while(scanner.hasNext()) parsed += scanner.next();
         tree = generateTree(queue);
@@ -92,7 +93,6 @@ public class Cryptor {
                     }
                     if (pivot == '0') refrence = refrence.left;
                     else refrence = refrence.right;
-                    length--;
                 }
             }
         }

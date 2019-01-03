@@ -45,13 +45,13 @@ public class Cryptor {
         for(char c : data.toCharArray()) {
             builder.append(tree.search(c));
         }
-        while(builder.length() % 16 != 0) {
+        while(builder.length() % 8 != 0) {
             builder.append("0");
         }
         String binbody = builder.toString();
         StringBuilder body = new StringBuilder();
-        for(int i = 0; i < binbody.length(); i+=16) {
-            body.append((char)Integer.parseInt(binbody.substring(i, i+16), 2));
+        for(int i = 0; i < binbody.length(); i+=8) {
+            body.append((char)(Integer.parseInt(binbody.substring(i, i+8), 2)));
         }
         header.append("#").append(body);
         return header.toString();
@@ -65,6 +65,7 @@ public class Cryptor {
         String output = "";
         String parsed = "";
         scanner.useDelimiter("");
+        int length = 0;
         do {
             parsed = scanner.next();
             if(!parsed.equals("#")) {
@@ -81,14 +82,18 @@ public class Cryptor {
         tree = generateTree(queue);
         refrence = tree;
         for(char c : parsed.toCharArray()) {
-            String path = Integer.toString(c, 2);
+            String path = String.format("%8s", Integer.toString(c, 2)).replace(' ', '0');
             for(char pivot : path.toCharArray()) {
-                if(refrence.data != null) {
-                    output += refrence.data;
-                    refrence = tree;
+                if(refrence.val != 0) {
+                    if (refrence.data != null) {
+                        output += refrence.data;
+                        refrence.val--;
+                        refrence = tree;
+                    }
+                    if (pivot == '0') refrence = refrence.left;
+                    else refrence = refrence.right;
+                    length--;
                 }
-                if(pivot == '0') refrence = refrence.left;
-                else refrence = refrence.right;
             }
         }
         scanner.close();

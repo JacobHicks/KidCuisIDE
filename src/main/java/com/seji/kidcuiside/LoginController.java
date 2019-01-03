@@ -25,7 +25,7 @@ public class LoginController {
     public String loginRequest(@ModelAttribute LoginBean login, HttpServletResponse response) {
         String user = login.getUsername();
         String password = login.getPassword();
-        if(isValidInput(user, password)) {
+        if(!isValidInput(user, password)) {
             return "redirect:/login";
         }
         else {
@@ -36,6 +36,23 @@ public class LoginController {
         return "redirect:/code";
     }
 
+    @GetMapping("/signup")
+    public String signUp(Model model) {
+        model.addAttribute("signup", new SignUpBean());
+        return "signup";
+    }
+
+    @PostMapping("/signup")
+    public String signUp(@ModelAttribute SignUpBean signup) {
+        System.out.println(signup);
+        if(signup.getPassword().equals(signup.getConfirmPassword()) && isValidInput(signup.getUsername(), signup.getPassword())) {
+            return "redirect:/signupconfirm";
+            //TODO register user in db
+        }
+        //Try again skrub
+        return "redirect:/signup";
+    }
+
     @PostMapping("/logout")
     public String logout(HttpServletResponse response) {
         response.addCookie(new Cookie("id", ""));
@@ -43,6 +60,6 @@ public class LoginController {
     }
 
     private boolean isValidInput(String user, String password) {
-        return user == null || user.length() < 5 || user.length() > 64 || user.contains("\\W") || (user+password).contains("\\s") || password == null || password.length() < 6 || password.length() > 128;
+        return !(user == null || user.length() < 5 || user.length() > 64 || user.contains("\\W") || (user+password).contains("\\s") || password == null || password.length() < 6 || password.length() > 128);
     }
 }

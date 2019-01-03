@@ -11,8 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 @Controller
 public class LoginController {
     @GetMapping("/login")
-    public String login(Model model, @CookieValue(value = "id", defaultValue = "NotLoggedIn") String id) {
-        if(id.equals("NotLoggedIn")) {
+    public String login(Model model, @CookieValue(value = "id", defaultValue = "") String id) {
+        if(id.equals("")) {
             model.addAttribute("login", new LoginBean());
             return "login";
         }
@@ -25,7 +25,7 @@ public class LoginController {
     public String loginRequest(@ModelAttribute LoginBean login, HttpServletResponse response) {
         String user = login.getUsername();
         String password = login.getPassword();
-        if(user == null || user.length() < 5 || user.length() > 64 || user.contains("\\W") || (user+password).contains("\\s") || password == null || password.length() < 6 || password.length() > 128) {
+        if(isValidInput(user, password)) {
             return "redirect:/login";
         }
         else {
@@ -34,5 +34,15 @@ public class LoginController {
             //TODO check hash against DB
         }
         return "redirect:/code";
+    }
+
+    @PostMapping("/logout")
+    public String logout(HttpServletResponse response) {
+        response.addCookie(new Cookie("id", ""));
+        return "redirect:/login";
+    }
+
+    private boolean isValidInput(String user, String password) {
+        return user == null || user.length() < 5 || user.length() > 64 || user.contains("\\W") || (user+password).contains("\\s") || password == null || password.length() < 6 || password.length() > 128;
     }
 }

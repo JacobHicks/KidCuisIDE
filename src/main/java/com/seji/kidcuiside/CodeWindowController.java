@@ -8,8 +8,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class CodeWindowController {
     @GetMapping("/code")
-    public String code(Model model, @CookieValue(value = "id", defaultValue = "NotLoggedIn") String id) {
-        if(id.equals("NotLoggedIn")) return "redirect:/login";
+    public String code(Model model, @CookieValue(value = "id", defaultValue = "") String id) {
+        if(id.equals("")) return "redirect:/login";
         return "CodeWritingWindow";
     }
 }

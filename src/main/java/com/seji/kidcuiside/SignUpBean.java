@@ -45,7 +45,7 @@ public class SignUpBean {
     }
 
     public void setPassword(String password) {
-        this.password = password;
+        this.password = Cryptor.hash(password);
     }
 
     public String getConfirmPassword() {
@@ -53,6 +53,6 @@ public class SignUpBean {
     }
 
     public void setConfirmPassword(String confirmPassword) {
-        this.confirmPassword = confirmPassword;
+        this.confirmPassword = Cryptor.hash(confirmPassword);
     }
 }

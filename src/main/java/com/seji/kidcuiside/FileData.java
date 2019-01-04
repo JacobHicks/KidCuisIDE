@@ -1,5 +1,8 @@
 package com.seji.kidcuiside;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
 import java.util.Scanner;
 
 public class FileData {
@@ -62,6 +65,17 @@ public class FileData {
 
     public String serialize() {
         return name.length() + "#" + name + "#" + id + "#" + Cryptor.huffmanEncode(data);
+    }
+
+    public void write(String location) {
+        try {
+            new File(location).mkdirs();
+            PrintWriter out = new PrintWriter(new File(location + "/" + id + name));
+            out.print(serialize());
+            out.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override

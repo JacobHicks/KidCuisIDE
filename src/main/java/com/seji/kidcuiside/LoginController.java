@@ -7,11 +7,24 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletResponse;
+import java.io.InputStream;
 
 @Controller
 public class LoginController {
     @GetMapping("/login")
     public String login(Model model, @CookieValue(value = "id", defaultValue = "") String id) {
+        /*FileData fd = new FileData(0, "Main.java",
+                "public class Main {" +
+                "\n    public static void main(String[] args) {" +
+                "\n        System.out.println(\"Hello World!\");" +
+                "\n    }" +
+                "\n }");
+        fd.write("TESTUSER");
+        ProccessManager pm = new ProccessManager("");
+        pm.compile(fd, System.in, System.out, System.err);
+        pm.run(fd, null, null, null);
+        **********Test Stuff*************
+        */
         if(id.equals("")) {
             model.addAttribute("login", new LoginBean());
             return "login";
@@ -44,7 +57,7 @@ public class LoginController {
 
     @PostMapping("/signup")
     public String signUp(@ModelAttribute SignUpBean signup) {
-        System.out.println(signup);
+        System.out.println(signup.getFirstname());
         if(signup.getPassword().equals(signup.getConfirmPassword()) && isValidInput(signup.getUsername(), signup.getPassword())) {
             String hash = Cryptor.hash("Kid" + signup.getUsername() + "Cuis" + signup.getPassword() + "IDE");
             return "redirect:/signupconfirm";
@@ -54,10 +67,15 @@ public class LoginController {
         return "redirect:/signup";
     }
 
+    @GetMapping("/signupconfirm")
+    public String signUpConfirm() {
+        return "signupConfirm";
+    }
+
     @PostMapping("/logout")
     public String logout(HttpServletResponse response) {
         response.addCookie(new Cookie("id", ""));
-        return "redirect:/login";
+        return "redirect:/";
     }
 
     private boolean isValidInput(String user, String password) {

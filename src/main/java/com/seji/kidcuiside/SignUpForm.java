@@ -1,6 +1,6 @@
 package com.seji.kidcuiside;
 
-public class SignUpBean {
+public class SignUpForm {
     private String firstname;
     private String lastname;
     private String username;

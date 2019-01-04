@@ -1,6 +1,6 @@
 package com.seji.kidcuiside;
 
-public class LoginBean {
+public class LoginForm {
     private String username;
     private String password;
 

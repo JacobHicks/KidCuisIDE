@@ -15,13 +15,13 @@
 	<body>
 		<div class="titleDiv">
 			<h1 class="title">WebIDE : Signup</h1>
-			<form>
-				<input type="text" placeholder="First Name" required minlength="1" maxlength="25">
-				<input type="text" placeholder="Last Name" required minlength="1" maxlength="25">
-				<input type="text" placeholder="Username" required minlength="5">
-				<input type="email" placeholder="Email" required>
-				<input type="password" placeholder="Password" required>
-				<input type="password" placeholder="Password" required>
+			<form action="#" th:action="@{/signup}" th:object="${signup}" method="post">
+				<input type="text" th:field="*{firstname}" placeholder="First Name" required minlength="1" maxlength="25">
+				<input type="text" th:field="*{lastname}" placeholder="Last Name" required minlength="1" maxlength="25">
+				<input type="text" th:field="*{username}" placeholder="Username" required minlength="5">
+				<input type="email" th:field="*{email}" placeholder="Email" required>
+				<input type="password" th:field="*{password}" placeholder="Password" required>
+				<input type="password" th:field="*{confirmPassword}" placeholder="Confirm Password" required>
 				<button type="submit" id="submitButtonSignup">Submit</button>
 			</form>
 		</div>

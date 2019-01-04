@@ -11,16 +11,56 @@
 	</head>
 	<body>
 		<div class="ribbon">
-			<button class="ribbonButtons">WebIDE</button>
+			<button class="ribbonButtons">Login</button>
             <a href="http://localhost:8080/signup"><button class="ribbonButtons">Signup</button></a>
             <a href="http://localhost:8080/home"><button class="ribbonButtons" >WebIDE</button></a>
-			<button class="ribbonButtons">WebIDE</button>
+			<a href="http://localhost:8080/features"><button class="ribbonButtons" >Features</button></a>
+			<a href="http://localhost:8080/about"><button class="ribbonButtons">About</button></a>
+			<a href="http://localhost:8080/contact"><button class="ribbonButtons">Contact</button></a>
+		</div>
+		<div>
+
 		</div>
 	</body>
 	<footer>
-
+		<p class="copyrightJazz">Copyright 2019 SEJI Corporation LLC.</p>
 	</footer>
 	<style>
-
+		body {
+			margin: 0;
+		}
+		.ribbonButtons {
+			color: white;
+			background-color: black;
+			font-family: monospace;
+			font-size: 28px;
+			border: none;
+			margin-top: 0;
+			margin-left: 0;
+			float: right;
+			cursor: pointer;
+			outline: none;
+			border-bottom-color: black;
+			border-bottom-style: solid;
+			border-bottom-width: 3px;
+		}
+		.ribbonButtons:hover {
+			transition: all 550ms, ease;
+			background-color: #1f223f;
+			border-bottom-color: green;
+			border-bottom-style: solid;
+			border-bottom-width: 3px;
+		}
+		.ribbon {
+			float: top;
+		}
+		footer {
+			display: block;
+			font-family: monospace;
+			float: bottom;
+			height: 5vh;
+			background-color: rgb(157, 157, 157);
+			margin-top: 0;
+		}
 	</style>
 </html>

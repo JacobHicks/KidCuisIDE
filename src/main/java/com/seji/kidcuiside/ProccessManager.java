@@ -1,17 +1,19 @@
 package com.seji.kidcuiside;
 
-import org.omg.PortableInterceptor.SYSTEM_EXCEPTION;
 import org.springframework.web.bind.annotation.CookieValue;
 
 import javax.tools.JavaCompiler;
 import javax.tools.ToolProvider;
 import java.io.*;
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLClassLoader;
 
 public class ProccessManager {
-    final JavaCompiler javacompiler = ToolProvider.getSystemJavaCompiler();
-    Process process;
-    String user;
+    final private JavaCompiler javacompiler = ToolProvider.getSystemJavaCompiler();
+    private String user;
 
     ProccessManager(@CookieValue(value = "id", defaultValue = "") String id) {
         //TODO Check if id is valid then find username from id
@@ -35,12 +37,30 @@ public class ProccessManager {
         return -2;
     }
 
-    public void run(FileData fileData, InputStream input, OutputStream output, OutputStream error) {
+    public void run(FileData fileData, InputStream input, OutputStream output, OutputStream error) { //TODO allow project support
         try {
-            System.out.println("cmd /c java C:\\Users\\hicks\\IdeaProjects\\KidCuisIDE\\TESTUSER\\RUN\\" + fileData.getName().substring(0,fileData.getName().length()-5) + ".class");
-            process = Runtime.getRuntime().exec("cmd /c java C:\\Users\\hicks\\IdeaProjects\\KidCuisIDE\\TESTUSER\\RUN\\" + fileData.getName().substring(0,fileData.getName().length()-5) + ".class");
-            System.out.println(process.getInputStream().available());
-        } catch (Exception e) {
+            URLClassLoader directory = new URLClassLoader(new URL[] {new URL("file://" + System.getProperty("user.dir") + "/" + user + "/RUN/")});
+            Class selection = Class.forName(fileData.getName().substring(0, fileData.getName().length() - ".java".length()), true, directory);
+            Method main = selection.getDeclaredMethod("main", String[].class);
+            PrintStream userOut = new PrintStream(output);
+            PrintStream userErr = new PrintStream(error);
+            PrintStream systemOut = System.out;
+            PrintStream systemErr = System.err;
+            InputStream systemIn = System.in;
+            System.setOut(userOut);
+            System.setErr(userErr);
+            System.setIn(input);
+            try {
+                main.invoke(null, (Object) new String[]{"test"});
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            System.out.flush();
+            System.err.flush();
+            System.setOut(systemOut);
+            System.setErr(systemErr);
+            System.setIn(systemIn);
+        } catch (ClassNotFoundException | NoSuchMethodException | MalformedURLException e) {
             e.printStackTrace();
         }
     }

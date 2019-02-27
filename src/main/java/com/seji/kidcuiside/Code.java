@@ -11,4 +11,12 @@ public class Code {
     public void setCode(String code) {
         this.code = code;
     }
+
+    public String getRequest() {
+        return request;
+    }
+
+    public void setRequest(String request) {
+        this.request = request;
+    }
 }

@@ -6,13 +6,13 @@ import java.io.PrintWriter;
 import java.util.Scanner;
 
 public class FileData {
-    private int id;
+    private String id;
     private String name;
     private String data;
 
     public FileData() {}
 
-    public FileData(int i, String n, String d) {
+    public FileData(String i, String n, String d) {
         id = i;
         name = n;
         data = d;
@@ -30,7 +30,7 @@ public class FileData {
             name += in.next();
         }
         in.useDelimiter("#");
-        id = in.nextInt();
+        id = in.next();
         in.useDelimiter("");
         in.next();
         StringBuilder body = new StringBuilder();
@@ -41,11 +41,11 @@ public class FileData {
         data = Cryptor.huffmanDecode(body.toString());
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 

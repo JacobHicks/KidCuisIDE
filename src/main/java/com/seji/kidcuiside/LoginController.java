@@ -7,8 +7,9 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletResponse;
+import java.io.*;
 import java.sql.*;
-import java.io.InputStream;
+import java.util.Scanner;
 
 @Controller
 public class LoginController {
@@ -18,18 +19,6 @@ public class LoginController {
 
     @GetMapping("/login")
     public String login(Model model, @CookieValue(value = "id", defaultValue = "") String id) {
-        /*FileData fd = new FileData(0, "Main.java",
-                "public class Main {" +
-                "\n    public static void main(String[] args) {" +
-                "\n        System.out.println(\"Hello World!\");" +
-                "\n    }" +
-                "\n }");
-        fd.write("TESTUSER");
-        ProccessManager pm = new ProccessManager("");
-        pm.compile(fd, System.in, System.out, System.err);
-        pm.run(fd, null, null, null);
-        **********Test Stuff*************
-        */
         if(id.equals("")) {
             model.addAttribute("login", new LoginBean());
             return "login";
@@ -48,45 +37,25 @@ public class LoginController {
             return "redirect:/login";
         }
         else {
-            String hash = Cryptor.hash("Kid" + user + "Cuis" + password + "IDE");
-            response.addCookie(new Cookie("id", hash));
-            /*
-            Connection conn = null;
-            Statement state = null;
             try {
-                Class.forName(JDBC_DRIVER);
-                conn = DriverManager.getConnection(DB_URL, "root", "blu");
-                state = conn.createStatement();
-                //selecting username-password pairs. yeah, this would be tedious for many users. shouldnt be a problem for us though
-                String sql = "select username,password from users";
-                ResultSet set = state.executeQuery(sql);
-                while (set.next()) {
-                    if (login.getUsername().equals(set.getString("username"))) {
-                        if (login.getPassword().equals(set.getString("password"))) {
-                            //this is a crude stand-in for future code that allows a user to sign in for themselves
-                            //at the moment this is just confirmation that a username/password combination exists in the system
-                            correct = true;
-                        }
+                String hash = Cryptor.hash("Kid" + user + "Cuis" + password + "IDE");
+                File userdir = new File("Users/" + user);
+                if(userdir.exists()) {
+                    Scanner hashreader = new Scanner(new File("Users/" + user + "/hash"));
+                    if(hashreader.nextLine().equals(hash)) {
+                        response.addCookie(new Cookie("id", hash));
+                        response.addCookie(new Cookie("user", user)); //TODO add more security
+                        hashreader.close();
+                        return "redirect:/code";
                     }
+                    hashreader.close();
                 }
-                //everything after this is exception checking and closing things. BEST PRACTICES ONLY
-            } catch (Exception e) {
+            } catch (IOException e) {
                 e.printStackTrace();
-            } finally {
-                try {
-                    if (state != null)
-                        state.close();
-                } catch (SQLException se2) {
-                }
-                try {
-                    if (conn != null)
-                        conn.close();
-                } catch (SQLException se) {
-                }
+                return "redirect:/login";
             }
-            */
         }
-        return correct ? "redirect:/code" : "redirect:/login";
+        return "redirect:/login"; //TODO tell wrong credentials
     }
 
     @GetMapping("/signup")
@@ -100,33 +69,21 @@ public class LoginController {
         System.out.println(signup);
         if(signup.getPassword().equals(signup.getConfirmPassword()) && isValidInput(signup.getUsername(), signup.getPassword())) {
             String hash = Cryptor.hash("Kid" + signup.getUsername() + "Cuis" + signup.getPassword() + "IDE");
-            Connection conn = null;
-            Statement state = null;
-            try {
-                //maven basically did all the classpath stuff for me
-                Class.forName(JDBC_DRIVER);
-                conn = DriverManager.getConnection(DB_URL, "root", "blu");
-                state = conn.createStatement();
-                //retrieving infromation and putting it in the correct columns
-                String sql = "insert into users (username,firstname,lastname,email,password,filecount) " +
-                        "values (\'" + signup.getUsername() + "\',\'" + signup.getFirstname() + "\',\'" + signup.getLastname() + "\',\'" + signup.getEmail() + "\',\'" + signup.getPassword() + "\',0);";
-                state.executeUpdate(sql);
-                //everything after this is exception checking and closing things. BEST PRACTICES ONLY
-            } catch (Exception e) {
-                e.printStackTrace();
-            } finally {
+            File hashfile = new File("Users/" + signup.getUsername());
+            if(!hashfile.exists()) {
                 try {
-                    if (state != null)
-                        state.close();
-                } catch (SQLException se2) {
+                    hashfile.mkdirs();
+                    hashfile = new File("Users/" + signup.getUsername() + "/hash");
+                    hashfile.createNewFile();
+                    PrintWriter hashwriter = new PrintWriter(hashfile);
+                    hashwriter.println(hash);
+                    hashwriter.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    return "redirect:/error";
                 }
-                try {
-                    if (conn != null)
-                        conn.close();
-                } catch (SQLException se) {
-                }
-            }
-            return "redirect:/signupconfirm";
+                return "redirect:/";
+            } //TODO tell user that name is taken
         }
         //Try again skrub
         return "redirect:/signup";

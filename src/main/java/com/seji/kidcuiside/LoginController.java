@@ -50,6 +50,7 @@ public class LoginController {
         else {
             String hash = Cryptor.hash("Kid" + user + "Cuis" + password + "IDE");
             response.addCookie(new Cookie("id", hash));
+            /*
             Connection conn = null;
             Statement state = null;
             try {
@@ -83,6 +84,7 @@ public class LoginController {
                 } catch (SQLException se) {
                 }
             }
+            */
         }
         return correct ? "redirect:/code" : "redirect:/login";
     }

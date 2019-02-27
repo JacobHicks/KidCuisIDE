@@ -11,8 +11,8 @@ public class KidCuisIdeApplication {
 
     public static void main(String[] args) {
         try {
-            File outputlog = new File(Calendar.getInstance().getTime() + "-out.log");
-            File errlog = new File(Calendar.getInstance().getTime() + "-err.log");
+            File outputlog = new File("logs/" + Calendar.getInstance().getTime() + "-out.log");
+            File errlog = new File("logs/" + Calendar.getInstance().getTime() + "-err.log");
             outputlog.createNewFile();
             errlog.createNewFile();
             PrintStream out = new PrintStream(outputlog);

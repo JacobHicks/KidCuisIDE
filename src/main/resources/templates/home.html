@@ -1,33 +1,55 @@
 <!-- YOUR MAIN TASKS WILL APPEAR HERE
 			TODO
-~	
+~	I was working on the
 ~	
 -->
 <!DOCTYPE HTML>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
+
 	<head>
     	<title>WebIDE</title>
     	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	</head>
 	<body>
-		<div class="ribbon">
-			<button class="ribbonButtons">Login</button>
-            <a href="http://localhost:8080/signup"><button class="ribbonButtons">Signup</button></a>
+		<div class="ribbon bigDiv">
+			<button class="ribbonButtons loginButtons">Login</button>
+            <a href="http://localhost:8080/signup"><button class="ribbonButtons loginButtons">Signup</button></a>
             <a href="http://localhost:8080/home"><button class="ribbonButtons" >WebIDE</button></a>
 			<a href="http://localhost:8080/features"><button class="ribbonButtons" >Features</button></a>
 			<a href="http://localhost:8080/about"><button class="ribbonButtons">About</button></a>
 			<a href="http://localhost:8080/contact"><button class="ribbonButtons">Contact</button></a>
 		</div>
-		<div>
+		<div class="thePitch bigDiv">
+			<h1 class="intro headline">Introducing <u>WebIDE</u>: The all-new online IDE.</h1>
+		</div>
+		<div class="features">
+			<h1 class="headline"> Features</h1>
+			<h2 class="bulletPoint"> IT DOESNT SUCK</h2>
+		</div>
+		<div class="contactDiv">
+			<h1 class="headline"></h1>
 
 		</div>
+
 	</body>
 	<footer>
 		<p class="copyrightJazz">Copyright 2019 SEJI Corporation LLC.</p>
 	</footer>
 	<style>
+		html {
+			background-color: black;
+		}
 		body {
 			margin: 0;
+		}
+		.headline {
+			color: white;
+			font-family: Monospace;
+			font-size: 30px;
+			text-align : center;
+		}
+		.loginButtons {
+			color: rgb(52, 83, 79);
 		}
 		.ribbonButtons {
 			color: white;
@@ -52,6 +74,7 @@
 			border-bottom-width: 3px;
 		}
 		.ribbon {
+			display: block;
 			float: top;
 		}
 		footer {
@@ -61,6 +84,13 @@
 			height: 5vh;
 			background-color: rgb(157, 157, 157);
 			margin-top: 0;
+		}
+		.thePitch {
+			color: white;
+			font-family: monospace;
+			font-size: 302px;
+			display: block;
+			text-align: center;
 		}
 	</style>
 </html>

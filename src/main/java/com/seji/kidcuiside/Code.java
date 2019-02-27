@@ -1,7 +1,7 @@
 package com.seji.kidcuiside;
 
 public class Code {
-    private String request; //Can be 'save', 'run', or 'get'
+    private String request; //Can be 'save', 'run'
     private String code;
 
     public String getCode() {

@@ -14,9 +14,6 @@ import java.util.Scanner;
 @Controller
 public class LoginController {
 
-    static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
-    static final String DB_URL = "jdbc:mysql://localhost/cuiside";
-
     @GetMapping("/login")
     public String login(Model model, @CookieValue(value = "id", defaultValue = "") String id) {
         if(id.equals("")) {
@@ -30,7 +27,6 @@ public class LoginController {
 
     @PostMapping("/login")
     public String loginRequest(@ModelAttribute LoginBean login, HttpServletResponse response) {
-        boolean correct = false;
         String user = login.getUsername();
         String password = login.getPassword();
         if(!isValidInput(user, password)) {

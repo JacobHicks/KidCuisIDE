@@ -15,15 +15,14 @@ public class ProccessManager {
     final private JavaCompiler javacompiler = ToolProvider.getSystemJavaCompiler();
     private String user;
 
-    ProccessManager(@CookieValue(value = "id", defaultValue = "") String id) {
-        //TODO Check if id is valid then find username from id
-        user = "TESTUSER";
+    ProccessManager(String usr) {
+        user = usr;
     }
 
     public int compile(FileData fileData, InputStream input, OutputStream output, OutputStream error) {
-        File file = new File(user + "/RUN");
+        File file = new File("Users/" + user + "/RUN");
         file.mkdirs();
-        file = new File(user + "/RUN/" + fileData.getName());
+        file = new File("Users/" + user + "/RUN/" + fileData.getName());
         try {
             PrintWriter pw = new PrintWriter(file);
             pw.print(fileData.getData());
@@ -39,7 +38,7 @@ public class ProccessManager {
 
     public void run(FileData fileData, InputStream input, OutputStream output, OutputStream error) { //TODO allow project support
         try {
-            URLClassLoader directory = new URLClassLoader(new URL[] {new URL("file://" + System.getProperty("user.dir") + "/" + user + "/RUN/")});
+            URLClassLoader directory = new URLClassLoader(new URL[] {new URL("file://" + System.getProperty("user.dir") + "/Users/" + user + "/RUN/")});
             Class selection = Class.forName(fileData.getName().substring(0, fileData.getName().length() - ".java".length()), true, directory);
             Method main = selection.getDeclaredMethod("main", String[].class);
             PrintStream userOut = new PrintStream(output);

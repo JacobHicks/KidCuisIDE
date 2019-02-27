@@ -20,29 +20,19 @@ public class CodeWindowController {
 
     @GetMapping("/code")
     public String code(Model model, @CookieValue(value = "id", defaultValue = "") String id, @CookieValue(value = "user", defaultValue = "") String user) {
-        File userdir = new File("Users/" + user);
-        if(userdir.exists()) {
-            try {
-                Scanner hashreader = new Scanner(new File("Users/" + user + "/hash"));
-                if (hashreader.nextLine().equals(id)) {
-                    model.addAttribute("code", new Code());
-                    hashreader.close();
-                    return "CodeWritingWindow";
-                }
-                hashreader.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+        if(isAuthenticated(id, user)) {
+            model.addAttribute("code", new Code());
+            return "CodeWritingWindow";
         }
         return "redirect:/login";
     }
 
     @PostMapping("/code")
-    public String getCode(@ModelAttribute Code tcode, @CookieValue(value = "id", defaultValue = "null") String id) {
-        if (!tcode.getRequest().equals("get")) {
-            FileData code = new FileData(id, "Main.java", tcode.getCode());
-            if(tcode.getRequest().equals("run")) {
-                ProccessManager pm = new ProccessManager("");
+    public String getCode(@ModelAttribute Code tcode, @CookieValue(value = "id", defaultValue = "") String id, @CookieValue(value = "user", defaultValue = "null") String user) {
+        if(isAuthenticated(id, user)) {
+            FileData code = new FileData("Main.java", tcode.getCode());
+            if (tcode.getRequest().equals("run")) {
+                ProccessManager pm = new ProccessManager(user);
                 ByteArrayOutputStream baos = new ByteArrayOutputStream();
                 if (pm.compile(code, System.in, System.out, System.err) == 0) { //TODO set params to the code window
                     try {
@@ -61,16 +51,34 @@ public class CodeWindowController {
                                 }
                             } while (!finished.get());
                         }).start();
-                        new Thread(() -> {
-                            pm.run(code, System.in, baos, System.err);
-                            finished.set(true);
-                        }).start();
+                        pm.run(code, System.in, baos, System.err);
+                        finished.set(true);
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
                 }
+            } else if (tcode.getRequest().equals("save")) {
+                code.write("Users/" + user);
+            }
+            return "code";
+        }
+        return "redirect:/login";
+    }
+
+    public boolean isAuthenticated(String id, String user) {
+        File userdir = new File("Users/" + user);
+        if(userdir.exists()) {
+            try {
+                Scanner hashreader = new Scanner(new File("Users/" + user + "/hash"));
+                if (hashreader.nextLine().equals(id)) {
+                    hashreader.close();
+                    return true;
+                }
+                hashreader.close();
+            } catch (IOException e) {
+                e.printStackTrace();
             }
         }
-        return "code";
+        return false;
     }
 }

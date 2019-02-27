@@ -20,12 +20,12 @@ public class CodeWindowController {
     @GetMapping("/code")
     public String code(Model model, @CookieValue(value = "id", defaultValue = "") String id) {
         if(id.equals("")) return "redirect:/login";
-        model.addAttribute("code", new TestCode());
+        model.addAttribute("code", new Code());
         return "CodeWritingWindow";
     }
 
     @PostMapping("/code")
-    public String getCode(@ModelAttribute TestCode tcode) { //TODO use FileData object
+    public String getCode(@ModelAttribute Code tcode) { //TODO use FileData object
         FileData code = new FileData(0, "Main.java", tcode.getCode());
 
         ProccessManager pm = new ProccessManager("");

@@ -10,6 +10,8 @@ public class FileData {
     private String name;
     private String data;
 
+    public FileData() {}
+
     public FileData(int i, String n, String d) {
         id = i;
         name = n;

@@ -5,7 +5,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 public class CompileTester {
-    public static void main(String[] args) {
+/*    public static void main(String[] args) {
         FileData fd = new FileData(0, "Main.java",
                 "import java.util.Scanner;\n" +
                         "\n" +
@@ -43,4 +43,5 @@ public class CompileTester {
             }
         }
     }
+*/
 }

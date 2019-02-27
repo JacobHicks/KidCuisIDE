@@ -18,6 +18,9 @@ public class CodeWindowController {
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/easyui/**").addResourceLocations("classpath:/easyui/");
         registry.addResourceHandler("/codemirror/**").addResourceLocations("classpath:/codemirror/");
-        registry.addResourceHandler("/easyui/**").addResourceLocations("classpath:/easyui/");
+        registry.addResourceHandler("/java/**").addResourceLocations("classpath:/java/");
+        registry.addResourceHandler("/templates/**").addResourceLocations("classpath:/templates/");
+        registry.addResourceHandler("/resources/**").addResourceLocations("classpath:/resources/");
     }
+
 }

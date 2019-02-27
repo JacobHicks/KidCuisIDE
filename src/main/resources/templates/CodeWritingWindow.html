@@ -1,5 +1,5 @@
 <!--YOUR TASKS WILL APPEAR HERE
-			TODO
+~			TODO
 ~	Set up the main window
 ~	Set up the multi window interface that we need
 ~	Make sure the form works
@@ -15,33 +15,55 @@
 	<link rel="stylesheet" type="text/css" href="easyui/themes/default/easyui.css">
 	<script type="text/javascript" src="easyui/jquery.min.js"></script>
 	<script type="text/javascript" src="easyui/jquery.easyui.min.js"></script>
+    <script src="codemirror-5.44.0/lib/codemirror.js"></script>
+    <link rel="stylesheet" href="codemirror-5.44.0/lib/codemirror.css">
+    <script src="codemirror-5.44.0/mode/javascript/javascript.js"></script>
 </head>
 <body class="easyui-layout">
-<div data-options="region:'north',border:false" style="height:50px;background:#B3DFDA;padding:10px">
-	<button class="topButton" id="runButton">Run</button>
-	<button class="topButton" id="saveButton">Save</button>
-	<button class="topButton" id="debugButton">Debug</button>
-	<button class="topButton" id="newButton">New</button>
-	<button class="topButton" id="openButton">Open</button>
-	<button class="topButton" id="compileButton">Compile</button>
-	<form action="#" th:action="@{/logout}" method="post">
-		<button class="topRightButton" id="logoutButton" name="Log Out">LogOut</button>
-	</form>
-</div>
-<div data-options="region:'south',title:'South Title',split:true" style="height:300px;">results window</div>
-<div data-options="region:'west',title:'West',split:true" style="width:200px;">file stuff</div>
-<div data-options="region:'center',title:'center title'" style="padding:5px;background:#eee;">
-	<form>
-				<textarea id="mainWritingWindow" placeholder="<Insert amazing code here>" style="height:575px;width:1690px;">
-				</textarea>
-	</form><!--The main code writing window.-->
-	<form></form> <!--main code writing window/console-->
+    <div data-options="region:'north',border:false" style="height:50px;background:#B3DFDA;padding:10px">
+        <button class="topButton" id="runButton">Run</button>
+        <button class="topButton" id="saveButton">Save</button>
+        <button class="topButton" id="debugButton">Debug</button>
+        <button class="topButton" id="newButton">New</button>
+        <button class="topButton" id="openButton">Open</button>
+        <button class="topButton" id="compileButton">Compile</button>
+        <form action="#" th:action="@{/logout}" method="post">
+            <button class="topRightButton" id="logoutButton" name="Log Out">LogOut</button>
+        </form>
+    </div>
+    <div data-options="region:'south',title:'Console',split:true" style="height:300px;">results window</div>
+    <div data-options="region:'west',title:'Files',split:true" style="width:200px;">file stuff</div>
+    <div data-options="region:'center',title:'Code'" style="padding:5px;background:#eee;">
+        <textarea class="codemirror-textarea" style="width:100%;height:100%;resize:vertical;overflow:auto !important"></textarea>
 
-</div>
+                    <!-- <textarea id="mainWritingWindow" placeholder="<Insert amazing code here>" style="height:575px;width:1690px;"> --> <!-- need to fix text window area -->
+                    <!-- </textarea> -->
+
+        <form></form> <!--main code writing window/console-->
+
+    </div>
 </body>
-
+<script>
+    $(document).ready(function(){
+       var code = $(".codemirror-textarea")[0];
+       var editor = CodeMirror.fromTextArea(code, {
+           lineNumbers : true,
+           value: "function myScript(){return 100;}\n",
+           mode:  "Java"
+       });
+       editor.getDoc().setValue(' public class HelloWorld {\n' +
+           '   public static void main(String[] args) {\n' +
+           '\t\tSystem.out.println("Hello World!");\n' +
+           '   }\n' +
+           ' }');
+    });
+</script>
 
 <style>
+    .CodeMirror {
+        border: 1px solid #eee;
+        height: auto;
+    }
 	html {
 		margin: 0;
 		height: 100;

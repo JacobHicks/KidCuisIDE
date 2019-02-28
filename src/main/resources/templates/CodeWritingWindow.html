@@ -52,6 +52,7 @@
 </body>
 <script>
     var tc = null;
+    var realedit = null;
     $(document).ready(function(){
         var code = $(".codemirror-textarea")[0];
         var editor = CodeMirror.fromTextArea(document.getElementById("codewindow"), {
@@ -64,17 +65,20 @@
             '\t\tSystem.out.println("Hello World!");\n' +
             '   }\n' +
             ' }');
+        realedit = editor;
         tc = editor.getValue();
 
     });
 
     function runCode() {
+        tc = realedit.getValue();
         document.forms["runForm"].elements.code.value = tc;
         document.forms["runForm"].elements.request.value = "run" ;
         document.forms["runForm"].submit();  //do same thing for request
     }
 
     function saveCode() {
+        tc = realedit.getValue();
         document.forms["runForm"].elements.code.value = tc;
         document.forms["runForm"].elements.request.value = "save" ;
         document.forms["runForm"].submit();  //do same thing for request

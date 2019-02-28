@@ -22,8 +22,9 @@
 </head>
 <body class="easyui-layout">
     <div data-options="region:'north',border:false" style="height:50px;background:#B3DFDA;padding:10px">
-        <form action="#" th:action="@{/code}" th:object="${code}" method="post">
-            <button class="topButton" id="runButton" onclick="submitCode()" type="submit">Run</button> <!-- form submission stuff -->
+        <button class="topButton" id="runButton" onclick="submitCode()" type="button">Run</button> <!-- form submission stuff -->
+        <form style="display: none" name="runForm" action="#" th:action="@{/code}" th:object="${code}" method="post" target="hiddenFrame">
+            <input type="text" th:field="*{code}" />
            <!-- <p>Id: type run<input type="text" th:field="*{request}" /></p> -->
         </form>
         <button class="topButton" id="saveButton">Save</button>
@@ -35,7 +36,9 @@
             <button class="topRightButton" id="logoutButton" name="Log Out">LogOut</button>
         </form>
     </div>
-    <div data-options="region:'south',title:'Console',split:true" style="height:300px;">results window</div>
+    <div data-options="region:'south',title:'Console',split:true" style="height:300px;">
+        <iframe name="hiddenFrame" width="100%" height="100%" ></iframe>
+    </div>
     <div data-options="region:'west',title:'Files',split:true" style="width:200px;">file stuff</div>
     <div data-options="region:'center',title:'Code'" style="padding:5px;background:#eee;">
         <textarea id="codewindow" class="codemirror-textarea" style="width:100%;height:100%;resize:vertical;overflow:auto !important"></textarea>
@@ -65,8 +68,11 @@
 
     });
     function submitCode() {
+        document.forms["runForm"].elements.code.value = tc;
+        document.forms["runForm"].submit();  //do same thing for request
         document.getElementById("run").innerHTML = tc;
     }
+
 </script>
 
 <style>

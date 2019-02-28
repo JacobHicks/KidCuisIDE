@@ -9,6 +9,7 @@
 -->
 <!DOCTYPE HTML>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
+
 <head>
 	<title>WebIDE</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -22,8 +23,8 @@
 <body class="easyui-layout">
     <div data-options="region:'north',border:false" style="height:50px;background:#B3DFDA;padding:10px">
         <form action="#" th:action="@{/code}" th:object="${code}" method="post">
-            <button class="topButton" onclick="submitCode()" th:field="*{code}" id="runButton" type="submit">Run</button>
-            <!-- <p>Id: type run<input type="text" th:field="*{request}" /></p> -->
+            <button class="topButton" id="runButton" onclick="submitCode()" type="submit">Run</button> <!-- form submission stuff -->
+           <!-- <p>Id: type run<input type="text" th:field="*{request}" /></p> -->
         </form>
         <button class="topButton" id="saveButton">Save</button>
         <!-- <button class="topButton" id="debugButton">Debug</button> -->
@@ -47,24 +48,25 @@
     </div>
 </body>
 <script>
+    var tc = null;
     $(document).ready(function(){
-       var code = $(".codemirror-textarea")[0];
-       var editor = CodeMirror.fromTextArea(document.getElementById("codewindow"), {
-           lineNumbers : true,
-           mode:  "text/x-java",
-           matchBrackets: true
-       });
-       editor.getDoc().setValue(' public class Main {\n' +
-           '   public static void main(String[] args) {\n' +
-           '\t\tSystem.out.println("Hello World!");\n' +
-           '   }\n' +
-           ' }');
-       var tc = editor.getTextArea()
-        function submitCode() {
-           var textcode = tc;
-           document.getElementById("runButton").innerHTML = textcode;
-        }
+        var code = $(".codemirror-textarea")[0];
+        var editor = CodeMirror.fromTextArea(document.getElementById("codewindow"), {
+            lineNumbers : true,
+            mode:  "text/x-java",
+            matchBrackets: true
+        });
+        editor.getDoc().setValue(' public class Main {\n' +
+            '   public static void main(String[] args) {\n' +
+            '\t\tSystem.out.println("Hello World!");\n' +
+            '   }\n' +
+            ' }');
+        tc = editor.getValue();
+
     });
+    function submitCode() {
+        document.getElementById("run").innerHTML = tc;
+    }
 </script>
 
 <style>

@@ -31,7 +31,7 @@ public class CodeWindowController {
     public String getCode(@ModelAttribute Code tcode, @CookieValue(value = "id", defaultValue = "") String id, @CookieValue(value = "user", defaultValue = "null") String user) {
         if(isAuthenticated(id, user)) {
             FileData code = new FileData("Main.java", tcode.getCode());
-            if (tcode.getRequest().equals("run")) {
+            //if (tcode.getRequest().equals("run")) {
                 ProccessManager pm = new ProccessManager(user);
                 ByteArrayOutputStream baos = new ByteArrayOutputStream();
                 if (pm.compile(code, System.in, System.out, System.err) == 0) { //TODO set params to the code window
@@ -57,9 +57,9 @@ public class CodeWindowController {
                         e.printStackTrace();
                     }
                 }
-            } else if (tcode.getRequest().equals("save")) {
-                code.write("Users/" + user);
-            }
+            /*} else */ //if (tcode.getRequest().equals("save")) {
+                //code.write("Users/" + user);
+            //}
             return "code";
         }
         return "redirect:/login";

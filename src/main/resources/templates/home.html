@@ -11,26 +11,19 @@
     	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	</head>
 	<body>
-		<div class="ribbon bigDiv">
-			<a href="http://localhost:8090/login"><button class="ribbonButtons loginButtons">Login</button>
-            <a href="http://localhost:8090/signup"><button class="ribbonButtons loginButtons">Signup</button></a>
-            <a href="http://localhost:8090/code"><button class="ribbonButtons" >WebIDE</button></a>
-			<a href="http://localhost:8090/features"><button class="ribbonButtons" >Features</button></a>
-			<a href="http://localhost:8090/about"><button class="ribbonButtons">About</button></a>
-			<a href="http://localhost:8090/contact"><button class="ribbonButtons">Contact</button></a>
-		</div>
-		<div class="thePitch bigDiv">
-			<h1 class="intro headline">Introducing <u>WebIDE</u>: The all-new online IDE.</h1>
-		</div>
-		<div class="features">
-			<h1 class="headline"> Features</h1>
-			<h2 class="bulletPoint"> IT DOESNT SUCK</h2>
-		</div>
-		<div class="contactDiv">
-			<h1 class="headline"></h1>
-
-		</div>
-
+				<a href="http://localhost:8090/login"><button class="ribbonButtons loginButtons">Login</button></a>
+        	    <a href="http://localhost:8090/signup"><button class="ribbonButtons loginButtons">Signup</button></a>
+        	    <a href="http://localhost:8090/code"><button class="ribbonButtons" >WebIDE</button></a>
+				<a href="http://localhost:8090/about"><button class="ribbonButtons">About</button></a>
+				<a href="http://localhost:8090/contact"><button class="ribbonButtons">Contact</button></a>
+			<h1 class="intro headline test">Introducing <u>WebIDE</u>: The all-new online IDE.</h1>
+			<form id="email-form">
+				<h1 class="contactTitle">Contact</h1>
+				<input id="namefirst" class="form firstname" placeholder="First Name">
+				<input id="namelast" class="form lastname" placeholder="Last Name">
+				<input required type="email" name="email" id="email" class="form emailclass" placeholder="Your Email">
+				<input type="submit" value="Submit" class="submitysmitty">
+			</form>
 	</body>
 	<footer>
 		<p class="copyrightJazz">Copyright 2019 SEJI Corporation LLC.</p>
@@ -42,17 +35,30 @@
 		body {
 			margin: 0;
 		}
+		.smallRibbonDiv {
+			display: block;
+			float: top;
+			width: 100vw;
+		}
 		.headline {
 			color: white;
 			font-family: Monospace;
 			font-size: 30px;
 			text-align : center;
 		}
+		.test {
+			display: block;
+			position : absolute;
+			margin-top : 100px;
+			width : 100vw;
+
+		}
 		.loginButtons {
 			color: rgb(52, 83, 79);
 		}
 		.ribbonButtons {
 			color: white;
+			align-items: top;
 			background-color: black;
 			font-family: monospace;
 			font-size: 28px;
@@ -73,9 +79,15 @@
 			border-bottom-style: solid;
 			border-bottom-width: 3px;
 		}
+		.subTitle {
+			color: white;
+			font-family: monospace;
+			text-align: center;
+		}
 		.ribbon {
 			display: block;
 			float: top;
+			background-color: green;
 		}
 		footer {
 			display: block;
@@ -85,12 +97,23 @@
 			background-color: rgb(157, 157, 157);
 			margin-top: 0;
 		}
-		.thePitch {
-			color: white;
+		.featuresHeadline {
+			text-align : center;
+			padding-top: 250px;
+		}
+		.contactTitle{
+			margin-top: 200px;
+		}
+		form {
+			align-items: center;
 			font-family: monospace;
-			font-size: 302px;
-			display: block;
-			text-align: center;
+			font-size: 14px;
+			color: grey;
+			background : none;
+			border: none;
+			border-bottom-color: blue;
+			border-bottom-style: solid;
+			border-bottom-width: 5px;
 		}
 	</style>
 </html>

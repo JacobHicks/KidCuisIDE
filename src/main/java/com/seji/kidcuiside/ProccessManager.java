@@ -1,11 +1,8 @@
 package com.seji.kidcuiside;
 
-import org.springframework.web.bind.annotation.CookieValue;
-
 import javax.tools.JavaCompiler;
 import javax.tools.ToolProvider;
 import java.io.*;
-import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.net.MalformedURLException;
 import java.net.URL;

@@ -11,112 +11,62 @@
     	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	</head>
 	<body>
-				<a href="http://localhost:8090/login"><button class="ribbonButtons loginButtons">Login</button></a>
-        	    <a href="http://localhost:8090/signup"><button class="ribbonButtons loginButtons">Signup</button></a>
-        	    <a href="http://localhost:8090/code"><button class="ribbonButtons" >WebIDE</button></a>
-				<a href="http://localhost:8090/about"><button class="ribbonButtons">About</button></a>
-				<a href="http://localhost:8090/contact"><button class="ribbonButtons">Contact</button></a>
+				<a href="http://localhost:8090/login"><button class="loginButtons">Login</button></a>
+        	    <a href="http://localhost:8090/signup"><button class="loginButtons">Signup</button></a>
 
+        <div>
 			<h1 class="intro headline test">Introducing <u>WebIDE</u>: The all-new online IDE.</h1>
-			<form id="email-form">
-				<h1 class="contactTitle">Contact</h1>
-				<input id="namefirst" class="form firstname" placeholder="First Name">
-				<input id="namelast" class="form lastname" placeholder="Last Name">
-				<input required type="email" name="email" id="email" class="form emailclass" placeholder="Your Email">
-				<input type="submit" value="Submit" class="submitysmitty">
-			</form>
+        </div>
+		<div>
+			<h1 class = "about">About</h1>
+			<p class="text">
+				WebIDE was created by Saffat Ahmed, Jacob Hicks, Ismail Hozain and Evan Varghese. All high school students in Texas.
+			</p>
+
+		</div>
 	</body>
-	<footer>
-		<p class="copyrightJazz">Copyright 2019 SEJI Corporation LLC.</p>
-	</footer>
 	<style>
-		html {
-			background-color: black;
-		}
 		body {
 			margin: 0;
 		}
-		.smallRibbonDiv {
-			display: block;
-			float: top;
-			width: 100vw;
+		.text {
+			font-family: monospace;
+			color: black;
+			font-size: 12px;
+			text-align: center;
+		}
+		.about {
+			font-family : monospace;
+			color: black;
+			padding-top : 40px;
+			padding-bottom: 40px;
+			font-size: 30px;
+			text-align: center;
 		}
 		.headline {
-			color: white;
-			font-family: Monospace;
+			color: black;
+			padding-top: 150px;
+			font-family: monospace;
 			font-size: 30px;
 			text-align : center;
 		}
-		.test {
-			display: block;
-			position : center;
-			margin-top : 100px;
-			width : 100vw;
-
-		}
 		.loginButtons {
-			color: rgb(52, 83, 79);
-		}
-		.ribbonButtons {
-			color: white;
-			margin-top: -200px
-			align-items: top;
-			background-color: black;
+			background-color: #0057e6;
 			font-family: monospace;
 			font-size: 28px;
 			border: none;
-			margin-top: 0;
 			margin-left: 0;
 			float: right;
 			cursor: pointer;
 			outline: none;
-			border-bottom-color: black;
-			border-bottom-style: solid;
-			border-bottom-width: 3px;
+			margin-top: -20px;
 		}
-		.ribbonButtons:hover {
+		.loginButtons:hover {
 			transition: all 550ms, ease;
-			background-color: #1f223f;
-			border-bottom-color: green;
+			background-color: #008900;
+			border-bottom-color: darkblue;
 			border-bottom-style: solid;
 			border-bottom-width: 3px;
-		}
-		.subTitle {
-			color: white;
-			font-family: monospace;
-			text-align: center;
-		}
-		.ribbon {
-			display: block;
-			float: top;
-			background-color: green;
-		}
-		footer {
-			display: block;
-			font-family: monospace;
-			float: bottom;
-			height: 5vh;
-			background-color: rgb(157, 157, 157);
-			margin-top: 0;
-		}
-		.featuresHeadline {
-			text-align : center;
-			padding-top: 250px;
-		}
-		.contactTitle{
-
-		}
-		form {
-			align-items: center;
-			font-family: monospace;
-			margin-top: 150px;
-			font-size: 14px;
-			color: grey;
-			background : none;
-			border: none;
-			border-bottom-color: blue;
-			border-bottom-style: solid;
-			border-bottom-width: 5px;
 		}
 	</style>
 </html>

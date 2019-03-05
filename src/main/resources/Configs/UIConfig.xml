@@ -1,1 +1,9 @@
-<mainColor>White</mainColor>
+<?xml version="1.0" encoding="UTF-8"?>
+    <!--NOTES
+    ~Keep in mind this is not finished.
+    ~This file is meant to set up the UI/colors in the mainCodingWindow.
+    `Keep naming standards to CamelCase
+    -->
+   <rootDiv>
+        <mainColor>White</mainColor>
+    </rootDiv>

@@ -40,7 +40,12 @@
     <div data-options="region:'south',title:'Console',split:true" style="height:300px;">
         <iframe name="hiddenFrame" width="100%" height="100%" ></iframe>
     </div>
-    <!-- <div data-options="region:'west',title:'Files',split:true" style="width:200px;">file stuff</div> -->
+
+    <div data-options="region:'west',title:'Files',split:true" style="width:200px;">
+        <div id="sm" style="width:300px">
+        </div>
+    </div>
+
     <div data-options="region:'center',title:'Code'" style="padding:5px;background:#EEEEEE;">
         <textarea id="codewindow" class="codemirror-textarea" style="width:100%;height:100%;resize:vertical;overflow:auto !important"></textarea>
 
@@ -75,16 +80,45 @@
         tc = realedit.getValue();
         document.forms["runForm"].elements.code.value = tc;
         document.forms["runForm"].elements.request.value = "run" ;
-        document.forms["runForm"].submit();  //do same thing for request
+        document.forms["runForm"].submit();
     }
 
     function saveCode() {
         tc = realedit.getValue();
         document.forms["runForm"].elements.code.value = tc;
         document.forms["runForm"].elements.request.value = "save" ;
-        document.forms["runForm"].submit();  //do same thing for request
+        document.forms["runForm"].submit();
     }
-
+    $('#sm').sidemenu({ //sidemenu implementation doesnt do anything right now tho
+        data: [{
+            text: 'Item1',
+            iconCls: 'icon-sum',
+            state: 'open',
+            children: [{
+                text: 'Option1'
+            },{
+                text: 'Option2'
+            },{
+                text: 'Option3',
+                children: [{
+                    text: 'Option31'
+                },{
+                    text: 'Option32'
+                }]
+            }]
+        },{
+            text: 'Item2',
+            iconCls: 'icon-more',
+            children: [{
+                text: 'Option4'
+            },{
+                text: 'Option5'
+            },{
+                text: 'Option6'
+            }]
+        }],
+        multiple: true
+    });
 </script>
 
 <style>

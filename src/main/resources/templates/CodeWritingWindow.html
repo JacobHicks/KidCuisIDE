@@ -22,6 +22,10 @@
     <script src="codemirror-5.44.0/mode/clike/clike.js"></script>
 
     <link rel="stylesheet" href="codemirror-5.44.0/theme/darcula.css">
+    <link rel="stylesheet" href="codemirror-5.44.0/theme/3024-day.css">
+    <link rel="stylesheet" href="codemirror-5.44.0/theme/3024-night.css">
+    <link rel="stylesheet" href="codemirror-5.44.0/theme/abcdef.css">
+
 
 
 </head>
@@ -34,11 +38,11 @@
         </form>
         <button class="topButton" id="saveButton" onclick="saveCode()" type="button">Save</button>
         <select id="cc" class="easyui-combobox" name="dept" style="width:200px;">
-            <option value="aa">aitem1</option>
-            <option onclick="updateEditor('darcula')">bitem2</option>
-            <option>bitem3</option>
-            <option>ditem4</option>
-            <option>eitem5</option>
+            <option selected>default</option>
+            <option>darcula</option>
+            <option>3024-day</option>
+            <option>3024-night</option>
+            <option>abcdef</option>
         </select>
         <button class="topButton" id="updateButton" onclick="updateEditor()" type="button">update</button>
         <!-- <button class="topButton" id="debugButton">Debug</button> -->
@@ -96,8 +100,10 @@
 
     });
 
-    function updateEditor(var name){
-        realedit.setOption("theme", name)
+    function updateEditor(){
+        var input = document.getElementById("cc");
+        var theme = input.options[input.selectedIndex].textContent;
+        realedit.setOption("theme", theme)
     }
 
     function runCode() {

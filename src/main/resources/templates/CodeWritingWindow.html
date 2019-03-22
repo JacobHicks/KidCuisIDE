@@ -209,7 +209,8 @@
         var input = document.getElementById("cc");
         var theme = input.options[input.selectedIndex].textContent;
         realedit.setOption("theme", theme)
-    }
+    }//default theme colors: Background of Code editor: #ffffff, Background of code panel: #ededee
+    //background of top bar: #B3DFD9, Color of panel headers: #E7F0FF, font of panels color: #0E365E
 
     function runCode() {
         tc = realedit.getValue();
@@ -247,6 +248,7 @@
 </script>
 
 <style>
+
     .CodeMirror {
         border: 1px solid #eee;
         height: auto;

@@ -211,7 +211,14 @@
         var input = document.getElementById("cc");
         var theme = input.options[input.selectedIndex].textContent;
         realedit.setOption("theme", theme)
-        document.getElementById("EasyuiLayout").href = "easyui/themes/black/easyui.css";
+        var light = ["default","3024-day","ambiance-mobile","base16-light","duotone-light","eclipse","elegant","idea","mdn-like","neat","neo","paraiso-light","solarized","smss","ttcn","xq-light","yeti"];
+        var dark = ["3024-night","abcdef","ambiance","base16-dark","bespin","blackboard", "cobalt","colorforth","darcula","duotone-dark","erlang-dark","gruvbox-dark","hopscotch","icecoder","isotope","lesser-dark","liquibyte","lucario","material","mbo","midnight","monokai","night","nord","oceanic-next","panda-syntax","paraiso-dark","pastel-on-dark","railscasts","rubyblue","seti","shadowfox","the-matrix","tomorrow-night-bright","tomorrow-night-eighties","twilight","vibrant-ink","xq-dark"];
+        if(light.indexOf(theme) > -1){
+            document.getElementById("EasyuiLayout").href = "easyui/themes/default/easyui.css";
+        }
+        else if(dark.indexOf(theme) > -1){
+            document.getElementById("EasyuiLayout").href = "easyui/themes/black/easyui.css";
+        }
     }//default theme colors: Background of Code editor: #ffffff, Background of code panel: #ededee
     //background of top bar: #B3DFD9, Color of panel headers: #E7F0FF, font of panels color: #0E365E
 

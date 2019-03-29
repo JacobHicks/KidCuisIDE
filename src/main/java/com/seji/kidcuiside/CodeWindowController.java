@@ -28,7 +28,7 @@ public class CodeWindowController {
         return (outputStream) -> {
             if (isAuthenticated(id, user)) {
                 FileData code = new FileData("Main.java", tcode.getCode());
-                //if (tcode.getRequest().equals("run")) {
+                if (tcode.getRequest().equals("run")) {
                 ProccessManager pm = new ProccessManager(user);
 
                 if (pm.compile(code, System.in, outputStream, outputStream) == 0) { //TODO set params to code window
@@ -38,10 +38,9 @@ public class CodeWindowController {
                         e.printStackTrace();
                     }
                 }
-                /*} else */ //if (tcode.getRequest().equals("save")) {
-                //code.write("Users/" + user);
-                //return null;
-                //}
+                } else if (tcode.getRequest().equals("save")) {
+                code.write("Users/" + user);
+                }
             }
         };
     }

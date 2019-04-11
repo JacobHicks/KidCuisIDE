@@ -6,9 +6,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.method.annotation.StreamingResponseBody;
 
 import java.io.*;
-import java.nio.charset.StandardCharsets;
 import java.util.Scanner;
-import java.util.concurrent.atomic.AtomicBoolean;
 
 @Controller
 public class CodeWindowController {
@@ -29,17 +27,17 @@ public class CodeWindowController {
             if (isAuthenticated(id, user)) {
                 FileData code = new FileData("Main.java", tcode.getCode());
                 if (tcode.getRequest().equals("run")) {
-                ProccessManager pm = new ProccessManager(user);
-
-                if (pm.compile(code, System.in, outputStream, outputStream) == 0) { //TODO set params to code window
-                    try {
-                        pm.run(code, System.in, outputStream, outputStream);
-                    } catch (Exception e) {
-                        e.printStackTrace();
+                    ProccessManager pm = new ProccessManager(user);
+                    if (pm.compile(code, System.in, outputStream, outputStream) == 0) { //TODO set params to code window
+                        try {
+                            pm.run(code, System.in, outputStream, outputStream);
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
                     }
                 }
-                } else if (tcode.getRequest().equals("save")) {
-                code.write("Users/" + user);
+                else if (tcode.getRequest().equals("save")) {
+                    code.write("Users/" + user);
                 }
             }
         };

@@ -1,9 +1,5 @@
 package com.seji.kidcuiside;
 
-import java.io.*;
-import java.nio.charset.StandardCharsets;
-import java.util.concurrent.atomic.AtomicBoolean;
-
 public class Tester {
     public static void main(String[] args) {
         CodeWindowController cwc = new CodeWindowController();

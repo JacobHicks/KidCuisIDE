@@ -6,12 +6,12 @@ import java.io.PrintWriter;
 import java.util.Scanner;
 
 public class FileData {
-    private int id;
     private String name;
     private String data;
 
-    public FileData(int i, String n, String d) {
-        id = i;
+    public FileData() {}
+
+    public FileData(String n, String d) {
         name = n;
         data = d;
     }
@@ -27,8 +27,6 @@ public class FileData {
         while (namelen-- > 0) {
             name += in.next();
         }
-        in.useDelimiter("#");
-        id = in.nextInt();
         in.useDelimiter("");
         in.next();
         StringBuilder body = new StringBuilder();
@@ -37,14 +35,6 @@ public class FileData {
         }
         in.close();
         data = Cryptor.huffmanDecode(body.toString());
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public String getName() {
@@ -64,13 +54,13 @@ public class FileData {
     }
 
     public String serialize() {
-        return name.length() + "#" + name + "#" + id + "#" + Cryptor.huffmanEncode(data);
+        return name.length() + "#" + name  + "#" + Cryptor.huffmanEncode(data);
     }
 
     public void write(String location) {
         try {
             new File(location).mkdirs();
-            PrintWriter out = new PrintWriter(new File(location + "/" + id + name));
+            PrintWriter out = new PrintWriter(new File(location + "/" + name));
             out.print(serialize());
             out.close();
         } catch (FileNotFoundException e) {
@@ -81,7 +71,6 @@ public class FileData {
     @Override
     public String toString() {
         return "FileData{" +
-                "\nid=" + id +
                 "\n, name='" + name + '\'' +
                 "\n, data='" + data + '\'' +
                 "\n}";

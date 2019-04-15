@@ -1,26 +1,66 @@
 <!-- YOUR MAIN TASKS WILL APPEAR HERE
 			TODO
-~	
+~	I was working on the
 ~	
 -->
 <!DOCTYPE HTML>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
+
 	<head>
     	<title>WebIDE</title>
     	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	</head>
 	<body>
-		<div class="ribbon">
-			<button class="ribbonButtons">WebIDE</button>
-            <a href="http://localhost:8080/signup"><button class="ribbonButtons">Signup</button></a>
-            <a href="http://localhost:8080/home"><button class="ribbonButtons" >WebIDE</button></a>
-			<button class="ribbonButtons">WebIDE</button>
-		</div>
+				<a href="http://localhost:8090/login"><button class="loginButtons">Login</button></a>
+        	    <a href="http://localhost:8090/signup"><button class="loginButtons">Signup</button></a>
+
+        <div>
+			<h1 class="intro headline test">Introducing <u>WebIDE</u>: The all-new online IDE.</h1>
+        </div>
+		
 	</body>
-	<footer>
-
-	</footer>
 	<style>
-
+		body {
+			margin: 0;
+		}
+		.text {
+			font-family: monospace;
+			color: black;
+			font-size: 12px;
+			text-align: center;
+		}
+		.about {
+			font-family : monospace;
+			color: black;
+			padding-top : 40px;
+			padding-bottom: 40px;
+			font-size: 30px;
+			text-align: center;
+		}
+		.headline {
+			color: black;
+			padding-top: 150px;
+			font-family: monospace;
+			font-size: 30px;
+			text-align : center;
+		}
+		.loginButtons {
+			background-color: #0057e6;
+			font-family: monospace;
+			font-size: 28px;
+			border: none;
+			margin-left: 0;
+			float: right;
+			cursor: pointer;
+			outline: none;
+			margin-top: -20px;
+		}
+		.loginButtons:hover {
+			transition: all 550ms, ease;
+			background-color: #008900;
+			border-bottom-color: darkblue;
+			border-bottom-style: solid;
+			border-bottom-width: 3px;
+		}
 	</style>
 </html>

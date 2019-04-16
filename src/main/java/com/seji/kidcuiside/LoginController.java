@@ -17,7 +17,7 @@ public class LoginController {
     @GetMapping("/login")
     public String login(Model model, @CookieValue(value = "id", defaultValue = "") String id) {
         if(id.equals("")) {
-            model.addAttribute("login", new LoginBean());
+            model.addAttribute("login", new LoginForm());
             return "login";
         }
         else {  //TODO check if id is valid
@@ -26,7 +26,7 @@ public class LoginController {
     }
 
     @PostMapping("/login")
-    public String loginRequest(@ModelAttribute LoginBean login, HttpServletResponse response) {
+    public String loginRequest(@ModelAttribute LoginForm login, HttpServletResponse response) {
         String user = login.getUsername();
         String password = login.getPassword();
         if(!isValidInput(user, password)) {
@@ -56,12 +56,12 @@ public class LoginController {
 
     @GetMapping("/signup")
     public String signUp(Model model) {
-        model.addAttribute("signup", new SignUpBean());
+        model.addAttribute("signup", new SignUpForm());
         return "signup";
     }
 
     @PostMapping("/signup")
-    public String signUp(@ModelAttribute SignUpBean signup) {
+    public String signUp(@ModelAttribute SignUpForm signup) {
         System.out.println(signup);
         if(signup.getPassword().equals(signup.getConfirmPassword()) && isValidInput(signup.getUsername(), signup.getPassword())) {
             String hash = Cryptor.hash("Kid" + signup.getUsername() + "Cuis" + signup.getPassword() + "IDE");

@@ -152,13 +152,13 @@
 
         </select>
         <button class="topButton" id="updateButton" onclick="updateEditor()" type="button">Update</button>
-        <button class="topButton" id="saveAsButton">Save As</button>
-         <button class="topButton" id="debugButton">Debug</button>
+        <!--<button class="topButton" id="saveAsButton">Save As</button>-->
+         <!--<button class="topButton" id="debugButton">Debug</button>-->
          <button class="topButton" id="newButton">New</button>
          <button class="topButton" id="openButton">Open</button>
-         <button class="topButton" id="compileButton">Compile</button>
+         <!--<button class="topButton" id="compileButton">Compile</button>-->
         <form action="#" th:action="@{/logout}" method="post">
-            <button class="topRightButton" id="logoutButton" name="Log Out">LogOut</button>
+            <button class="topRightButton" id="logoutButton" name="Log Out">Logout</button>
         </form>
     </div>
     <div data-options="region:'south',title:'Console',split:true" style="height:300px;">
@@ -190,7 +190,7 @@
             mode:  "text/x-java",
             theme: "default",
             matchBrackets: true,
-            indentUnit: 2,
+            indentUnit: 4,
             smartIndent: true,
             tabSize: 4,
             indentWithTabs: true,
@@ -199,10 +199,11 @@
             coverGutterNextToScrollbar: true,
 
         });
-        realedit.getDoc().setValue('public class Main {\n' +
-            '\tpublic static void main(String[] args) {\n' +
-            '\t\tSystem.out.println("Hello World!");\n' +
-            '\t}\n' +
+        realedit.getDoc().setValue(
+            'public class Main {\r\n' +
+            '\tpublic static void main(String[] args) {\r\n' +
+            '\t\tSystem.out.println("Hello World!");\r\n' +
+            '\t}\r\n' +
             '}');
         tc = realedit.getValue();
 

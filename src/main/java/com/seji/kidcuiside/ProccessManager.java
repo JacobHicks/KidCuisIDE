@@ -17,9 +17,9 @@ public class ProccessManager {
     }
 
     public int compile(FileData fileData, InputStream input, OutputStream output, OutputStream error) {
-        File file = new File("Users/" + user + "/RUN");
+        File file = new File("Users/" + user);
         file.mkdirs();
-        file = new File("Users/" + user + "/RUN/" + fileData.getName());
+        file = new File("Users/" + user + "/" + fileData.getName());
         try {
             PrintWriter pw = new PrintWriter(file);
             pw.print(fileData.getData());
@@ -34,30 +34,40 @@ public class ProccessManager {
     }
 
     public void run(FileData fileData, InputStream input, OutputStream output, OutputStream error) { //TODO allow project support
+        PrintStream userOut = new PrintStream(output);
+        PrintStream userErr = new PrintStream(error);
+        PrintStream systemOut = System.out;
+        PrintStream systemErr = System.err;
+        InputStream systemIn = System.in;
+        System.setOut(systemOut);
+        System.setErr(systemErr);
+        System.setIn(systemIn);
         try {
-            URLClassLoader directory = new URLClassLoader(new URL[] {new URL("file://" + System.getProperty("user.dir") + "/Users/" + user + "/RUN/")});
+            URLClassLoader directory = new URLClassLoader(new URL[] {new URL("file://" + System.getProperty("user.dir") + "\\Users\\" + user + "\\")});
+            System.out.println("file://" + System.getProperty("user.dir") + "/Users/" + user + "\\" + fileData.getName().substring(0, fileData.getName().length() - ".java".length()));
             Class selection = Class.forName(fileData.getName().substring(0, fileData.getName().length() - ".java".length()), true, directory);
             Method main = selection.getDeclaredMethod("main", String[].class);
-            PrintStream userOut = new PrintStream(output);
-            PrintStream userErr = new PrintStream(error);
-            PrintStream systemOut = System.out;
-            PrintStream systemErr = System.err;
-            InputStream systemIn = System.in;
+            userOut.print("Success! ");
             System.setOut(userOut);
             System.setErr(userErr);
             System.setIn(input);
+            System.out.println("Executing program...\n");
             try {
                 main.invoke(null, (Object) new String[]{"test"});
+                System.out.println("\nExecution ran successfully");
             } catch (Exception e) {
-                e.printStackTrace();
+                System.out.println(e.getMessage());
             }
+
+        } catch (ClassNotFoundException | NoSuchMethodException | MalformedURLException e) {
+            userErr.println("\nCompilation failed due to an unknown error");
+        }
+        finally {
             System.out.flush();
             System.err.flush();
-            System.setOut(systemOut);
-            System.setErr(systemErr);
-            System.setIn(systemIn);
-        } catch (ClassNotFoundException | NoSuchMethodException | MalformedURLException e) {
-            e.printStackTrace();
+            userOut.close();
+            userErr.close();
+            fileData.write("Users/" + user);
         }
     }
 }

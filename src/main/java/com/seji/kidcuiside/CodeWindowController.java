@@ -26,19 +26,30 @@ public class CodeWindowController {
         return (outputStream) -> {
             if (isAuthenticated(id, user)) {
                 FileData code = new FileData("Main.java", tcode.getCode());
+                PrintStream ps = new PrintStream(outputStream);
                 if (tcode.getRequest().equals("run")) {
+                    ps.print("Compiling... ");
                     ProccessManager pm = new ProccessManager(user);
-                    if (pm.compile(code, System.in, outputStream, outputStream) == 0) { //TODO set params to code window
+                    ByteArrayOutputStream errorstream = new ByteArrayOutputStream();
+                    if (pm.compile(code, System.in, outputStream, errorstream) == 0) {
                         try {
                             pm.run(code, System.in, outputStream, outputStream);
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
                     }
+                    else {
+                        String error = errorstream.toString();
+                        ps.println("\n" + error.substring(error.indexOf("KidCuisIDE\\Users\\") + "KidCuisIDE\\Users\\".length()));
+                        System.out.println("\n Compilation Failed");
+                    }
                 }
                 else if (tcode.getRequest().equals("save")) {
+                    ps.println("Saving... ");
                     code.write("Users/" + user);
+                    ps.print("Success! ");
                 }
+                ps.close();
             }
         };
     }

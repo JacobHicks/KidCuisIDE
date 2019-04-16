@@ -18,7 +18,6 @@ public class KidCuisIdeApplication {
             System.setErr(out);
         } catch (IOException e) {
             System.err.println("Unable to start logging, printing to terminal instead");
-            e.printStackTrace();
         }
         SpringApplication.run(KidCuisIdeApplication.class, args);
     }

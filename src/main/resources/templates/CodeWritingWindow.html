@@ -155,7 +155,9 @@
         <!--<button class="topButton" id="saveAsButton">Save As</button>-->
          <!--<button class="topButton" id="debugButton">Debug</button>-->
          <button class="topButton" id="newButton">New</button>
-         <button class="topButton" id="openButton">Open</button>
+        <button class="topButton"><label for="file-input" class="input-label"> Open Java File
+            <input type="file" accept=".java" id="file-input">
+        </label></button>
          <!--<button class="topButton" id="compileButton">Compile</button>-->
         <form action="#" th:action="@{/logout}" method="post">
             <button class="topRightButton" id="logoutButton" name="Log Out">Logout</button>
@@ -297,6 +299,23 @@
 		background-color: green;
 		color: white;
 	}
+    #file-input {
+         cursor: pointer;
+         outline: none;
+         position: absolute;
+         top: 0;
+         left: 0;
+         width: 0;
+         height: 0;
+         overflow: hidden;
+         filter: alpha(opacity=0); /* IE < 9 */
+         opacity: 0;
+     }
+    .input-label {
+        cursor: pointer;
+        position: relative;
+        display: inline-block;
+    }
 	.topRightButton {
 		background-color: rgb(0, 0, 0);
 		font-family: monospace;

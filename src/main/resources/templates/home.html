@@ -5,56 +5,53 @@
 -->
 <!DOCTYPE HTML>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
+
 <script defer src="https://use.fontawesome.com/releases/v5.8.1/js/regular.js" integrity="sha384-Uc9toywOA44owltk1MWl0lQZ+L0mBzJkLQcdif6+JtG9izvok9DLJtCZX57Uq3k2" crossorigin="anonymous"></script>
 <script defer src="https://use.fontawesome.com/releases/v5.8.1/js/fontawesome.js" integrity="sha384-EMmnH+Njn8umuoSMZ3Ae3bC9hDknHKOWL2e9WJD/cN6XLeAN7tr5ZQ0Hx5HDHtkS" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react@16/umd/react.production.js" crossorigin></script>
+<script src="https://unpkg.com/react-dom@16/umd/react-dom.production.js" crossorigin></script>
 
 	<head>
     	<title>WebIDE</title>
+		<link rel="shortcut icon" type="image/png" href="https://lh3.googleusercontent.com/POJlgg3snT9_FTcnBFKcf7i_ZoP9HMRq7fLqr8LVQMNzI9CPeAK44aIdFbJTRzeUDG6Se0qPqOGmBV2_fjIN0hdp28rdEsihw6X0zndvJFIpdPndBKF8h1zpxPdyNasH21By9QwE"/>
     	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	</head>
 	<body>
+
+
 				<a href="http://localhost:8090/login"><button class="loginButtons">Login</button></a>
         	    <a href="http://localhost:8090/signup"><button class="loginButtons">Signup</button></a>
 
         <div>
 			<h1 class="intro headline test">Introducing <u>WebIDE</u>: The all-new online IDE.</h1>
-        </div>
-				<div class="potatoes">
-					<button class="w3-button w3-display-left btol" onclick="plusDivs(-1)">Back</button>
-					<button class="w3-button w3-display-right btor" onclick="plusDivs(+1)">Next</button>
-				</div>
-				<div class="text-center">
-					<image  class="myimages" src="https://upload.wikimedia.org/wikipedia/commons/5/59/Java_-.jpg"></image>
-					<image alt="Cloud-Based: Work on the go." class="myimages" src="https://www.channelfutures.com/files/2014/04/clouds_0.jpg"></image>
-					<image alt="Free for every school and student" class="myimages" src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/52/Free_logo.svg/1280px-Free_logo.svg.png"></image>
-
-				</div>
-		
+		</div>
 	</body>
+
+
 	<style>
 		body {
 			margin: 0;
 		}
-		.text {
-			font-family: monospace;
-			color: black;
-			font-size: 12px;
-			text-align: center;
-		}
-		.about {
-			font-family : monospace;
-			color: black;
-			padding-top : 40px;
-			padding-bottom: 40px;
-			font-size: 30px;
-			text-align: center;
-		}
 
+		.logo {
+			color: black;
+			margin-left: auto;
+			margin-right: auto;
+			background: none;
+			border: none;
+			outline: none;
+			font-size: 24px;
+			font-family: monospace;
+
+		}
+		.logo :hover {
+			color: blue;
+		}
 		.headline {
 			color: black;
 			padding-top: 150px;
 			font-family: monospace;
-			font-size: 30px;
+			font-size: 40px;
 			text-align : center;
 		}
 		.loginButtons {
@@ -66,8 +63,9 @@
 			float: right;
 			cursor: pointer;
 			outline: none;
-			margin-top: -20px;
+			margin-top: -30px;
 		}
+
 		.loginButtons:hover {
 			transition: all 550ms, ease;
 			background-color: #008900;
@@ -75,64 +73,12 @@
 			border-bottom-style: solid;
 			border-bottom-width: 3px;
 		}
-        .fa {
-            font-size: 20px;
-            color: #0a001f;
 
-        }
-		.myimages {
-			width:50vw;
-            height: 60vh;
-            display: block;
-            margin-left: auto;
-            margin-right: auto;
-		}
-		.btol {
-			float:left;
-			border:none;
-            height: 60vh;
-			color:white;
-			background:black;
-			font-size:24px;
-		}
-		.btol:hover {
-			color:black;
-			background-color:white;
-		}
-		.btor {
-			float:right;
-			border:none;
-			height: 60vh;
-			color:white;
-			background:black;
-			font-size:24px;
-
-		}
-		.btor:hover {
-			color:black;
-			background-color:white;
-		}
 		.potatoes {
 			background-color:black;
 		}
 	</style>
 	<script>
-		var slideIndex = 1;
-		showDivs(slideIndex);
 
-		function plusDivs(n) {
-			showDivs(slideIndex += n);
-		}
-
-		function showDivs(n) {
-			var i;
-			var x = document.getElementsByClassName("myimages");
-			if (n > x.length) {slideIndex = 1}
-			if (n < 1) {slideIndex = x.length} ;
-			for (i = 0; i < x.length; i++) {
-				x[i].style.display = "none";
-			}
-			x[slideIndex-1].style.display = "block";
-		}
-	</script>
+		</script>
 </html>

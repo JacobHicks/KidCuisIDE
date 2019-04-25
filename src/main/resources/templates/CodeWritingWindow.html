@@ -14,6 +14,14 @@
 	<title>WebIDE</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 
+    <link rel="apple-touch-icon" sizes="180x180" href="favicons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicons/favicon-16x16.png">
+    <link rel="manifest" href="favicons/site.webmanifest">
+    <link rel="mask-icon" href="favicons/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="theme-color" content="#ffffff">
+
 	<link rel="stylesheet" type="text/css" id="EasyuiLayout" href="easyui/themes/default/easyui.css">
 	<script type="text/javascript" src="easyui/jquery.min.js"></script>
 	<script type="text/javascript" src="easyui/jquery.easyui.min.js"></script>
@@ -76,21 +84,37 @@
     <link rel="stylesheet" href="codemirror-5.44.0/theme/vibrant-ink.css">
     <link rel="stylesheet" href="codemirror-5.44.0/theme/xq-dark.css">
     <link rel="stylesheet" href="codemirror-5.44.0/theme/xq-light.css">
-    <link rel="stylesheet" href="codemirror-5.44.0/theme/veti.css">
+    <link rel="stylesheet" href="codemirror-5.44.0/theme/yeti.css">
     <link rel="stylesheet" href="codemirror-5.44.0/theme/zenburn.css">
 
 
 
 
 </head>
+
+
 <body class="easyui-layout">
+
     <div data-options="region:'north',border:false" style="height:55px;background:#B3DFDA;padding:10px">
+
         <button class="topButton" id="runButton" onclick="runCode()" type="button">Run</button> <!-- form submission stuff -->
         <form style="display: none" name="runForm" action="#" th:action="@{/code}" th:object="${code}" method="post" target="hiddenFrame">
             <input type="text" th:field="*{code}" />
             <input type="text" th:field="*{request}"/>
         </form>
+
         <button class="topButton" id="saveButton" onclick="saveCode()" type="button">Save</button>
+
+        <!--<button class="topButton" id="saveAsButton">Save As</button>-->
+         <!--<button class="topButton" id="debugButton">Debug</button>-->
+        <button class="topButton" id="newButton" onclick="newFile()">New</button>
+
+        <button class="topButton"><label for="open-file" class="input-label"> Open
+            <input style="display:none;" type="file" accept=".java" id="open-file" onchange="getFile(event);">
+
+        </label></button>
+
+        <button class="topButton" id="updateButton" onclick="updateEditor()" type="button">Update Theme:</button>
         <select id="cc" class="easyui-combobox" name="dept" style="width:200px;">
             <option selected>default</option>
             <option>3024-day</option>
@@ -151,20 +175,17 @@
 
 
         </select>
-        <button class="topButton" id="updateButton" onclick="updateEditor()" type="button">Update</button>
-        <!--<button class="topButton" id="saveAsButton">Save As</button>-->
-         <!--<button class="topButton" id="debugButton">Debug</button>-->
-         <button class="topButton" id="newButton">New</button>
-        <button class="topButton"><label for="file-input" class="input-label"> Open Java File
-            <input type="file" accept=".java" id="file-input">
-        </label></button>
+
          <!--<button class="topButton" id="compileButton">Compile</button>-->
         <form action="#" th:action="@{/logout}" method="post">
             <button class="topRightButton" id="logoutButton" name="Log Out">Logout</button>
         </form>
+
     </div>
+
+
     <div data-options="region:'south',title:'Console',split:true" style="height:300px;">
-        <iframe name="hiddenFrame" width="100%" height="100%" ></iframe>
+        <iframe name="hiddenFrame" width="100%" height="100%"></iframe>
     </div>
 
     <div data-options="region:'west',title:'Files',split:true" style="width:200px;">
@@ -175,16 +196,19 @@
     <div data-options="region:'center',title:'Code'" style="padding:5px;">
         <textarea id="codewindow" class="codemirror-textarea" style="width:100%;height:100%;resize:vertical;overflow:auto !important"></textarea>
 
-                    <!-- <textarea id="mainWritingWindow" placeholder="<Insert amazing code here>" style="height:575px;width:1690px;"> --> <!-- need to fix text window area -->
-                    <!-- </textarea> -->
-
-        <form></form> <!--main code writing window/console-->
 
     </div>
+
 </body>
+
+
 <script>
-    var tc = null;
+    var tc;
+    var changefile;
     var realedit;
+    var fileName = "untitled";
+    var file;
+
     $(document).ready(function(){
         var code = $(".codemirror-textarea")[0];
         realedit = CodeMirror.fromTextArea(document.getElementById("codewindow"), {
@@ -207,9 +231,88 @@
             '\t\tSystem.out.println("Hello World!");\r\n' +
             '\t}\r\n' +
             '}');
-        tc = realedit.getValue();
-
+        changefile = realedit;
+        tc = changefile.getDoc().getValue();
     });
+
+    function newFile() {
+        changefile.getDoc().setValue(
+            'public class Main {\r\n' +
+            '\tpublic static void main(String[] args) {\r\n' +
+            '\t\t\r\n' +
+            '\t}\r\n' +
+            '}');
+        fileName = "untitled";
+        $('#sm').sidemenu({ //sidemenu implementation doesnt do anything right now tho
+            data: [{
+                text: fileName,
+                iconCls: 'icon-sum',
+                state: 'closed',
+                /*children: [{
+                    text: 'notWorkingrightnow.java'
+                },{
+                    text: 'itWillWorkInTime.java'
+                },{
+                    text: 'src',
+                    children: [{
+                        text: 'comeOn.java'
+                    },{
+                        text: 'boi.java'
+                    }]
+                }]*/
+            }],
+            multiple: true
+        });
+    }
+
+    function getFile(event) {
+        const input = event.target
+        if ('files' in input && input.files.length > 0) {
+            fileName = input.value.substr(input.value.indexOf('fakepath\\') + 9);
+            $('#sm').sidemenu({ //sidemenu implementation doesnt do anything right now tho
+                data: [{
+                    text: fileName,
+                    iconCls: 'icon-sum',
+                    state: 'closed',
+                    /*children: [{
+                        text: 'notWorkingrightnow.java'
+                    },{
+                        text: 'itWillWorkInTime.java'
+                    },{
+                        text: 'src',
+                        children: [{
+                            text: 'comeOn.java'
+                        },{
+                            text: 'boi.java'
+                        }]
+                    }]*/
+                }],
+                multiple: true
+            });
+            updateEditor();
+            placeFileContent(
+                changefile.getDoc(),
+                input.files[0])
+
+        }
+
+    }
+
+    function placeFileContent(target, file) {
+        console.log(file)
+        readFileContent(file).then(content => {
+            target.setValue(content);
+        }).catch(error => console.log(error))
+    }
+
+    function readFileContent(file) {
+        const reader = new FileReader()
+        return new Promise((resolve, reject) => {
+            reader.onload = event => resolve(event.target.result)
+            reader.onerror = error => reject(error)
+            reader.readAsText(file)
+        })
+    }
 
     function updateEditor(){
         var input = document.getElementById("cc");
@@ -239,12 +342,13 @@
         document.forms["runForm"].elements.request.value = "save" ;
         document.forms["runForm"].submit();
     }
+
     $('#sm').sidemenu({ //sidemenu implementation doesnt do anything right now tho
         data: [{
-            text: 'Project',
+            text: fileName,
             iconCls: 'icon-sum',
             state: 'closed',
-            children: [{
+            /*children: [{
                 text: 'notWorkingrightnow.java'
             },{
                 text: 'itWillWorkInTime.java'
@@ -255,11 +359,12 @@
                 },{
                     text: 'boi.java'
                 }]
-            }]
+            }]*/
         }],
         multiple: true
     });
 </script>
+
 
 <style>
 

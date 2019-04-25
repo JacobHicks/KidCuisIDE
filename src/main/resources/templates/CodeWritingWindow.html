@@ -110,7 +110,7 @@
         <button class="topButton" id="newButton">New</button>
 
         <button class="topButton"><label for="open-file" class="input-label"> Open
-            <input style="display:none;" type="file" accept=".java" id="open-file" onchange="openFile(this,0);">
+            <input style="display:none;" type="file" accept=".java" id="open-file" onchange="getFile(event);">
 
         </label></button>
 
@@ -196,7 +196,6 @@
     <div data-options="region:'center',title:'Code'" style="padding:5px;">
         <textarea id="codewindow" class="codemirror-textarea" style="width:100%;height:100%;resize:vertical;overflow:auto !important"></textarea>
 
-        <textarea id="content-target"></textarea>
 
     </div>
 
@@ -209,7 +208,6 @@
     var realedit;
     var fileName = "untitled";
     var file;
-    var filestuff;
 
     $(document).ready(function(){
         var code = $(".codemirror-textarea")[0];
@@ -237,60 +235,54 @@
         tc = changefile.getDoc().getValue();
     });
 
-    function openFile(f,a){
-        document.getElementById('open-file')
-            .addEventListener('change', getFile)
 
-        function getFile(event) {
-            const input = event.target
-            if ('files' in input && input.files.length > 0) {
-                placeFileContent(
-                    document.getElementById('content-target'),
-                    input.files[0])
-            }
-        }
-
-        function placeFileContent(target, file) {
-            readFileContent(file).then(content => {
-                target.value = content
-            }).catch(error => console.log(error))
-        }
-
-        function readFileContent(file) {
-            const reader = new FileReader()
-            return new Promise((resolve, reject) => {
-                reader.onload = event => resolve(event.target.result)
-                reader.onerror = error => reject(error)
-                reader.readAsText(file)
-            })
-        }
-
-
-        file = f;
-        fileName = file.value.substr(file.value.indexOf('fakepath\\') + 9);
-        $('#sm').sidemenu({ //sidemenu implementation doesnt do anything right now tho
-            data: [{
-                text: fileName,
-                iconCls: 'icon-sum',
-                state: 'closed',
-                /*children: [{
-                    text: 'notWorkingrightnow.java'
-                },{
-                    text: 'itWillWorkInTime.java'
-                },{
-                    text: 'src',
-                    children: [{
-                        text: 'comeOn.java'
+    function getFile(event) {
+        const input = event.target
+        if ('files' in input && input.files.length > 0) {
+            fileName = input.value.substr(input.value.indexOf('fakepath\\') + 9);
+            $('#sm').sidemenu({ //sidemenu implementation doesnt do anything right now tho
+                data: [{
+                    text: fileName,
+                    iconCls: 'icon-sum',
+                    state: 'closed',
+                    /*children: [{
+                        text: 'notWorkingrightnow.java'
                     },{
-                        text: 'boi.java'
-                    }]
-                }]*/
-            }],
-            multiple: true
-        });
-        changefile.getDoc().setValue(document.getElementById('content-target').value);
-        updateEditor();
+                        text: 'itWillWorkInTime.java'
+                    },{
+                        text: 'src',
+                        children: [{
+                            text: 'comeOn.java'
+                        },{
+                            text: 'boi.java'
+                        }]
+                    }]*/
+                }],
+                multiple: true
+            });
+            updateEditor();
+            placeFileContent(
+                changefile.getDoc(),
+                input.files[0])
 
+        }
+
+    }
+
+    function placeFileContent(target, file) {
+        console.log(file)
+        readFileContent(file).then(content => {
+            target.setValue(content);
+        }).catch(error => console.log(error))
+    }
+
+    function readFileContent(file) {
+        const reader = new FileReader()
+        return new Promise((resolve, reject) => {
+            reader.onload = event => resolve(event.target.result)
+            reader.onerror = error => reject(error)
+            reader.readAsText(file)
+        })
     }
 
     function updateEditor(){

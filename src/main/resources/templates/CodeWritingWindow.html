@@ -107,7 +107,7 @@
 
         <!--<button class="topButton" id="saveAsButton">Save As</button>-->
          <!--<button class="topButton" id="debugButton">Debug</button>-->
-        <button class="topButton" id="newButton">New</button>
+        <button class="topButton" id="newButton" onclick="newFile()">New</button>
 
         <button class="topButton"><label for="open-file" class="input-label"> Open
             <input style="display:none;" type="file" accept=".java" id="open-file" onchange="getFile(event);">
@@ -235,6 +235,35 @@
         tc = changefile.getDoc().getValue();
     });
 
+    function newFile() {
+        changefile.getDoc().setValue(
+            'public class Main {\r\n' +
+            '\tpublic static void main(String[] args) {\r\n' +
+            '\t\t\r\n' +
+            '\t}\r\n' +
+            '}');
+        fileName = "untitled";
+        $('#sm').sidemenu({ //sidemenu implementation doesnt do anything right now tho
+            data: [{
+                text: fileName,
+                iconCls: 'icon-sum',
+                state: 'closed',
+                /*children: [{
+                    text: 'notWorkingrightnow.java'
+                },{
+                    text: 'itWillWorkInTime.java'
+                },{
+                    text: 'src',
+                    children: [{
+                        text: 'comeOn.java'
+                    },{
+                        text: 'boi.java'
+                    }]
+                }]*/
+            }],
+            multiple: true
+        });
+    }
 
     function getFile(event) {
         const input = event.target

@@ -109,10 +109,12 @@
          <!--<button class="topButton" id="debugButton">Debug</button>-->
         <button class="topButton" id="newButton" onclick="newFile()">New</button>
 
-        <button class="topButton"><label for="open-file" class="input-label"> Open
-            <input style="display:none;" type="file" accept=".java" id="open-file" onchange="getFile(event);">
+        <button class="topButton"><label for="upload-file" class="input-label"> Upload
+            <input style="display:none;" type="file" accept=".java" id="upload-file" onchange="getFile(event);">
 
         </label></button>
+
+        <button class="topButton"><label> Open</label></button>
 
         <button class="topButton" id="updateButton" onclick="updateEditor()" type="button">Update Theme:</button>
         <select id="cc" class="easyui-combobox" name="dept" style="width:200px;">

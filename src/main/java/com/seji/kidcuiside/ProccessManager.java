@@ -49,14 +49,14 @@ public class ProccessManager {
             Method main = selection.getDeclaredMethod("main", String[].class);
             userOut.print("Success! ");
             System.setOut(userOut);
-            System.setErr(userErr);
+            System.setErr(userOut); //last minute fix
             System.setIn(input);
             System.out.println("Executing program...\n");
             try {
                 main.invoke(null, (Object) new String[]{"test"});
                 System.out.println("\nExecution ran successfully");
             } catch (Exception e) {
-                System.out.println(e.getMessage());
+                e.getCause().printStackTrace();
             }
 
         } catch (ClassNotFoundException | NoSuchMethodException | MalformedURLException e) {

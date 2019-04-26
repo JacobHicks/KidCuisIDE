@@ -33,9 +33,10 @@ public class CodeWindowController {
                     ByteArrayOutputStream errorstream = new ByteArrayOutputStream();
                     if (pm.compile(code, System.in, outputStream, errorstream) == 0) {
                         try {
-                            pm.run(code, System.in, outputStream, outputStream);
+                            pm.run(code, System.in, outputStream, errorstream);
                         } catch (Exception e) {
                             e.printStackTrace();
+                            ps.println(e.toString());
                         }
                     }
                     else {
@@ -43,6 +44,7 @@ public class CodeWindowController {
                         ps.println("\n" + error.substring(error.indexOf("KidCuisIDE\\Users\\") + "KidCuisIDE\\Users\\".length()));
                         System.out.println("\n Compilation Failed");
                     }
+                    System.out.println("dbg" + outputStream.toString() + errorstream.toString());
                 }
                 else if (tcode.getRequest().equals("save")) {
                     ps.println("Saving... ");

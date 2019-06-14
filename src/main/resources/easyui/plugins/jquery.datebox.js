@@ -59,8 +59,8 @@ var _f=parseInt($(e.target).attr("datebox-button-index"));
 _d.buttons[_f].handler.call(e.target,_c);
 }
 });
-};
-function _6(_10){
+}
+    function _6(_10){
 var _11=$(_10).combo("panel");
 if(_11.children("div.datebox-button").length){
 return;
@@ -74,8 +74,8 @@ var t=$("<a class=\"datebox-button-a\" href=\"javascript:;\"></a>").html($.isFun
 t.attr("datebox-button-index",i);
 }
 tr.find("td").css("width",(100/_4.buttons.length)+"%");
-};
-function _7(_13){
+}
+    function _7(_13){
 var _14=$(_13).combo("panel");
 var cc=_14.children("div.datebox-calendar-inner");
 _14.children()._outerWidth(_14.width());
@@ -89,12 +89,12 @@ _15-=$(this).outerHeight();
 cc._outerHeight(_15);
 }
 _3.calendar.calendar("resize");
-};
-};
-function _16(_17,q){
+}
+}
+    function _16(_17,q){
 _18(_17,q,true);
-};
-function _19(_1a){
+}
+    function _19(_1a){
 var _1b=$.data(_1a,"datebox");
 var _1c=_1b.options;
 var _1d=_1b.calendar.calendar("options").current;
@@ -102,8 +102,8 @@ if(_1d){
 _18(_1a,_1c.formatter.call(_1a,_1d));
 $(_1a).combo("hidePanel");
 }
-};
-function _18(_1e,_1f,_20){
+}
+    function _18(_1e,_1f,_20){
 var _21=$.data(_1e,"datebox");
 var _22=_21.options;
 var _23=_21.calendar;
@@ -116,8 +116,8 @@ _1f=_22.formatter.call(_1e,_23.calendar("options").current);
 }
 $(_1e).combo("setText",_1f).combo("setValue",_1f);
 }
-};
-$.fn.datebox=function(_24,_25){
+}
+    $.fn.datebox=function(_24,_25){
 if(typeof _24=="string"){
 var _26=$.fn.datebox.methods[_24];
 if(_26){

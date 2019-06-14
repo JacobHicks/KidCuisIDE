@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+
+    <meta charset="UTF-8">
+    <title>WebIDE:Dashboard</title>
+</head>
+<body>
+<!--make the navbar with logout, settings(color changelings, deleting account etc. password change, ), user profile pic.-->
+    <div class="navbar">
+        <form action="#" th:action="@{/logout}" method="post">
+            <button class="topRightButton" id="logoutButton" name="Log Out">Logout</button>
+        </form>
+        <a href="http://localhost:8090/settings"><button class="navButtons">settings</button></a>
+        <a href="http://localhost:8090/profile"><img class="profileImage" src="#####"></a>
+    </div>
+</body>
+<style>
+
+</style>
+<script>
+    //create an object that is a panel linking to a project
+</script>
+</html>

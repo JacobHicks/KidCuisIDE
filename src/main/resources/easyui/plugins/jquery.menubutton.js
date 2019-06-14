@@ -39,8 +39,8 @@ _d.removeClass((_e.plain==true)?_e.cls.btn2:_e.cls.btn1);
 _8.call(this);
 }});
 }
-};
-function _f(_10){
+}
+    function _f(_10){
 var _11=$.data(_10,"menubutton").options;
 var btn=$(_10);
 var t=btn.find("."+_11.cls.trigger);
@@ -64,9 +64,9 @@ $(_11.menu).triggerHandler("mouseleave");
 });
 function _13(){
 return $(_10).linkbutton("options").disabled;
-};
-};
-function _14(_15){
+}
+}
+    function _14(_15){
 var _16=$(_15).menubutton("options");
 if(_16.disabled||!_16.menu){
 return;
@@ -79,8 +79,8 @@ mm.menu("options").alignTo=btn;
 mm.menu("show",{alignTo:btn,align:_16.menuAlign});
 }
 btn.blur();
-};
-$.fn.menubutton=function(_17,_18){
+}
+    $.fn.menubutton=function(_17,_18){
 if(typeof _17=="string"){
 var _19=$.fn.menubutton.methods[_17];
 if(_19){

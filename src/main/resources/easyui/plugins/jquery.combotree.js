@@ -47,8 +47,8 @@ _3.remainText=false;
 _e(_2);
 _4.onCheck.call(this,_c,_d);
 }}));
-};
-function _e(_f){
+}
+    function _e(_f){
 var _10=$.data(_f,"combotree");
 var _11=_10.options;
 var _12=_10.tree;
@@ -65,8 +65,8 @@ vv.push(_14.id);
 }
 vv=vv.concat(_11.unselectedValues);
 _15(_f,vv,_10.remainText);
-};
-function _15(_16,_17,_18){
+}
+    function _15(_16,_17,_18){
 var _19=$.data(_16,"combotree");
 var _1a=_19.options;
 var _1b=_19.tree;
@@ -125,25 +125,25 @@ $(_16).combo("setValues",vv);
 function _24(_26,a){
 var _27=$.easyui.getArrayItem(a,"id",_26);
 return _27?_23(_27):undefined;
-};
-function _23(_28){
+}
+    function _23(_28){
 return _28[_1a.textField||""]||_28.text;
-};
-};
-function _29(_2a,q){
+}
+}
+    function _29(_2a,q){
 var _2b=$.data(_2a,"combotree");
 var _2c=_2b.options;
 var _2d=_2b.tree;
 _2b.remainText=true;
 _2d.tree("doFilter",_2c.multiple?q.split(_2c.separator):q);
-};
-function _2e(_2f){
+}
+    function _2e(_2f){
 var _30=$.data(_2f,"combotree");
 _30.remainText=false;
 $(_2f).combotree("setValues",$(_2f).combotree("getValues"));
 $(_2f).combotree("hidePanel");
-};
-$.fn.combotree=function(_31,_32){
+}
+    $.fn.combotree=function(_31,_32){
 if(typeof _31=="string"){
 var _33=$.fn.combotree.methods[_31];
 if(_33){

@@ -107,7 +107,7 @@
 						opts.onBeforeLoad = function(row,param){
 							state.allRows = null;
 							return onBeforeLoad.call(this, row, param);
-						}
+						};
 						var pager = tg.treegrid('getPager');
 						pager.pagination({
 							onSelectPage:function(pageNum, pageSize){
@@ -173,7 +173,7 @@
 		function formatProgress(value){
 	    	if (value){
 		    	var s = '<div style="width:100%;border:1px solid #ccc">' +
-		    			'<div style="width:' + value + '%;background:#cc0000;color:#fff">' + value + '%' + '</div>'
+		    			'<div style="width:' + value + '%;background:#cc0000;color:#fff">' + value + '%' + '</div>';
 		    			'</div>';
 		    	return s;
 	    	} else {

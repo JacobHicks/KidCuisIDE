@@ -69,7 +69,7 @@
 	function submitIframe(target, param){
 		var opts = $.data(target, 'form').options;
 		var frameId = 'easyui_frame_' + (new Date().getTime());
-		var frame = $('<iframe id='+frameId+' name='+frameId+'></iframe>').appendTo('body')
+		var frame = $('<iframe id='+frameId+' name='+frameId+'></iframe>').appendTo('body');
 		frame.attr('src', window.ActiveXObject ? 'javascript:false' : 'about:blank');
 		frame.css({
 			position:'absolute',

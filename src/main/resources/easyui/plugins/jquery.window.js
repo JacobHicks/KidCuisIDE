@@ -22,8 +22,8 @@ $(_2).panel("move",_4.options);
 if(_4.shadow){
 _4.shadow.css({left:_4.options.left,top:_4.options.top});
 }
-};
-function _5(_6,_7){
+}
+    function _5(_6,_7){
 var _8=$.data(_6,"window").options;
 var pp=$(_6).window("panel");
 var _9=pp._outerWidth();
@@ -36,8 +36,8 @@ _8.left=Math.ceil(($(window)._outerWidth()-_9)/2+$(document).scrollLeft());
 if(_7){
 _1(_6);
 }
-};
-function _b(_c,_d){
+}
+    function _b(_c,_d){
 var _e=$.data(_c,"window").options;
 var pp=$(_c).window("panel");
 var _f=pp._outerHeight();
@@ -50,8 +50,8 @@ _e.top=Math.ceil(($(window)._outerHeight()-_f)/2+$(document).scrollTop());
 if(_d){
 _1(_c);
 }
-};
-function _11(_12){
+}
+    function _11(_12){
 var _13=$.data(_12,"window");
 var _14=_13.options;
 var win=$(_12).panel($.extend({},_13.options,{border:false,doSize:true,closed:true,cls:"window "+(!_14.border?"window-thinborder window-noborder ":(_14.border=="thin"?"window-thinborder ":""))+(_14.cls||""),headerCls:"window-header "+(_14.headerCls||""),bodyCls:"window-body "+(_14.noheader?"window-body-noheader ":" ")+(_14.bodyCls||""),onBeforeDestroy:function(){
@@ -133,8 +133,8 @@ _1(_12);
 if(!_18){
 win.window("open");
 }
-};
-function _19(_1a,top,_1b,_1c){
+}
+    function _19(_1a,top,_1b,_1c){
 var _1d=this;
 var _1e=$.data(_1d,"window");
 var _1f=_1e.options;
@@ -167,8 +167,8 @@ _1c=_20.height()-top+_20.scrollTop();
 }
 }
 return {left:_1a,top:top,width:_1b,height:_1c};
-};
-function _21(_22){
+}
+    function _21(_22){
 var _23=$.data(_22,"window");
 _23.window.draggable({handle:">div.panel-header>div.panel-title",disabled:_23.options.draggable==false,onBeforeDrag:function(e){
 if(_23.mask){
@@ -215,24 +215,24 @@ if(_23.proxy){
 _23.proxy.show();
 }
 },500);
-};
-function _25(e){
+}
+    function _25(e){
 $.extend(e.data,_19.call(_22,e.data.left,e.data.top,e.data.width,e.data.height));
 _23.pmask.show();
 _23.proxy.css({display:"block",left:e.data.left,top:e.data.top});
 _23.proxy._outerWidth(e.data.width);
 _23.proxy._outerHeight(e.data.height);
-};
-function _26(e,_27){
+}
+    function _26(e,_27){
 $.extend(e.data,_19.call(_22,e.data.left,e.data.top,e.data.width+0.1,e.data.height+0.1));
 $(_22).window(_27,e.data);
 _23.pmask.remove();
 _23.pmask=null;
 _23.proxy.remove();
 _23.proxy=null;
-};
-};
-$(function(){
+}
+}
+    $(function(){
 if(!$._positionFixed){
 $(window).resize(function(){
 $("body>div.window-mask:visible").css({width:"",height:""});

@@ -87,7 +87,7 @@
                         opts.onBeforeLoad = function(param){
                             state.allRows = null;
                             return onBeforeLoad.call(this, param);
-                        }
+                        };
                         var pager = dg.datagrid('getPager');
 						pager.pagination({
 							onSelectPage:function(pageNum, pageSize){

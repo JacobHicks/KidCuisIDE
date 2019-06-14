@@ -44,7 +44,7 @@
 		function formatProgress(value){
 	    	if (value){
 		    	var s = '<div style="width:100%;border:1px solid #ccc">' +
-		    			'<div style="width:' + value + '%;background:#cc0000;color:#fff">' + value + '%' + '</div>'
+		    			'<div style="width:' + value + '%;background:#cc0000;color:#fff">' + value + '%' + '</div>';
 		    			'</div>';
 		    	return s;
 	    	} else {
@@ -59,7 +59,7 @@
 			}
 			var row = $('#tg').treegrid('getSelected');
 			if (row){
-				editingId = row.id
+				editingId = row.id;
 				$('#tg').treegrid('beginEdit', editingId);
 			}
 		}

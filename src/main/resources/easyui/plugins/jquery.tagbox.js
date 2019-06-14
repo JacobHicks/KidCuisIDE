@@ -52,9 +52,9 @@ $("<a href=\"javascript:;\" class=\"tagbox-remove\"></a>").appendTo(_11);
 });
 _12(_2);
 $(_2).combobox("setText","");
-};
-};
-function _12(_13,_14){
+}
+}
+    function _12(_13,_14){
 var _15=$(_13).next();
 var _16=_14?$(_14):_15.find(".tagbox-label");
 if(_16.length){
@@ -67,8 +67,8 @@ var _1b=_15.find(".textbox-addon").css("height","100%");
 _1b.find(".textbox-icon").css("height","100%");
 _15.find(".textbox-button").linkbutton("resize",{height:"100%"});
 }
-};
-function _1c(_1d){
+}
+    function _1c(_1d){
 var _1e=$(_1d).next();
 _1e.unbind(".tagbox").bind("click.tagbox",function(e){
 var _1f=$(_1d).tagbox("options");
@@ -104,8 +104,8 @@ $(this).find(".textbox-text").triggerHandler("mouseenter");
 }).bind("mouseleave.tagbox",function(e){
 $(this).find(".textbox-text").triggerHandler("mouseleave");
 });
-};
-function _23(_24){
+}
+    function _23(_24){
 var _25=$(_24).tagbox("options");
 var _26=$(_24).tagbox("textbox");
 var _27=$(_24).next();
@@ -122,9 +122,9 @@ function _29(val){
 var s=val.replace(/&/g,"&amp;").replace(/\s/g," ").replace(/</g,"&lt;").replace(/>/g,"&gt;");
 tmp.html(s);
 return tmp.outerWidth();
-};
-};
-function _2c(_2d){
+}
+}
+    function _2c(_2d){
 var t=$(_2d);
 var _2e=t.tagbox("options");
 if(_2e.limitToList){
@@ -145,15 +145,15 @@ _32.push(v);
 $(_2d).tagbox("setValues",_32);
 }
 }
-};
-function _33(_34,_35){
+}
+    function _33(_34,_35){
 $(_34).combobox("setText","");
 _23(_34);
 $(_34).combobox("setValues",_35);
 $(_34).combobox("setText","");
 $(_34).tagbox("validate");
-};
-$.fn.tagbox=function(_36,_37){
+}
+    $.fn.tagbox=function(_36,_37){
 if(typeof _36=="string"){
 var _38=$.fn.tagbox.methods[_36];
 if(_38){

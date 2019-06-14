@@ -33,8 +33,8 @@ _5=Math.min(Math.max(_5,_3.minHeight),_3.maxHeight);
 _2.height=_5;
 _2.top=_2.startTop+_2.startHeight-_2.height;
 }
-};
-function _6(e){
+}
+    function _6(e){
 var _7=e.data;
 var t=$(_7.target);
 t.css({left:_7.left,top:_7.top});
@@ -44,20 +44,20 @@ t._outerWidth(_7.width);
 if(t.outerHeight()!=_7.height){
 t._outerHeight(_7.height);
 }
-};
-function _8(e){
+}
+    function _8(e){
 $.fn.resizable.isResizing=true;
 $.data(e.data.target,"resizable").options.onStartResize.call(e.data.target,e);
 return false;
-};
-function _9(e){
+}
+    function _9(e){
 _1(e);
 if($.data(e.data.target,"resizable").options.onResize.call(e.data.target,e)!=false){
 _6(e);
 }
 return false;
-};
-function _a(e){
+}
+    function _a(e){
 $.fn.resizable.isResizing=false;
 _1(e,true);
 _6(e);
@@ -65,8 +65,8 @@ $.data(e.data.target,"resizable").options.onStopResize.call(e.data.target,e);
 $(document).unbind(".resizable");
 $("body").css("cursor","");
 return false;
-};
-function _b(e){
+}
+    function _b(e){
 var _c=$(e.data.target).resizable("options");
 var tt=$(e.data.target);
 var _d="";
@@ -102,8 +102,8 @@ return _12[_13];
 }
 }
 return "";
-};
-$.fn.resizable=function(_14,_15){
+}
+    $.fn.resizable=function(_14,_15){
 if(typeof _14=="string"){
 return $.fn.resizable.methods[_14](this,_15);
 }
@@ -140,8 +140,8 @@ return 0;
 }else{
 return val;
 }
-};
-var _19={target:e.data.target,dir:dir,startLeft:_18("left"),startTop:_18("top"),left:_18("left"),top:_18("top"),startX:e.pageX,startY:e.pageY,startWidth:$(e.data.target).outerWidth(),startHeight:$(e.data.target).outerHeight(),width:$(e.data.target).outerWidth(),height:$(e.data.target).outerHeight(),deltaWidth:$(e.data.target).outerWidth()-$(e.data.target).width(),deltaHeight:$(e.data.target).outerHeight()-$(e.data.target).height()};
+}
+    var _19={target:e.data.target,dir:dir,startLeft:_18("left"),startTop:_18("top"),left:_18("left"),top:_18("top"),startX:e.pageX,startY:e.pageY,startWidth:$(e.data.target).outerWidth(),startHeight:$(e.data.target).outerHeight(),width:$(e.data.target).outerWidth(),height:$(e.data.target).outerHeight(),deltaWidth:$(e.data.target).outerWidth()-$(e.data.target).width(),deltaHeight:$(e.data.target).outerHeight()-$(e.data.target).height()};
 $(document).bind("mousedown.resizable",_19,_8);
 $(document).bind("mousemove.resizable",_19,_9);
 $(document).bind("mouseup.resizable",_19,_a);

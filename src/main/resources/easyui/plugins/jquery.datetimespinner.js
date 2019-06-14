@@ -11,8 +11,8 @@
 function _1(_2){
 var _3=$.data(_2,"datetimespinner").options;
 $(_2).addClass("datetimespinner-f").timespinner(_3);
-};
-$.fn.datetimespinner=function(_4,_5){
+}
+    $.fn.datetimespinner=function(_4,_5){
 if(typeof _4=="string"){
 var _6=$.fn.datetimespinner.methods[_4];
 if(_6){

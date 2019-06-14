@@ -20,8 +20,8 @@ _6(_2);
 }
 $(_2).addClass("passwordbox-f").textbox($.extend({},_4,{icons:_5}));
 _6(_2);
-};
-function _7(_8,_9,_a){
+}
+    function _7(_8,_9,_a){
 var t=$(_8);
 var _b=t.passwordbox("options");
 if(_b.revealed){
@@ -51,8 +51,8 @@ cc[i]=_c;
 t.textbox("setValue",vv.join(""));
 t.textbox("setText",cc.join(""));
 t.textbox("setSelectionRange",{start:_d,end:_d});
-};
-function _6(_e,_f){
+}
+    function _6(_e,_f){
 var t=$(_e);
 var _10=t.passwordbox("options");
 var _11=t.next().find(".passwordbox-open");
@@ -61,8 +61,8 @@ _f=_f==undefined?t.textbox("getValue"):_f;
 t.textbox("setValue",_f);
 t.textbox("setText",_10.revealed?_f:_f.replace(/./ig,_12));
 _10.revealed?_11.addClass("passwordbox-close"):_11.removeClass("passwordbox-close");
-};
-function _13(e){
+}
+    function _13(e){
 var _14=e.data.target;
 var t=$(e.data.target);
 var _15=t.data("passwordbox");
@@ -87,8 +87,8 @@ _15.lastTimer=undefined;
 setTimeout(arguments.callee,_16.checkInterval);
 }
 })();
-};
-function _18(e){
+}
+    function _18(e){
 var _19=e.data.target;
 var _1a=$(_19).data("passwordbox");
 _1a.checking=false;
@@ -97,8 +97,8 @@ clearTimeout(_1a.lastTimer);
 _1a.lastTimer=undefined;
 }
 _6(_19);
-};
-$.fn.passwordbox=function(_1b,_1c){
+}
+    $.fn.passwordbox=function(_1b,_1c){
 if(typeof _1b=="string"){
 var _1d=$.fn.passwordbox.methods[_1b];
 if(_1d){

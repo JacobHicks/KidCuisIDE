@@ -11,16 +11,16 @@
 var _1=1;
 function _2(_3){
 $(_3).addClass("sidemenu");
-};
-function _4(_5,_6){
+}
+    function _4(_5,_6){
 var _7=$(_5).sidemenu("options");
 if(_6){
 $.extend(_7,{width:_6.width,height:_6.height});
 }
 $(_5)._size(_7);
 $(_5).find(".accordion").accordion("resize");
-};
-function _8(_9,_a,_b){
+}
+    function _8(_9,_a,_b){
 var _c=$(_9).sidemenu("options");
 var tt=$("<ul class=\"sidemenu-tree\"></ul>").appendTo(_a);
 tt.tree({data:_b,animate:_c.animate,onBeforeSelect:function(_d){
@@ -47,8 +47,8 @@ tt.unbind(".sidemenu").bind("mouseleave.sidemenu",function(){
 $(_a).trigger("mouseleave");
 });
 _12(_9,_c.selectedItemId);
-};
-function _13(_14,_15,_16){
+}
+    function _13(_14,_15,_16){
 var _17=$(_14).sidemenu("options");
 $(_15).tooltip({content:$("<div></div>"),position:_17.floatMenuPosition,valign:"top",data:_16,onUpdate:function(_18){
 var _19=$(this).tooltip("options");
@@ -77,8 +77,8 @@ tip.css("top",top);
 }
 }
 }});
-};
-function _1c(_1d,_1e){
+}
+    function _1c(_1d,_1e){
 $(_1d).find(".sidemenu-tree").each(function(){
 _1e($(this));
 });
@@ -91,8 +91,8 @@ _1e($(this));
 $(this).tooltip("reposition");
 }
 });
-};
-function _12(_1f,_20,_21){
+}
+    function _12(_1f,_20,_21){
 var _22=null;
 var _23=$(_1f).sidemenu("options");
 _1c(_1f,function(t){
@@ -108,8 +108,8 @@ _22=_24;
 if(_21&&_22){
 _23.onSelect.call(_1f,_22);
 }
-};
-function _25(_26,_27){
+}
+    function _25(_26,_27){
 _1c(_26,function(t){
 var _28=t.tree("find",_27.id);
 if(_28){
@@ -120,8 +120,8 @@ t.tree(_27.state=="open"?"expand":"collapse",_28.target);
 _29.animate=_2a;
 }
 });
-};
-function _2b(_2c){
+}
+    function _2b(_2c){
 var _2d=$(_2c).sidemenu("options");
 $(_2c).empty();
 if(_2d.data){
@@ -156,8 +156,8 @@ _8(_2c,ap,_2f[i].children);
 _13(_2c,ap.panel("header"),_2f[i]);
 }
 }
-};
-function _30(_31,_32){
+}
+    function _30(_31,_32){
 var _33=$(_31).sidemenu("options");
 _33.collapsed=_32;
 var acc=$(_31).find(".accordion");
@@ -190,14 +190,14 @@ _36.find(".panel-tool").show();
 }
 }
 acc.accordion("options").animate=_33.animate;
-};
-function _37(_38){
+}
+    function _37(_38){
 $(_38).find(".tooltip-f").each(function(){
 $(this).tooltip("destroy");
 });
 $(_38).remove();
-};
-$.fn.sidemenu=function(_39,_3a){
+}
+    $.fn.sidemenu=function(_39,_3a){
 if(typeof _39=="string"){
 var _3b=$.fn.sidemenu.methods[_39];
 return _3b(this,_3a);

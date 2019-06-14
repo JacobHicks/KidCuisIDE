@@ -13,8 +13,8 @@ var _3=$.data(_2,"datalist").options;
 $(_2).datagrid($.extend({},_3,{cls:"datalist"+(_3.lines?" datalist-lines":""),frozenColumns:(_3.frozenColumns&&_3.frozenColumns.length)?_3.frozenColumns:(_3.checkbox?[[{field:"_ck",checkbox:true}]]:undefined),columns:(_3.columns&&_3.columns.length)?_3.columns:[[{field:_3.textField,width:"100%",formatter:function(_4,_5,_6){
 return _3.textFormatter?_3.textFormatter(_4,_5,_6):_4;
 }}]]}));
-};
-var _7=$.extend({},$.fn.datagrid.defaults.view,{render:function(_8,_9,_a){
+}
+    var _7=$.extend({},$.fn.datagrid.defaults.view,{render:function(_8,_9,_a){
 var _b=$.data(_8,"datagrid");
 var _c=_b.options;
 if(_c.groupField){
@@ -74,8 +74,8 @@ return _1f;
 }
 }
 return null;
-};
-}});
+}
+    }});
 $.fn.datalist=function(_20,_21){
 if(typeof _20=="string"){
 var _22=$.fn.datalist.methods[_20];

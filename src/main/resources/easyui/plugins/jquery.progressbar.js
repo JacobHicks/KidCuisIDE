@@ -18,8 +18,8 @@ _4(_2);
 return false;
 });
 return $(_2);
-};
-function _4(_5,_6){
+}
+    function _4(_5,_6){
 var _7=$.data(_5,"progressbar").options;
 var _8=$.data(_5,"progressbar").bar;
 if(_6){
@@ -28,8 +28,8 @@ _7.width=_6;
 _8._size(_7);
 _8.find("div.progressbar-text").css("width",_8.width());
 _8.find("div.progressbar-text,div.progressbar-value").css({height:_8.height()+"px",lineHeight:_8.height()+"px"});
-};
-$.fn.progressbar=function(_9,_a){
+}
+    $.fn.progressbar=function(_9,_a){
 if(typeof _9=="string"){
 var _b=$.fn.progressbar.methods[_9];
 if(_b){

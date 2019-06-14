@@ -4,8 +4,6 @@
 ~	Set up the multi window interface that we need
 ~	Make sure the form works
 ~	Get the console going
-~	Make it all look nice
-~ 	Import font awesome
 -->
 <!DOCTYPE HTML>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
@@ -107,10 +105,11 @@
 
         <!--<button class="topButton" id="saveAsButton">Save As</button>-->
          <!--<button class="topButton" id="debugButton">Debug</button>-->
-        <button class="topButton" id="newButton">New</button>
+        <button class="topButton" id="newButton" onclick="newFile()">New</button>
 
-        <button class="topButton"><label for="open-file" class="input-label"> Open
-            <input style="display:none;" type="file" accept=".java" id="open-file" onchange="openFile(this);">
+        <button class="topButton"><label for="upload-file" class="input-label"> Upload
+            <input style="display:none;" type="file" accept=".java" id="upload-file" onchange="getFile(event);">
+
         </label></button>
 
         <button class="topButton" id="updateButton" onclick="updateEditor()" type="button">Update Theme:</button>
@@ -177,8 +176,8 @@
 
          <!--<button class="topButton" id="compileButton">Compile</button>-->
         <form action="#" th:action="@{/logout}" method="post">
-            <button class="topRightButton" id="logoutButton" name="Log Out">Logout</button>
-        </form>
+        <button class="topRightButton" id="logoutButton" name="Log Out">Logout</button>
+    </form>
 
     </div>
 
@@ -194,6 +193,8 @@
 
     <div data-options="region:'center',title:'Code'" style="padding:5px;">
         <textarea id="codewindow" class="codemirror-textarea" style="width:100%;height:100%;resize:vertical;overflow:auto !important"></textarea>
+
+
     </div>
 
 </body>
@@ -206,9 +207,8 @@
     var fileName = "untitled";
     var file;
 
-
     $(document).ready(function(){
-        var code = $(".codemirror-textarea")[0];
+
         realedit = CodeMirror.fromTextArea(document.getElementById("codewindow"), {
             lineNumbers : true,
             mode:  "text/x-java",
@@ -233,10 +233,14 @@
         tc = changefile.getDoc().getValue();
     });
 
-
-    function openFile(f){
-        file = f;
-        fileName = file.value.substr(file.value.indexOf('fakepath\\') + 9);
+    function newFile() {
+        changefile.getDoc().setValue(
+            'public class Main {\r\n' +
+            '\tpublic static void main(String[] args) {\r\n' +
+            '\t\t\r\n' +
+            '\t}\r\n' +
+            '}');
+        fileName = "untitled";
         $('#sm').sidemenu({ //sidemenu implementation doesnt do anything right now tho
             data: [{
                 text: fileName,
@@ -257,15 +261,61 @@
             }],
             multiple: true
         });
-        changefile.getDoc().setValue("5");
-        updateEditor();
+    }
 
+    function getFile(event) {
+        const input = event.target;
+        if ('files' in input && input.files.length > 0) {
+            fileName = input.value.substr(input.value.indexOf('fakepath\\') + 9);
+            $('#sm').sidemenu({ //sidemenu implementation doesnt do anything right now tho
+                data: [{
+                    text: fileName,
+                    iconCls: 'icon-sum',
+                    state: 'closed',
+                    /*children: [{
+                        text: 'notWorkingrightnow.java'
+                    },{
+                        text: 'itWillWorkInTime.java'
+                    },{
+                        text: 'src',
+                        children: [{
+                            text: 'comeOn.java'
+                        },{
+                            text: 'boi.java'
+                        }]
+                    }]*/
+                }],
+                multiple: true
+            });
+            updateEditor();
+            placeFileContent(
+                changefile.getDoc(),
+                input.files[0])
+
+        }
+
+    }
+
+    function placeFileContent(target, file) {
+        console.log(file);
+        readFileContent(file).then(content => {
+            target.setValue(content);
+        }).catch(error => console.log(error);)
+    }
+
+    function readFileContent(file) {
+        const reader = new FileReader();
+        return new Promise((resolve, reject) => {
+            reader.onload = event => resolve(event.target.result);
+            reader.onerror = error =;> reject(error);
+            reader.readAsText(file)
+        })
     }
 
     function updateEditor(){
         var input = document.getElementById("cc");
         var theme = input.options[input.selectedIndex].textContent;
-        realedit.setOption("theme", theme)
+        realedit.setOption("theme", theme);
         var light = ["default","3024-day","ambiance-mobile","base16-light","duotone-light","eclipse","elegant","idea","mdn-like","neat","neo","paraiso-light","solarized","smss","ttcn","xq-light","yeti"];
         var dark = ["3024-night","abcdef","ambiance","base16-dark","bespin","blackboard", "cobalt","colorforth","darcula","duotone-dark","erlang-dark","gruvbox-dark","hopscotch","icecoder","isotope","lesser-dark","liquibyte","lucario","material","mbo","midnight","monokai","night","nord","oceanic-next","panda-syntax","paraiso-dark","pastel-on-dark","railscasts","rubyblue","seti","shadowfox","the-matrix","tomorrow-night-bright","tomorrow-night-eighties","twilight","vibrant-ink","xq-dark"];
         if(light.indexOf(theme) > -1){
@@ -352,18 +402,7 @@
 		background-color: green;
 		color: white;
 	}
-    #file-input {
-         cursor: pointer;
-         outline: none;
-         position: absolute;
-         top: 0;
-         left: 0;
-         width: 0;
-         height: 0;
-         overflow: hidden;
-         filter: alpha(opacity=0); /* IE < 9 */
-         opacity: 0;
-     }
+
     .input-label {
         cursor: pointer;
         position: relative;
@@ -391,38 +430,6 @@
 		border-color: green;
 		background-color: green;
 		color: white;
-	}
-	.sidenav {
-		grid-area: sidenav;
-		border-color: black;
-		border-width: 5px;
-		border-style: solid;
-
-	}
-	.ribbon {
-		grid-area: ribbon;
-		border-color: black;
-		border-width: 5px;
-		border-style: solid;
-	}
-	.main {
-		grid-area: main;
-		border-color: black;
-		border-width: 5px;
-		border-style: solid;
-		width: auto;
-		height: auto;
-	}
-	#mainWritingWindow {
-		font-family: monospace;
-		color: black;
-		font-size: 14px;
-		border-color: blue;
-		border-style: solid;
-		border-width: 5px;
-		height: 60%;
-		width: 90%;
-		resize: none;
 	}
 
 </style>

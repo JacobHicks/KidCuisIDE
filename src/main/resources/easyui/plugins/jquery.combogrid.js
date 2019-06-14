@@ -34,16 +34,16 @@ _3.grid=_5;
 _5.datagrid($.extend({},_4,{border:false,singleSelect:(!_4.multiple),onLoadSuccess:_b,onClickRow:_c,onSelect:_d("onSelect"),onUnselect:_d("onUnselect"),onSelectAll:_d("onSelectAll"),onUnselectAll:_d("onUnselectAll")}));
 function _e(dg){
 return $(dg).closest(".combo-panel").panel("options").comboTarget||_2;
-};
-function _b(_f){
+}
+    function _b(_f){
 var _10=_e(this);
 var _11=$(_10).data("combogrid");
 var _12=_11.options;
 var _13=$(_10).combo("getValues");
 _22(_10,_13,_11.remainText);
 _12.onLoadSuccess.call(this,_f);
-};
-function _c(_14,row){
+}
+    function _c(_14,row){
 var _15=_e(this);
 var _16=$(_15).data("combogrid");
 var _17=_16.options;
@@ -53,8 +53,8 @@ if(!_17.multiple){
 $(_15).combo("hidePanel");
 }
 _17.onClickRow.call(this,_14,row);
-};
-function _d(_19){
+}
+    function _d(_19){
 return function(_1a,row){
 var _1b=_e(this);
 var _1c=$(_1b).combogrid("options");
@@ -67,8 +67,8 @@ _18.call(this);
 }
 _1c[_19].call(this,_1a,row);
 };
-};
-function _18(){
+}
+    function _18(){
 var dg=$(this);
 var _1d=_e(dg);
 var _1e=$(_1d).data("combogrid");
@@ -81,9 +81,9 @@ var _20=dg.data("datagrid").dc.body2;
 var _21=_20.scrollTop();
 _22(_1d,vv,_1e.remainText);
 _20.scrollTop(_21);
-};
-};
-function nav(_23,dir){
+}
+}
+    function nav(_23,dir){
 var _24=$.data(_23,"combogrid");
 var _25=_24.options;
 var _26=_24.grid;
@@ -113,8 +113,8 @@ if(_25.selectOnNavigation){
 _24.remainText=false;
 _26.datagrid("selectRow",_28);
 }
-};
-function _22(_29,_2a,_2b){
+}
+    function _22(_29,_2a,_2b){
 var _2c=$.data(_29,"combogrid");
 var _2d=_2c.options;
 var _2e=_2c.grid;
@@ -170,9 +170,9 @@ $(_29).combo("setValues",_2a);
 function _3a(_3b,a){
 var _3c=$.easyui.getArrayItem(a,_2d.idField,_3b);
 return _3c?_3c[_2d.textField]:undefined;
-};
-};
-function _3d(_3e,q){
+}
+}
+    function _3d(_3e,q){
 var _3f=$.data(_3e,"combogrid");
 var _40=_3f.options;
 var _41=_3f.grid;
@@ -217,14 +217,14 @@ return i;
 }
 }
 return -1;
-};
-function _42(vv){
+}
+    function _42(vv){
 if(!_40.reversed){
 _22(_3e,vv,true);
 }
-};
-};
-function _48(_49){
+}
+}
+    function _48(_49){
 var _4a=$.data(_49,"combogrid");
 var _4b=_4a.options;
 var _4c=_4a.grid;
@@ -255,8 +255,8 @@ $(_49).combogrid("setValues",vv);
 if(!_4b.multiple){
 $(_49).combogrid("hidePanel");
 }
-};
-$.fn.combogrid=function(_4e,_4f){
+}
+    $.fn.combogrid=function(_4e,_4f){
 if(typeof _4e=="string"){
 var _50=$.fn.combogrid.methods[_4e];
 if(_50){

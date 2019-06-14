@@ -386,11 +386,11 @@
 		var fn = $.isFunction(param) ? param : function(item){
 			for(var p in param){
 				if (item[p] != param[p]){
-					return false;;
-				}
+                    return false;
+                }
 			}
 			return true;
-		}
+		};
 		function find(menu){
 			menu.children('div.menu-item').each(function(){
 				var opts = $(this).data('menuitem').options;

@@ -104,7 +104,7 @@
 			}
 			buildGrid(this);
 		});
-	}
+	};
 	
 	$.fn.propertygrid.methods = {
 		options: function(jq){
@@ -293,11 +293,11 @@
 			opts.onResizeColumn = function(field, width){
 				view.resizeGroup(target);
 				state.onResizeColumn.call(target, field, width);
-			}
+			};
 			opts.onResize = function(width, height){
 				view.resizeGroup(target);		
 				state.onResize.call($(target).datagrid('getPanel')[0], width, height);
-			}
+			};
 			view.resizeGroup(target);
 		}
 	});
@@ -434,7 +434,7 @@
 					value: row[opts.groupField],
 					rows: [row],
 					startIndex: state.data.rows.length
-				}
+				};
 				groupIndex = this.groups.length;
 				dc.body1.append(this.renderGroup.call(this, target, groupIndex, group, true));
 				dc.body2.append(this.renderGroup.call(this, target, groupIndex, group, false));

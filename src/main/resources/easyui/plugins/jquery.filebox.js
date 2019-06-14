@@ -26,8 +26,8 @@ _6._propAttr("disabled",true);
 _6._propAttr("disabled",false);
 }
 }
-};
-function _7(_9){
+}
+    function _7(_9){
 var _a=$.data(_9,"filebox");
 var _b=_a.options;
 _a.filebox.find(".textbox-value").remove();
@@ -51,8 +51,8 @@ _b.onChange.call(_9,_d,_b.oldValue);
 _b.oldValue=_d;
 });
 return _c;
-};
-$.fn.filebox=function(_f,_10){
+}
+    $.fn.filebox=function(_f,_10){
 if(typeof _f=="string"){
 var _11=$.fn.filebox.methods[_f];
 if(_11){

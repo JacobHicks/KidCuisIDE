@@ -173,7 +173,7 @@
 
 
         </select>
-
+        <a href="http://localhost:8090/dashboard"><button>TEMPORARY:DASHBOARD ACCESS</button></a>
          <!--<button class="topButton" id="compileButton">Compile</button>-->
         <form action="#" th:action="@{/logout}" method="post">
         <button class="topRightButton" id="logoutButton" name="Log Out">Logout</button>
@@ -246,18 +246,7 @@
                 text: fileName,
                 iconCls: 'icon-sum',
                 state: 'closed',
-                /*children: [{
-                    text: 'notWorkingrightnow.java'
-                },{
-                    text: 'itWillWorkInTime.java'
-                },{
-                    text: 'src',
-                    children: [{
-                        text: 'comeOn.java'
-                    },{
-                        text: 'boi.java'
-                    }]
-                }]*/
+
             }],
             multiple: true
         });
@@ -272,18 +261,7 @@
                     text: fileName,
                     iconCls: 'icon-sum',
                     state: 'closed',
-                    /*children: [{
-                        text: 'notWorkingrightnow.java'
-                    },{
-                        text: 'itWillWorkInTime.java'
-                    },{
-                        text: 'src',
-                        children: [{
-                            text: 'comeOn.java'
-                        },{
-                            text: 'boi.java'
-                        }]
-                    }]*/
+
                 }],
                 multiple: true
             });
@@ -346,18 +324,7 @@
             text: fileName,
             iconCls: 'icon-sum',
             state: 'closed',
-            /*children: [{
-                text: 'notWorkingrightnow.java'
-            },{
-                text: 'itWillWorkInTime.java'
-            },{
-                text: 'src',
-                children: [{
-                    text: 'comeOn.java'
-                },{
-                    text: 'boi.java'
-                }]
-            }]*/
+
         }],
         multiple: true
     });

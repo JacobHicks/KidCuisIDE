@@ -1,0 +1,37 @@
+body {
+    margin: 0;
+    height:100%;
+}
+
+.headline {
+    color: black;
+    padding-top: 150px;
+    font-family: monospace;
+    font-size: 30px;
+    text-align : center;
+}
+.subtitle {
+    color: black;
+    padding-top: 40px;
+    font-family: monospace;
+    font-size: 16px;
+    text-align : center;
+}
+.loginButtons {
+    background-color: #0057e6;
+    font-family: monospace;
+    font-size: 28px;
+    border: none;
+    margin-left: 0;
+    float: right;
+    cursor: pointer;
+    outline: none;
+    margin-top: -20px;
+}
+.loginButtons:hover {
+    transition: all 550ms, ease;
+    background-color: #008900;
+    border-bottom-color: darkblue;
+    border-bottom-style: solid;
+    border-bottom-width: 3px;
+}

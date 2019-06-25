@@ -55,7 +55,8 @@ export default class Home extends React.Component {
         this.state = {
             code: "", //initial code
             console: "",
-
+            language: "java",
+            isRunning: false
         };
     }
 
@@ -108,16 +109,18 @@ export default class Home extends React.Component {
                                     <div className="runBar">
                                         <Button className="runButton"
                                                 onClick={this.runCode}
+                                                disabled={this.state.isRunning}
                                                 ghost
                                         >
-                                            <Icon className="consoleIcons" type="caret-right"/>
+                                            <Icon className="runIcon" type="caret-right" style={{color: this.state.isRunning ? "#595959" : "#499c54"}}/>
                                         </Button>
 
                                         <Button className="stopButton"
-                                                onClick={this.runCode}
+                                                onClick={this.stopCode}
+                                                disabled={!this.state.isRunning}
                                                 ghost
                                         >
-                                            <div className="stopIcon"/>
+                                            <div className="stopIcon" style={{backgroundColor: this.state.isRunning ? "#c75450" : "#595959"}}/>
                                         </Button>
                                     </div>
                                 </div>
@@ -135,7 +138,19 @@ export default class Home extends React.Component {
         )
     }
 
-    runCode() {
+    runCode = () => {
         console.log("Click");
+        this.toggleRunning()
+    };
+
+    stopCode = () => {
+        console.log("Click");
+        this.toggleRunning()
+    };
+
+    toggleRunning() {
+        this.setState({
+            isRunning: !this.state.isRunning
+        });
     }
 }

@@ -21,6 +21,7 @@ require("codemirror/addon/comment/continuecomment");
 const React = require('react');
 const CodeArea = require('react-codemirror');
 const {Header, Content} = Layout;
+const serverIp = "http://127.0.0.1:5000";
 
 const codeWindowOptions = {
     scrollbarStyle: "overlay",
@@ -56,6 +57,8 @@ export default class Home extends React.Component {
             code: "", //initial code
             console: "",
             language: "java",
+            filePath: "",
+            fileName: "Main",
             isRunning: false
         };
     }
@@ -112,7 +115,8 @@ export default class Home extends React.Component {
                                                 disabled={this.state.isRunning}
                                                 ghost
                                         >
-                                            <Icon className="runIcon" type="caret-right" style={{color: this.state.isRunning ? "#595959" : "#499c54"}}/>
+                                            <Icon className="runIcon" type="caret-right"
+                                                  style={{color: this.state.isRunning ? "#595959" : "#499c54"}}/>
                                         </Button>
 
                                         <Button className="stopButton"
@@ -120,7 +124,8 @@ export default class Home extends React.Component {
                                                 disabled={!this.state.isRunning}
                                                 ghost
                                         >
-                                            <div className="stopIcon" style={{backgroundColor: this.state.isRunning ? "#c75450" : "#595959"}}/>
+                                            <div className="stopIcon"
+                                                 style={{backgroundColor: this.state.isRunning ? "#c75450" : "#595959"}}/>
                                         </Button>
                                     </div>
                                 </div>
@@ -139,12 +144,39 @@ export default class Home extends React.Component {
     }
 
     runCode = () => {
-        console.log("Click");
         this.toggleRunning()
+        let codeForm = {
+            name: this.state.fileName,
+            path: this.state.filePath,
+            language: this.state.language,
+            code: this.state.code
+        };
+
+        fetch(serverIp + "/run",
+            {
+                method: "post",
+                body: JSON.stringify(codeForm),
+                credentials: 'include'
+            }
+        )
+            .then(response => {
+                console.log(response.status);
+                if (response.status === 200) { //Good upload
+                    let update =
+                        fetch(serverIp + "/output")
+                            .then(response => response.json())
+                            .then(data => {
+                               if(!data.eof) {
+                                   this.setState({
+                                       console: this.state.console + data.output + data.error
+                                   }, () => update());
+                               }
+                            });
+                }
+            });
     };
 
     stopCode = () => {
-        console.log("Click");
         this.toggleRunning()
     };
 

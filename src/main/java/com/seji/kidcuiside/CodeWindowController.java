@@ -11,15 +11,6 @@ import java.util.Scanner;
 @Controller
 public class CodeWindowController {
 
-    @GetMapping("/code")
-    public String code(Model model, @CookieValue(value = "id", defaultValue = "") String id, @CookieValue(value = "user", defaultValue = "") String user) {
-        if(isAuthenticated(id, user)) {
-            model.addAttribute("code", new Code());
-            return "CodeWritingWindow";
-        }
-        return "redirect:/login";
-    }
-
     @PostMapping("/code")
     @ResponseBody
     public StreamingResponseBody getCode(@ModelAttribute Code tcode, @CookieValue(value = "id", defaultValue = "") String id, @CookieValue(value = "user", defaultValue = "null") String user) {

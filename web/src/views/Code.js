@@ -131,7 +131,7 @@ export default class Home extends React.Component {
                                         </Button>
 
                                         <Button className="stopButton"
-                                                onClick={this.stopCode}
+                                                onClick={this.kill}
                                                 disabled={!this.state.isRunning}
                                                 ghost
                                         >
@@ -190,11 +190,11 @@ export default class Home extends React.Component {
                         fetch(serverIp + "/output")
                             .then(response => response.json())
                             .then(data => {
+                                console.log(data);
                                 if (!data.eof) {
                                     this.setState({
                                         console: this.state.console + data.output + data.error
                                     }, () => {
-                                        console.log(this.consoleMirror.getCodeMirror().getLine(this.consoleMirror.getCodeMirror().lastLine()));
                                         this.consoleMirror.getCodeMirror().focus();
                                         this.consoleMirror.getCodeMirror().setCursor(this.consoleMirror.getCodeMirror().lastLine(), this.consoleMirror.getCodeMirror().getLine(this.consoleMirror.getCodeMirror().lastLine()).length);
                                         update()
@@ -207,11 +207,6 @@ export default class Home extends React.Component {
                 }
             });
     };
-
-    stopCode = () => {
-        this.toggleRunning();
-    };
-
     toggleRunning() {
         this.setState({
             isRunning: !this.state.isRunning
@@ -246,6 +241,32 @@ export default class Home extends React.Component {
             } else if (name === "Backspace") {
                 this.sendMessage(instance, {text: ["\b"]});
             }
-        }
+        };
+    }
+
+    kill() {
+        fetch(serverIp + "/stop",
+            {
+                method: "post",
+                credentials: 'include'
+            }
+        );
     }
 }
+
+/*
+import java.util.Scanner;
+public class Main {
+    public static void main(String[] args) {
+    	Scanner in = new Scanner(System.in);
+    	System.out.print("index?: ");
+        int n = in.nextInt();
+        System.out.println(f(n));
+    }
+
+    static int f(int n) {
+        if(n <= 1) return 1;
+        return f(n-1) + f(n-2);
+    }
+}
+ */

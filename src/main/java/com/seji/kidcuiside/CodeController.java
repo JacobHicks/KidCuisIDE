@@ -27,4 +27,9 @@ public class CodeController {
     public @ResponseBody ConsoleOutput checkMail(@CookieValue(value = "session", defaultValue = "testUser") String sessionId) {
         return Mailbox.getMail(sessionId);
     }
+
+    @PostMapping("/stop")
+    public void kill(@CookieValue(value = "session", defaultValue = "testUser") String sessionId) {
+        Mailbox.stop(sessionId);
+    }
 }

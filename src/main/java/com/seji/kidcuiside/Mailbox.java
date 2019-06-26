@@ -29,6 +29,7 @@ public class Mailbox {
     }
 
     public static void stop(String sessionId) {
+        runtime.stopCode();
         outputQueue.get(sessionId)[3] = true;
     }
 
@@ -59,8 +60,12 @@ public class Mailbox {
                 res.setEof(true);
                 return res;
             } else {
-                while (!outputQueue.containsKey(sessionId) || outputQueue.get(sessionId)[0] == null || ((InputStream) outputQueue.get(sessionId)[0]).available() == 0)
-                    ; //TODO Make this time out
+                while (!outputQueue.containsKey(sessionId) || outputQueue.get(sessionId)[0] == null || ((InputStream) outputQueue.get(sessionId)[0]).available() == 0) {
+                    if (outputQueue.get(sessionId)[3].equals(true)) {
+                        res.setEof(true);
+                        return res;
+                    }
+                } //TODO Make this time out
                 if (outputQueue.containsKey(sessionId)) {
                     if (((InputStream) outputQueue.get(sessionId)[0]) != null && ((InputStream) outputQueue.get(sessionId)[0]).available() > 0) {
                         byte[] messagebytes = new byte[((InputStream) outputQueue.get(sessionId)[0]).available()];

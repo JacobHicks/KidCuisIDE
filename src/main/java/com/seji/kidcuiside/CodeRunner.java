@@ -13,6 +13,7 @@ class CodeRunner implements Runnable {
     private final ProcessBuilder processBuilder;
     private final AtomicBoolean enabled;
     private final AtomicBoolean running;
+    private final AtomicBoolean codeStopped;
 
     private final String[] types = new String[]{"java"};
     final Mailbox dbg = new Mailbox();
@@ -20,6 +21,7 @@ class CodeRunner implements Runnable {
     CodeRunner() {
         enabled = new AtomicBoolean(true);
         running = new AtomicBoolean(false);
+        codeStopped = new AtomicBoolean(false);
         processBuilder = new ProcessBuilder();
     }
 
@@ -30,6 +32,7 @@ class CodeRunner implements Runnable {
             running.set(true);
             FullRunRequest runRequest = Mailbox.next();
             if (runRequest != null) {
+                codeStopped.set(false);
                 Mailbox.start(runRequest.getSessionId());
                 if (Pattern.matches("\\W.*", runRequest.getName())) {
                     //TODO we need a message for stuff like this, ez but its 3am
@@ -71,10 +74,11 @@ class CodeRunner implements Runnable {
                                     long startTime = System.currentTimeMillis();
                                     long timeElapsed = 0;
                                     boolean withinTimeLimits = true;  //TODO: tell users there out of time
-                                    while (process.isAlive()) {
-                                        if (timeElapsed / 1000.0 >= 600) {
+                                    while (process.isAlive() ) {
+                                        if (timeElapsed / 1000.0 >= 600 || codeStopped.get()) {
                                             withinTimeLimits = false;
                                             process.destroyForcibly();
+                                            codeStopped.set(false);
                                         } else {
                                             timeElapsed = Math.max((System.currentTimeMillis() - startTime), 0);
                                         }
@@ -114,6 +118,10 @@ class CodeRunner implements Runnable {
     void stop() {
         while (running.get()) ;
         enabled.set(false);
+    }
+
+    void stopCode() {
+        codeStopped.set(true);
     }
 
     void start() {

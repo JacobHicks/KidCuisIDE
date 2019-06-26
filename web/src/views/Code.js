@@ -40,16 +40,6 @@ const codeWindowOptions = {
     mode: "text/x-java"
 };
 
-const consoleWindowOptions = {
-    scrollbarStyle: "overlay",
-    lineNumbers: false,
-    indentUnit: 4,
-    undoDepth: 0,
-    readOnly: true,
-    theme: "darcula",
-    mode: "text/x-java"
-};
-
 export default class Home extends React.Component {
     constructor(props) {
         super(props);
@@ -69,11 +59,22 @@ export default class Home extends React.Component {
         })
     };
 
-    componentDidMount() {
-
-    }
+    updateConsole = (newConsole) => {
+        this.setState({
+            console: newConsole
+        })
+    };
 
     render() {
+        const consoleWindowOptions = {
+            scrollbarStyle: "overlay",
+            lineNumbers: false,
+            indentUnit: 4,
+            undoDepth: 0,
+            readOnly: !this.state.isRunning,
+            theme: "darcula",
+            mode: "text/x-java"
+        };
         return (
             <Layout style={{overflow: "hidden"}}>
                 <Header style={{height: '5vh'}}>
@@ -130,7 +131,7 @@ export default class Home extends React.Component {
                                     </div>
                                 </div>
 
-                                <CodeArea className="CodeMirror" value={this.state.console} onChange={this.updateCode}
+                                <CodeArea className="CodeMirror" ref={c => this.consoleMirror = c} value={this.state.console} onChange={this.updateConsole}
                                           options={consoleWindowOptions}/>
 
                                 <div className="consoleRightBar"/>
@@ -144,7 +145,7 @@ export default class Home extends React.Component {
     }
 
     runCode = () => {
-        this.toggleRunning()
+        this.toggleRunning();
         let codeForm = {
             name: this.state.fileName,
             path: this.state.filePath,
@@ -152,9 +153,15 @@ export default class Home extends React.Component {
             code: this.state.code
         };
 
+        console.log(codeForm);
+
         fetch(serverIp + "/run",
             {
                 method: "post",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Accept": "application/json"
+                },
                 body: JSON.stringify(codeForm),
                 credentials: 'include'
             }
@@ -162,22 +169,25 @@ export default class Home extends React.Component {
             .then(response => {
                 console.log(response.status);
                 if (response.status === 200) { //Good upload
-                    let update =
+                    let update = () =>
                         fetch(serverIp + "/output")
                             .then(response => response.json())
                             .then(data => {
                                if(!data.eof) {
                                    this.setState({
                                        console: this.state.console + data.output + data.error
-                                   }, () => update());
+                                   },() => update());
+                                   this.consoleMirror.getCodeMirror().focus();
+                                   this.consoleMirror.getCodeMirror().setCursor(this.consoleMirror.getCodeMirror().lineCount(), 0);
                                }
                             });
+                    update();
                 }
             });
     };
 
     stopCode = () => {
-        this.toggleRunning()
+        this.toggleRunning();
     };
 
     toggleRunning() {

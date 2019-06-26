@@ -15,6 +15,7 @@ class CodeRunner implements Runnable {
     private final AtomicBoolean running;
 
     private final String[] types = new String[]{"java"};
+    final Mailbox dbg = new Mailbox();
 
     CodeRunner() {
         enabled = new AtomicBoolean(true);
@@ -51,40 +52,34 @@ class CodeRunner implements Runnable {
                                             break;
                                     }
                                     Process process = processBuilder.start();
-                                    InputStream err = process.getErrorStream();
-                                    InputStream out = process.getInputStream();
-                                    Mailbox.addOutputTrail(runRequest.getSessionId(), out, err);
+                                    Mailbox.addOutputTrail(runRequest.getSessionId(), process.getInputStream(), process.getErrorStream());
                                     while (process.isAlive()) ;
 
-                                    if (err.available() == 0) {
-                                        int endPathIndex = file.getAbsolutePath().lastIndexOf("\\" + runRequest.getName());
-                                        if (endPathIndex == -1)
-                                            endPathIndex = file.getAbsolutePath().lastIndexOf("/" + runRequest.getName());
-                                        switch (runRequest.getLanguage()) {
-                                            case ("java"): //+ or minus memory based on languages too
-                                                processBuilder.command("java", "-cp", file.getAbsolutePath().substring(0, endPathIndex), "-Djava.security.manager", "-Djava.security.policy=javacodeexecutionpolicy", "-Xmx512M", runRequest.getName());
-                                                break;
-                                        }
+                                    int endPathIndex = file.getAbsolutePath().lastIndexOf("\\" + runRequest.getName());
+                                    if (endPathIndex == -1)
+                                        endPathIndex = file.getAbsolutePath().lastIndexOf("/" + runRequest.getName());
+                                    switch (runRequest.getLanguage()) {
+                                        case ("java"): //+ or minus memory based on languages too
+                                            processBuilder.command("java", "-cp", file.getAbsolutePath().substring(0, endPathIndex), "-Djava.security.manager", "-Djava.security.policy=javacodeexecutionpolicy", "-Xmx512M", runRequest.getName());
+                                            break;
+                                    }
 
-                                        process = processBuilder.start();
-                                        OutputStream in = process.getOutputStream();
-                                        out = process.getInputStream();
-                                        err = process.getErrorStream();
-                                        Mailbox.addOutputTrail(runRequest.getSessionId(), out, err);
-                                        Mailbox.addInputTrail(runRequest.getSessionId(), in);
+                                    process = processBuilder.start();
+                                    Mailbox.addOutputTrail(runRequest.getSessionId(), process.getInputStream(), process.getErrorStream());
+                                    Mailbox.addInputTrail(runRequest.getSessionId(), process.getOutputStream());
 
-                                        long startTime = System.currentTimeMillis();
-                                        long timeElapsed = 0;
-                                        boolean withinTimeLimits = true;  //TODO: tell users there out of time
-                                        while (process.isAlive()) {
-                                            if (timeElapsed / 1000.0 >= 60) {
-                                                withinTimeLimits = false;
-                                                process.destroyForcibly();
-                                            } else {
-                                                timeElapsed = Math.max((System.currentTimeMillis() - startTime), 0);
-                                            }
+                                    long startTime = System.currentTimeMillis();
+                                    long timeElapsed = 0;
+                                    boolean withinTimeLimits = true;  //TODO: tell users there out of time
+                                    while (process.isAlive()) {
+                                        if (timeElapsed / 1000.0 >= 600) {
+                                            withinTimeLimits = false;
+                                            process.destroyForcibly();
+                                        } else {
+                                            timeElapsed = Math.max((System.currentTimeMillis() - startTime), 0);
                                         }
                                     }
+
                                 } catch (IOException io) {
                                     //TODO yup
                                 }
@@ -101,6 +96,7 @@ class CodeRunner implements Runnable {
     private File saveCode(FullRunRequest runRequest) {
         try {
             File file = new File("Users/" + runRequest.getPath() + runRequest.getName() + "." + runRequest.getLanguage());
+            if (file.exists()) file.delete();
             if (file.createNewFile()) {
                 PrintWriter outputStream = new PrintWriter(file);
                 outputStream.print(runRequest.getCode());

@@ -49,7 +49,8 @@ export default class Home extends React.Component {
             language: "java",
             filePath: "",
             fileName: "Main",
-            isRunning: false
+            isRunning: false,
+
         };
     }
 
@@ -66,15 +67,24 @@ export default class Home extends React.Component {
     };
 
     render() {
-        const consoleWindowOptions = {
+        const consoleOption = {
             scrollbarStyle: "overlay",
             lineNumbers: false,
-            indentUnit: 4,
+            indentUnit: 0,
             undoDepth: 0,
             readOnly: !this.state.isRunning,
             theme: "darcula",
             mode: "text/x-java"
         };
+
+        if (this.consoleMarkup !== undefined) {
+            this.consoleMarkup.props = {
+                options: {
+                    readOnly: !this.state.isRunning
+                }
+            };
+        }
+
         return (
             <Layout style={{overflow: "hidden"}}>
                 <Header style={{height: '5vh'}}>
@@ -131,8 +141,16 @@ export default class Home extends React.Component {
                                     </div>
                                 </div>
 
-                                <CodeArea className="CodeMirror" ref={c => this.consoleMirror = c} value={this.state.console} onChange={this.updateConsole}
-                                          options={consoleWindowOptions}/>
+                                <CodeArea className="CodeMirror" ref={c => {
+                                    this.consoleMirror = c;
+                                    if (c !== null && this.consoleBinded !== true) {
+                                        c.getCodeMirror().on("inputRead", this.sendMessage);
+                                        c.getCodeMirror().on("keyHandled", this.keyHandled);
+                                        this.consoleBinded = true;
+                                    }
+                                }}
+                                          value={this.state.console} onChange={this.updateConsole}
+                                          options={consoleOption}/>
 
                                 <div className="consoleRightBar"/>
                             </div>
@@ -145,6 +163,8 @@ export default class Home extends React.Component {
     }
 
     runCode = () => {
+        this.msgBuffer = "";
+        this.updateConsole("");
         this.toggleRunning();
         let codeForm = {
             name: this.state.fileName,
@@ -152,8 +172,6 @@ export default class Home extends React.Component {
             language: this.state.language,
             code: this.state.code
         };
-
-        console.log(codeForm);
 
         fetch(serverIp + "/run",
             {
@@ -167,19 +185,23 @@ export default class Home extends React.Component {
             }
         )
             .then(response => {
-                console.log(response.status);
                 if (response.status === 200) { //Good upload
                     let update = () =>
                         fetch(serverIp + "/output")
                             .then(response => response.json())
                             .then(data => {
-                               if(!data.eof) {
-                                   this.setState({
-                                       console: this.state.console + data.output + data.error
-                                   },() => update());
-                                   this.consoleMirror.getCodeMirror().focus();
-                                   this.consoleMirror.getCodeMirror().setCursor(this.consoleMirror.getCodeMirror().lineCount(), 0);
-                               }
+                                if (!data.eof) {
+                                    this.setState({
+                                        console: this.state.console + data.output + data.error
+                                    }, () => {
+                                        console.log(this.consoleMirror.getCodeMirror().getLine(this.consoleMirror.getCodeMirror().lastLine()));
+                                        this.consoleMirror.getCodeMirror().focus();
+                                        this.consoleMirror.getCodeMirror().setCursor(this.consoleMirror.getCodeMirror().lastLine(), this.consoleMirror.getCodeMirror().getLine(this.consoleMirror.getCodeMirror().lastLine()).length);
+                                        update()
+                                    });
+                                } else {
+                                    this.toggleRunning();
+                                }
                             });
                     update();
                 }
@@ -194,5 +216,36 @@ export default class Home extends React.Component {
         this.setState({
             isRunning: !this.state.isRunning
         });
+    }
+
+    sendMessage = (instance, changeObj) => {
+        if(changeObj.text[0] === " " || changeObj.text[0] === "\n" || changeObj.text[0] === "\t") {
+            fetch(serverIp + "/send",
+                {
+                    method: "post",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Accept": "application/json"
+                    },
+                    body: this.msgBuffer + changeObj.text,
+                    credentials: 'include'
+                }
+            );
+        }
+        else {
+            this.msgBuffer += changeObj.text;
+        }
+    };
+
+    keyHandled = (instance, name, event) => {
+        if (this.state.isRunning) {
+            if (name === "Enter") {
+                this.sendMessage(instance, {text: ["\n"]});
+            } else if (name === "Tab") {
+                this.sendMessage(instance, {text: ["\t"]});
+            } else if (name === "Backspace") {
+                this.sendMessage(instance, {text: ["\b"]});
+            }
+        }
     }
 }

@@ -227,6 +227,9 @@ export default class Home extends React.Component {
                 }
             );
         }
+        else if(changeObj.text[0] === "\b") {
+            this.msgBuffer = this.msgBuffer.substring(0, this.msgBuffer.length - 1);
+        }
         else {
             this.msgBuffer += changeObj.text;
         }

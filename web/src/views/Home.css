@@ -17,6 +17,12 @@ body {
     font-size: 16px;
     text-align : center;
 }
+.navDiv {
+    float: right;
+    position: fixed;
+    width: 100%;
+    background-image: linear-gradient(to right, transparent 80%, #0057e6);
+}
 .loginButtons {
     background-color: #0057e6;
     font-family: monospace;
@@ -27,7 +33,6 @@ body {
     cursor: pointer;
     outline: none;
     margin-top: 0px;
-
 }
 .loginButtons:hover {
     transition: all 550ms, ease;
@@ -41,12 +46,14 @@ body {
     padding-top: 40vh;
 }
 .launch {
+    display: table-cell;
+    vertical-align: middle;
     border-radius: 100%;
     border: none;
-    font-size: 28px;
-    align-self: center;
-    padding-left: 5px;
-    padding-right: 5px;
+    font-size: 20px;
+    height: 40px;
+    width: 40px;
+    padding: 5px;
     scroll-behavior: smooth;
 }
 .launch:hover {
@@ -55,9 +62,12 @@ body {
     transition: all 330ms, ease;
 }
 
-#section2 {
-    margin-top: 300px;
-    height: 333px;
+.section {
+    border-top-color: cadetblue;
+    boder-top-style: solid;
+    border-top-width: 5px;
+    margin-top: 20vh;
+    height: 100vh;
     background-color: black;
     scroll-behavior: smooth;
 }
@@ -67,13 +77,13 @@ body {
     text-decoration-color: #313335;
     font-family: monospace;
     font-size: 45px;
-
+    text-align: center;
 }
 .helperTitle {
     color: aqua;
     font-family: monospace;
     font-size: 30px;
-
+    text-align: center;
 }
 .talk {
     color: whitesmoke;

@@ -5,14 +5,30 @@
    }
    50% {
        color: seagreen;
-       border-color: seagreen;
+       border-color: whitesmoke;
    }
    100% {
        color:darkslateblue;
         border-color:darkslateblue;
    }
 }
-
+.ant-carousel  {
+    text-align: center;
+    child-align: middle;
+    line-height: 40vh;
+    margin-right: 10vw;
+    margin-left: 10vw;
+    background: #3C3F41;
+    overflow: hidden;
+    width: 80vw;
+}
+.slick-slide {
+    line-height: 50vh;
+    width: 80vw;
+}
+.ant-carousel .slick-slide h3 {
+    color: #fff;
+}
 
 html {
     scroll-behavior: smooth;
@@ -21,16 +37,16 @@ body {
     margin: 0;
     height:100%;
 
+
 }
-.wrapper {
-    scroll-behavior: smooth;
-}
+
 .headline {
     color: black;
-    padding-top: 150px;
+    padding-top: 50px;
     font-family: monospace;
     font-size: 30px;
     text-align : center;
+    animation: 0.8s flipInX ease;
 }
 .subtitle {
     color: black;
@@ -62,6 +78,10 @@ body {
     border-bottom-color: darkblue;
     border-bottom-style: solid;
     border-bottom-width: 3px;
+}
+.firstButtonDiv {
+    text-align: center;
+    padding-top: 10vh;
 }
 .buttonDiv {
     text-align: center;
@@ -119,7 +139,8 @@ body {
     font-family: monospace;
     font-size: 14px;
     margin-right: 20px;
-    margin-top: 25px;
+    margin-left: 30px;
+    margin-top: 45px;
 }
 .helperImage {
     display: inline;
@@ -129,4 +150,9 @@ body {
     float: right;
     max-width: 40vw;
     height: auto;
+    border-radius: 5px;
+}
+.carouselWrapper {
+    align-content: center;
+    margin-left: 10vw;
 }

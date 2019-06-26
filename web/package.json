@@ -3,6 +3,7 @@
   "version": "0.2.0",
   "private": true,
   "dependencies": {
+    "animate.css": "^3.7.2",
     "antd": "^3.17.0",
     "axios": "^0.18.0",
     "babel-cli": "^6.26.0",
@@ -18,16 +19,16 @@
     "node-sass": "^4.12.0",
     "react": "^16.8.6",
     "react-bootstrap": "^1.0.0-beta.8",
+    "react-codemirror": "git://github.com/skidding/react-codemirror.git#106-fix-update",
     "react-dom": "^16.8.6",
     "react-modal": "^3.8.1",
+    "react-reflex": "^3.0.15",
     "react-router": "^5.0.0",
     "react-router-dom": "^5.0.0",
     "react-scripts": "3.0.0",
     "sass-loader": "^7.1.0",
     "style-loader": "^0.23.1",
-    "tar": "^4.4.8",
-    "react-codemirror": "git://github.com/skidding/react-codemirror.git#106-fix-update",
-    "react-reflex": "^3.0.15"
+    "tar": "^4.4.8"
   },
   "scripts": {
     "start": "react-scripts start",

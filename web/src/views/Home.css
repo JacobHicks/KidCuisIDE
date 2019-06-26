@@ -1,8 +1,8 @@
 body {
     margin: 0;
     height:100%;
+    scroll-behavior: smooth;
 }
-
 .headline {
     color: black;
     padding-top: 150px;
@@ -26,7 +26,8 @@ body {
     float: right;
     cursor: pointer;
     outline: none;
-    margin-top: -20px;
+    margin-top: 0px;
+
 }
 .loginButtons:hover {
     transition: all 550ms, ease;
@@ -34,4 +35,48 @@ body {
     border-bottom-color: darkblue;
     border-bottom-style: solid;
     border-bottom-width: 3px;
+}
+.buttonDiv {
+    text-align: center;
+    padding-top: 40vh;
+}
+.launch {
+    border-radius: 100%;
+    border: none;
+    font-size: 28px;
+    align-self: center;
+    padding-left: 5px;
+    padding-right: 5px;
+    scroll-behavior: smooth;
+}
+.launch:hover {
+    color: #313335;
+    background-color: white;
+    transition: all 330ms, ease;
+}
+
+#section2 {
+    margin-top: 300px;
+    height: 333px;
+    background-color: black;
+    scroll-behavior: smooth;
+}
+.itemHeading {
+    color: aliceblue;
+    text-decoration: underline;
+    text-decoration-color: #313335;
+    font-family: monospace;
+    font-size: 45px;
+
+}
+.helperTitle {
+    color: aqua;
+    font-family: monospace;
+    font-size: 30px;
+
+}
+.talk {
+    color: whitesmoke;
+    font-family: monospace;
+    font-size: 14px;
 }

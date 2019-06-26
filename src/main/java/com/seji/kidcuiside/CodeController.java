@@ -18,9 +18,13 @@ public class CodeController {
         servletResponse.setStatus(200);
     }
 
+    @PostMapping("/send")
+    public void sendMail(@RequestBody String message, @CookieValue(value = "session", defaultValue = "testUser") String sessionId, HttpServletResponse servletResponse) {
+        Mailbox.sendMail(sessionId, message);
+    }
+
     @GetMapping("/output")
     public @ResponseBody ConsoleOutput checkMail(@CookieValue(value = "session", defaultValue = "testUser") String sessionId) {
-        ConsoleOutput res = Mailbox.getMail(sessionId);
-        return res;
+        return Mailbox.getMail(sessionId);
     }
 }

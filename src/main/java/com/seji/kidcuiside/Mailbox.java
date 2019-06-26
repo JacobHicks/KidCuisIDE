@@ -45,6 +45,7 @@ public class Mailbox {
         while (!outputQueue.containsKey(sessionId) || outputQueue.get(sessionId)[2] == null) ; //TODO Make this time out
         try {
             ((OutputStream) outputQueue.get(sessionId)[2]).write(message.getBytes());
+            ((OutputStream) outputQueue.get(sessionId)[2]).flush();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -61,10 +62,9 @@ public class Mailbox {
                 while (!outputQueue.containsKey(sessionId) || outputQueue.get(sessionId)[0] == null || ((InputStream) outputQueue.get(sessionId)[0]).available() == 0)
                     ; //TODO Make this time out
                 if (outputQueue.containsKey(sessionId)) {
-                    InputStream out = (InputStream) outputQueue.get(sessionId)[0];
-                    if (out != null && out.available() > 0) {
-                        byte[] messagebytes = new byte[out.available()];
-                        out.read(messagebytes);
+                    if (((InputStream) outputQueue.get(sessionId)[0]) != null && ((InputStream) outputQueue.get(sessionId)[0]).available() > 0) {
+                        byte[] messagebytes = new byte[((InputStream) outputQueue.get(sessionId)[0]).available()];
+                        ((InputStream) outputQueue.get(sessionId)[0]).read(messagebytes);
                         res.setOutput(new String(messagebytes));
                     } else {
                         res.setOutput("");

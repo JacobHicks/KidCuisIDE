@@ -61,6 +61,7 @@ body {
     position: fixed;
     width: 100%;
     background-image: linear-gradient(to right, transparent 80%, #0057e6);
+    z-index: 3;
 }
 .loginButtons {
     background-color: #0057e6;
@@ -72,6 +73,7 @@ body {
     cursor: pointer;
     outline: none;
     margin-top: 0px;
+    z-index: 3;
 }
 .loginButtons:hover {
     transition: all 550ms, ease;
@@ -118,19 +120,19 @@ body {
     boder-bottom: 5px solid cadetblue;
     margin-top: 5px;
     height: 100vh;
-    background-color: black;
+    background-color: #1b1028;
     scroll-behavior: smooth;
 }
 .itemHeading {
-    color: aliceblue;
+    color: rgba(61, 78, 77, 0.86);
     text-decoration: underline;
-    text-decoration-color: #313335;
+    text-decoration-color: #497779;
     font-family: Fira Mono;
     font-size: 45px;
     text-align: center;
 }
 .helperTitle {
-    color: aqua;
+    color: rgb(249, 255, 251);
     font-family: Fira Mono;
     font-size: 30px;
     text-align: center;
@@ -139,17 +141,17 @@ body {
     color: whitesmoke;
     font-family: Fira Mono;
     font-size: 14px;
-    margin-right: 20px;
-    margin-left: 30px;
+    margin-right: 50px;
+    margin-left: 50px;
     margin-top: 45px;
 }
 .helperImage {
     display: inline;
-    margin-left: 15px;
-    margin-right: 15px;
+    margin-left: 5vw;
+    margin-right: 5vw;
     margin-top: 15px;
     float: right;
-    max-width: 40vw;
+    max-width: 44vw;
     height: auto;
     border-radius: 5px;
 }

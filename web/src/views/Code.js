@@ -2,7 +2,7 @@ import {Link} from 'react-router-dom'
 import 'antd/dist/antd.css';
 import 'codemirror/lib/codemirror.css';
 import 'codemirror/theme/darcula.css';
-import {Button, Dropdown, Icon, Layout, Menu} from "antd";
+import {Button, Dropdown, Icon, Input, Layout, Menu, Modal} from "antd";
 import 'react-reflex/styles.css'
 import {ReflexContainer, ReflexSplitter, ReflexElement} from 'react-reflex'
 import "./Code.css";
@@ -41,60 +41,62 @@ const codeWindowOptions = {
     mode: "text/x-java"
 };
 
-const fileMenu = (
-    <Menu className="subMenu">
-        <SubMenu
-            className="subMenuEntryMenu"
-            title={
-                <div className="subMenuEntryMenuTitle">
-                    <Icon className="menuIcon" type="plus-circle" theme="filled"/>
-                    New...
-                </div>
-            }>
 
-            <Menu.Item className="subMenuEntry">
-                <div className="subMenuEntryMenuTitle">
-                    <Icon className="menuIcon" type="project" theme="filled"/>
-                    Project
-                </div>
-            </Menu.Item>
-
-            <Menu.Item className="subMenuEntry">
-                <div className="subMenuEntryMenuTitle">
-                    <Icon className="menuIcon" type="folder-add" theme="filled"/>
-                    Folder
-                </div>
-            </Menu.Item>
-
-            <Menu.Item className="subMenuEntry">
-                <div className="subMenuEntryMenuTitle">
-                    <Icon className="menuIcon" type="code" theme="filled"/>
-                    Java Source File
-                </div>
-            </Menu.Item>
-
-            <Menu.Item className="subMenuEntry">
-                <div className="subMenuEntryMenuTitle">
-                    <Icon className="menuIcon" type="file-text" theme="filled"/>
-                    Text file
-                </div>
-            </Menu.Item>
-
-            <Menu.Item className="subMenuEntry">
-                <div className="subMenuEntryMenuTitle">
-                    <Icon className="menuIcon" type="file-unknown" theme="filled"/>
-                    Other
-                </div>
-            </Menu.Item>
-
-        </SubMenu>
-    </Menu>
-);
-
-
-export default class Home extends React.Component {
+export default class Code extends React.Component {
     constructor(props) {
         super(props);
+
+        this.fileMenu = (
+            <Menu className="subMenu" onClick={this.handleMenuClick}>
+                <SubMenu
+                    className="subMenuEntryMenu"
+                    key="new"
+                    onTitleClick={this.handleFileNewClick}
+                    title={
+                        <div className="subMenuEntryMenuTitle">
+                            <Icon className="menuIcon" type="plus-circle" theme="filled"/>
+                            New...
+                        </div>
+                    }>
+
+                    <Menu.Item key="newProject" className="subMenuEntry">
+                        <div className="subMenuEntryMenuTitle">
+                            <Icon className="menuIcon" type="project" theme="filled"/>
+                            Project
+                        </div>
+                    </Menu.Item>
+
+                    <Menu.Item key="newFolder" className="subMenuEntry">
+                        <div className="subMenuEntryMenuTitle">
+                            <Icon className="menuIcon" type="folder-add" theme="filled"/>
+                            Folder
+                        </div>
+                    </Menu.Item>
+
+                    <Menu.Item key="newJava" className="subMenuEntry">
+                        <div className="subMenuEntryMenuTitle">
+                            <Icon className="menuIcon" type="code" theme="filled"/>
+                            Java Source File
+                        </div>
+                    </Menu.Item>
+
+                    <Menu.Item className="subMenuEntry">
+                        <div className="subMenuEntryMenuTitle">
+                            <Icon className="menuIcon" type="file-text" theme="filled"/>
+                            Text file
+                        </div>
+                    </Menu.Item>
+
+                    <Menu.Item key="newOther" className="subMenuEntry">
+                        <div className="subMenuEntryMenuTitle">
+                            <Icon className="menuIcon" type="file-unknown" theme="filled"/>
+                            Other
+                        </div>
+                    </Menu.Item>
+
+                </SubMenu>
+            </Menu>
+        );
         this.state = {
             code: "", //initial code
             console: "",
@@ -105,7 +107,7 @@ export default class Home extends React.Component {
             fileStructure: {
                 0: {
                     name: "Test Project",
-                    type: "dir",
+                    type: "folder",
                     tags: "",
                     open: true,
                     root: true,
@@ -114,7 +116,7 @@ export default class Home extends React.Component {
 
                 1: {
                     name: "src",
-                    type: "dir",
+                    type: "folder",
                     tags: "src",
                     open: false,
                     root: false,
@@ -132,7 +134,7 @@ export default class Home extends React.Component {
 
                 3: {
                     name: "Fake Project",
-                    type: "dir",
+                    type: "folder",
                     tags: "",
                     root: true,
                     open: false
@@ -140,7 +142,7 @@ export default class Home extends React.Component {
 
                 4: {
                     name: "Test Folder",
-                    type: "dir",
+                    type: "folder",
                     tags: "",
                     open: true,
                     root: false,
@@ -157,7 +159,7 @@ export default class Home extends React.Component {
 
                 6: {
                     name: "folder2",
-                    type: "dir",
+                    type: "folder",
                     tags: "",
                     open: true,
                     root: false,
@@ -171,7 +173,8 @@ export default class Home extends React.Component {
                     open: false,
                     root: false
                 },
-            }
+            },
+            creatingFile: true
 
         }
 
@@ -210,8 +213,37 @@ export default class Home extends React.Component {
 
         return (
             <Layout style={{overflow: "hidden"}}>
+                <Modal
+                    className="codeModal"
+                    title={
+                        <div className="codeModalTitle">
+                            Create new
+                        </div>
+                    }
+                    closable={false}
+                    visible={this.state.creatingFile}
+                    okButtonProps={{ghost: true, style: {borderColor: "#4b4b4b", color: "#bbbbbb"}}}
+                    cancelButtonProps={{ghost: true, style: {borderColor: "#4b4b4b", color: "#bbbbbb"}}}
+                >
+                    <div style={{display: "flex"}}>
+                        <div className="modalInputDescriptor">
+                            Name:
+                        </div>
+                        <Input
+                            className="modalInput"
+                            id="name"
+                        />
+                    </div>
+
+                    <div style={{display: "flex"}}>
+                        <div className="modalInputDescriptor">
+                            Path:
+                        </div>
+                        <Input className="modalInput" defaultValue="/"/>
+                    </div>
+                </Modal>
                 <div className="menuBar">
-                    <Dropdown overlay={fileMenu} trigger={["click"]} overlayStyle={{
+                    <Dropdown overlay={this.fileMenu} trigger={["click"]} overlayStyle={{
                         background: "#3C3F41",
                         borderRadius: 0,
                         border: "solid",
@@ -333,7 +365,7 @@ export default class Home extends React.Component {
     }
 
     renderFold(node) {
-        if (this.state.fileStructure[node].type === "dir") {
+        if (this.state.fileStructure[node].type === "folder") {
             return (
                 <Button className="treeFoldButton"
                         disabled={this.state.fileStructure[node].children === undefined}
@@ -358,7 +390,7 @@ export default class Home extends React.Component {
     }
 
     renderIcon(n) {
-        if (n === "dir") {
+        if (n === "folder") {
             return (
                 <Icon
                     type="folder"
@@ -480,7 +512,7 @@ export default class Home extends React.Component {
             }
         }
         ;
-    }
+    };
 
     kill() {
         fetch(serverIp + "/stop",
@@ -489,6 +521,33 @@ export default class Home extends React.Component {
                 credentials: 'include'
             }
         );
+    }
+
+    createFile(path, type) {
+        let order = {
+            path: path,
+            type: type
+        };
+
+        fetch(serverIp + "/newFile",
+            {
+                method: "post",
+                credentials: 'include',
+                body: JSON.stringify(order),
+            }
+        );
+    }
+
+    handleFileNewClick(key) {
+        console.log(key);
+    }
+
+    handleMenuClick(item) {
+        const key = item.key;
+        if (key === "newFolder") {
+            Code.newFileModal("Create new folder", "folder", null);
+        }
+        console.log(item);
     }
 }
 

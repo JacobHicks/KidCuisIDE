@@ -209,3 +209,48 @@
     font-size: 12px;
     margin-right: 4px !important;
 }
+
+.codeModal .ant-modal-content {
+    background: #3C3F41 !important;
+    padding: 0 0 0 0;
+    border-radius: 0;
+    border: 0;
+}
+
+.codeModal .ant-modal-body {
+    padding: 8px 24px 0 12px;
+}
+
+.codeModal .ant-modal-header {
+    background: #3C3F41 !important;
+    padding: 4px 12px;
+    border-radius: 0;
+    border-color: #4b4b4b;
+}
+
+.codeModal .ant-modal-footer {
+    background: #3C3F41 !important;
+    padding-top: 0;
+    border-radius: 0;
+    border: 0;
+}
+
+.codeModalTitle {
+    font-family: Consolas, Menlo, Monaco, 'Lucida Console', 'Liberation Mono', 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', 'Courier New', monospace, serif;
+    color: #A9B7C6;
+}
+
+.modalInput {
+    background: #3C3F41;
+    border-radius: 0;
+    border-width: 1px;
+    border-color: #4b4b4b;
+    color: #6e6e6e;
+    margin-bottom: 16px;
+}
+
+.modalInputDescriptor {
+    color: #a4a4a4;
+    padding-top: 4px;
+    width: 54px;
+}

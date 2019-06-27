@@ -74,7 +74,7 @@ class CodeRunner implements Runnable {
                                     long startTime = System.currentTimeMillis();
                                     long timeElapsed = 0;
                                     boolean withinTimeLimits = true;  //TODO: tell users there out of time
-                                    while (process.isAlive() ) {
+                                    while (process.isAlive()) {
                                         if (timeElapsed / 1000.0 >= 600 || codeStopped.get()) {
                                             withinTimeLimits = false;
                                             process.destroyForcibly();
@@ -99,7 +99,9 @@ class CodeRunner implements Runnable {
 
     private File saveCode(FullRunRequest runRequest) {
         try {
-            File file = new File("Users/" + runRequest.getPath() + runRequest.getName() + "." + runRequest.getLanguage());
+            File file = new File("Users/" + runRequest.getSessionId());
+            if(!file.exists()) file.mkdir();
+            file = new File("Users/" + runRequest.getSessionId() + "/" + runRequest.getPath() + runRequest.getName() + "." + runRequest.getLanguage());
             if (file.exists()) file.delete();
             if (file.createNewFile()) {
                 PrintWriter outputStream = new PrintWriter(file);

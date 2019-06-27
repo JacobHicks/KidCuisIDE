@@ -5,6 +5,7 @@ import com.seji.kidcuiside.forms.PreRunRequest;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
+import java.io.File;
 
 @CrossOrigin(origins = "http://127.0.0.1", allowCredentials = "true")
 @RestController
@@ -31,5 +32,12 @@ public class CodeController {
     @PostMapping("/stop")
     public void kill(@CookieValue(value = "session", defaultValue = "testUser") String sessionId) {
         Mailbox.stop(sessionId);
+    }
+
+    @PostMapping("/done")
+    public void done(@CookieValue(value = "session", defaultValue = "testUser") String sessionId) {
+        Mailbox.stop(sessionId);
+        File dir = new File("Users/" + sessionId);
+        dir.delete();
     }
 }

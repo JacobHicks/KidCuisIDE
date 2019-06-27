@@ -50,9 +50,80 @@ export default class Home extends React.Component {
             filePath: "",
             fileName: "Main",
             isRunning: false,
+            fileStructure: {
+                0: {
+                    name: "Test Project",
+                    type: "dir",
+                    tags: "",
+                    open: true,
+                    root: true,
+                    children: [1, 4]
+                },
 
-        };
-    }
+                1: {
+                    name: "src",
+                    type: "dir",
+                    tags: "src",
+                    open: false,
+                    root: false,
+                    children: [
+                        2
+                    ]
+                },
+
+                2: {
+                    name: "Main",
+                    type: "java",
+                    tags: "",
+                    root: false
+                },
+
+                3: {
+                    name: "Fake Project",
+                    type: "dir",
+                    tags: "",
+                    root: true,
+                    open: false
+                },
+
+                4: {
+                    name: "Test Folder",
+                    type: "dir",
+                    tags: "",
+                    open: true,
+                    root: false,
+                    children: [5, 6]
+                },
+
+                5: {
+                    name: "file",
+                    type: "",
+                    tags: "",
+                    open: false,
+                    root: false
+                },
+
+                6: {
+                    name: "folder2",
+                    type: "dir",
+                    tags: "",
+                    open: true,
+                    root: false,
+                    children: [7]
+                },
+
+                7: {
+                    name: "file",
+                    type: "",
+                    tags: "",
+                    open: false,
+                    root: false
+                },
+            }
+
+        }
+
+    };
 
     updateCode = (newCode) => {
         this.setState({
@@ -101,12 +172,25 @@ export default class Home extends React.Component {
                         <Menu.Item key="6">Sign out</Menu.Item>
                     </Menu>
                 </Header>
-                <Content style={{height: "95vh"}}>
+                <Content style={{height: "95vh", display: "flex"}}>
+                    <div className="verticalBarLeft"/>
                     <ReflexContainer orientation="horizontal">
                         <ReflexElement>
                             <ReflexContainer orientation="vertical">
-                                <ReflexElement>
-
+                                <ReflexElement style={{background: "#3C3F41"}}>
+                                    <div className="horizontalBarTop">
+                                        <div className="treeHeader">
+                                            <Icon
+                                                type="project"
+                                                theme="filled"
+                                                style={{fontSize: 14, marginRight: 6, color: "#ADADAD"}}
+                                            />
+                                            Project Manager
+                                        </div>
+                                    </div>
+                                    <div style={{marginLeft: 8}}>
+                                        {this.renderTree()}
+                                    </div>
                                 </ReflexElement>
                                 <ReflexSplitter propagate={true} className="horizontalSplitter"/>
                                 <ReflexElement>
@@ -152,7 +236,7 @@ export default class Home extends React.Component {
                                           value={this.state.console} onChange={this.updateConsole}
                                           options={consoleOption}/>
 
-                                <div className="consoleRightBar"/>
+                                <div className="verticalBar"/>
                             </div>
                             <div className="consoleFooter"/>
                         </ReflexElement>
@@ -160,6 +244,105 @@ export default class Home extends React.Component {
                 </Content>
             </Layout>
         )
+    }
+
+    renderTree() {
+        let res = [];
+        for (let i = 0; this.state.fileStructure[i] !== undefined; i++) {
+            if (this.state.fileStructure[i].root) {
+                res.push(this.renderNode(i, this.state.fileStructure));
+            }
+        }
+        return res;
+    }
+
+    renderNode(node) {
+        let markup = [];
+        if (this.state.fileStructure[node].children !== undefined && this.state.fileStructure[node].open) {
+            for (let i = 0; i < this.state.fileStructure[node].children.length; i++) {
+                markup.push(this.renderNode(this.state.fileStructure[node].children[i]));
+            }
+        }
+        return (
+            <div>
+                <div className="treeText">
+                    {this.renderFold(node)}
+                    {this.renderIcon(this.state.fileStructure[node].type)}
+                    <span style={{fontStyle: this.state.fileStructure[node].root ? "italic" : ""}}>
+                        {this.state.fileStructure[node].name}
+                    </span>
+                </div>
+                <div style={{marginLeft: 16}}>
+                    {markup}
+                </div>
+            </div>
+        )
+    }
+
+    renderFold(node) {
+        if (this.state.fileStructure[node].type === "dir") {
+            return (
+                <Button className="treeFoldButton"
+                        disabled={this.state.fileStructure[node].children === undefined}
+                        onClick={() => {
+                            let newStructure = this.state.fileStructure;
+                            newStructure[node].open = !newStructure[node].open;
+                            this.setState({
+                                fileStructure: newStructure
+                            })
+                        }}
+                        ghost
+                >
+                    <Icon type={this.state.fileStructure[node].open ? "caret-down" : "caret-right"}
+                          style={{
+                              marginRight: 4,
+                              color: this.state.fileStructure[node].children !== undefined ? "#ADADAD" : "#3C3F41"
+                          }}
+                    />
+                </Button>
+            )
+        }
+    }
+
+    renderIcon(n) {
+        if (n === "dir") {
+            return (
+                <Icon
+                    type="folder"
+                    theme="filled"
+                    style={{
+                        color: "#87939A",
+                        marginRight: 4
+                    }}
+                />
+            )
+        } else if (n === "java") {
+            return (
+                <Icon
+                    type="code"
+                    theme="filled"
+                    style={{
+                        marginLeft: 18,
+                        marginRight: 5,
+                        marginTop: 4,
+                        marginBottom: 6
+                    }}
+                />
+            )
+        } else {
+            return (<Icon
+                    type="file"
+                    theme="filled"
+                    style={{
+                        color: "#87939A",
+                        marginLeft: 18,
+                        marginRight: 5,
+                        marginTop: 4,
+                        marginBottom: 6
+                    }}
+                />
+            )
+        }
     }
 
     runCode = () => {
@@ -190,7 +373,6 @@ export default class Home extends React.Component {
                         fetch(serverIp + "/output")
                             .then(response => response.json())
                             .then(data => {
-                                console.log(data);
                                 if (!data.eof) {
                                     this.setState({
                                         console: this.state.console + data.output + data.error
@@ -207,6 +389,7 @@ export default class Home extends React.Component {
                 }
             });
     };
+
     toggleRunning() {
         this.setState({
             isRunning: !this.state.isRunning
@@ -214,7 +397,7 @@ export default class Home extends React.Component {
     }
 
     sendMessage = (instance, changeObj) => {
-        if(changeObj.text[0] === " " || changeObj.text[0] === "\n" || changeObj.text[0] === "\t") {
+        if (changeObj.text[0] === " " || changeObj.text[0] === "\n" || changeObj.text[0] === "\t") {
             fetch(serverIp + "/send",
                 {
                     method: "post",
@@ -226,11 +409,9 @@ export default class Home extends React.Component {
                     credentials: 'include'
                 }
             );
-        }
-        else if(changeObj.text[0] === "\b") {
+        } else if (changeObj.text[0] === "\b") {
             this.msgBuffer = this.msgBuffer.substring(0, this.msgBuffer.length - 1);
-        }
-        else {
+        } else {
             this.msgBuffer += changeObj.text;
         }
     };
@@ -244,7 +425,8 @@ export default class Home extends React.Component {
             } else if (name === "Backspace") {
                 this.sendMessage(instance, {text: ["\b"]});
             }
-        };
+        }
+        ;
     }
 
     kill() {

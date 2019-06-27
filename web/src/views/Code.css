@@ -13,14 +13,15 @@
 
 .verticalSplitter {
     height: 1px !important;
-    background: #000000 !important;
+    background: #323232 !important;
     border: none !important;
 }
 
 .horizontalSplitter {
-    width: 1px !important;
-    background: #000000 !important;
-    border: none !important;
+    width: 5px !important;
+    background: #313335 !important;
+    border-left: #3C3F41 !important;
+    border-right: none !important;
 }
 
 .consoleHeader {
@@ -37,7 +38,7 @@
     background: #313335;
 }
 
-.consoleRightBar {
+.verticalBar {
     z-index: 1;
     width: 8px;
     height: 100%;
@@ -84,4 +85,49 @@
     width: 12px;
     height: 12px;
     margin-left: 6px;
+}
+
+.treeText {
+    font-family: Consolas, Menlo, Monaco, 'Lucida Console', 'Liberation Mono', 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', 'Courier New', monospace, serif;
+    color: #A9B7C6;
+    font-size: 12px;
+    line-height: 0;
+}
+
+.treeFoldButton {
+    padding: 0;
+    border: none;
+    margin-bottom: 8px;
+    margin-top: 0;
+    height: 12px;
+}
+
+.verticalBarLeft {
+    z-index: 1;
+    width: 16px;
+    height: 100%;
+    background: #3C3F41;
+    border-right: solid;
+    border-width: 1px;
+    border-color: #4b4b4b;
+}
+
+.horizontalBarTop {
+    z-index: 1;
+    width: 100%;
+    height: 20px;
+    background: #3C3F41;
+    border-bottom: solid;
+    border-top: solid;
+    border-right: solid;
+    border-width: 1px;
+    border-color: #323232;
+}
+
+.treeHeader {
+    font-family: Consolas, Menlo, Monaco, 'Lucida Console', 'Liberation Mono', 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', 'Courier New', monospace, serif;
+    color: #bfcfe0;
+    margin-left: 8px;
+    font-size: 12px;
+    font-weight: bold;
 }

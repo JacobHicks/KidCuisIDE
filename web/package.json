@@ -27,7 +27,8 @@
     "style-loader": "^0.23.1",
     "tar": "^4.4.8",
     "react-codemirror": "git://github.com/skidding/react-codemirror.git#106-fix-update",
-    "react-reflex": "^3.0.15"
+    "react-reflex": "^3.0.15",
+    "webpack": "^4.35.0"
   },
   "scripts": {
     "start": "react-scripts start",

@@ -1,9 +1,6 @@
-.header {
-    height: 64px;
-    background: #000000;
-    position: fixed;
-    z-index: 20;
-    width: 100%;
+.content {
+    height: calc(100vh - 24px);
+    display: flex;
 }
 
 .CodeMirror {
@@ -64,12 +61,12 @@
 }
 
 .runButton {
-     z-index: 4;
-     width: 100%;
-     height: 24px;
-     padding: 0;
-     margin-top: 8px;
-     border: none;
+    z-index: 4;
+    width: 100%;
+    height: 24px;
+    padding: 0;
+    margin-top: 8px;
+    border: none;
 }
 
 .stopButton {
@@ -130,4 +127,85 @@
     margin-left: 8px;
     font-size: 12px;
     font-weight: bold;
+}
+
+.menuBar {
+    width: 100%;
+    height: 24px;
+    background: #3C3F41;
+    border-bottom: solid;
+    border-width: 1px;
+    border-color: #4b4b4b;
+}
+
+.verticalBarRight {
+    z-index: 1;
+    width: 18px;
+    height: 100%;
+    background: #3C3F41;
+    border-left: solid;
+    border-width: 1px;
+    border-color: #4b4b4b;
+}
+
+.menuText {
+    font-family: Consolas, Menlo, Monaco, 'Lucida Console', 'Liberation Mono', 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', 'Courier New', monospace, serif;
+    color: #bbbbbb;
+    margin-left: 8px;
+    margin-right: 4px;
+    font-size: 12px;
+}
+
+.subMenu {
+    background: #3C3F41;
+    padding: 0 0 0 0;
+    border-radius: 0;
+}
+
+.subMenuEntry {
+    padding: 0 0 0 4px;
+    width: 200px;
+    line-height: 16px;
+    font-family: Consolas, Menlo, Monaco, 'Lucida Console', 'Liberation Mono', 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', 'Courier New', monospace, serif;
+    color: #A9B7C6;
+    font-size: 12px;
+}
+
+.subMenuEntryMenu {
+    width: 200px;
+}
+
+.subMenuEntryMenu .ant-dropdown-menu {
+    margin-left: -4px;
+    background: #3C3F41 !important;
+    padding: 0 0 0 0 !important;
+    border-radius: 0 !important;
+}
+
+.subMenuEntryMenu .ant-dropdown-menu-submenu-title {
+    padding: 0 !important;
+    margin: 0 !important;
+}
+
+.subMenuEntryMenu .ant-dropdown-menu-submenu-title .ant-dropdown-menu-submenu-arrow {
+    top: 0 !important;
+    line-height: 16px !important;
+}
+
+.subMenuEntryMenu .ant-dropdown-menu-submenu-title .ant-dropdown-menu-submenu-arrow-icon {
+    color: #A9B7C6 !important;
+}
+
+.subMenuEntryMenuTitle {
+    padding-left: 4px;
+    line-height: 16px;
+    font-family: Consolas, Menlo, Monaco, 'Lucida Console', 'Liberation Mono', 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', 'Courier New', monospace, serif;
+    color: #A9B7C6;
+    font-size: 12px;
+}
+
+.menuIcon {
+    color: #A9B7C6;
+    font-size: 12px;
+    margin-right: 4px !important;
 }

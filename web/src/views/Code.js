@@ -2,7 +2,7 @@ import {Link} from 'react-router-dom'
 import 'antd/dist/antd.css';
 import 'codemirror/lib/codemirror.css';
 import 'codemirror/theme/darcula.css';
-import {Button, Icon, Layout, Menu} from "antd";
+import {Button, Dropdown, Icon, Layout, Menu} from "antd";
 import 'react-reflex/styles.css'
 import {ReflexContainer, ReflexSplitter, ReflexElement} from 'react-reflex'
 import "./Code.css";
@@ -20,7 +20,8 @@ require("codemirror/addon/comment/continuecomment");
 
 const React = require('react');
 const CodeArea = require('react-codemirror');
-const {Header, Content} = Layout;
+const {Content} = Layout;
+const {SubMenu} = Menu;
 const serverIp = "http://127.0.0.1:5000";
 
 const codeWindowOptions = {
@@ -39,6 +40,57 @@ const codeWindowOptions = {
     theme: "darcula",
     mode: "text/x-java"
 };
+
+const fileMenu = (
+    <Menu className="subMenu">
+        <SubMenu
+            className="subMenuEntryMenu"
+            title={
+                <div className="subMenuEntryMenuTitle">
+                    <Icon className="menuIcon" type="plus-circle" theme="filled"/>
+                    New...
+                </div>
+            }>
+
+            <Menu.Item className="subMenuEntry">
+                <div className="subMenuEntryMenuTitle">
+                    <Icon className="menuIcon" type="project" theme="filled"/>
+                    Project
+                </div>
+            </Menu.Item>
+
+            <Menu.Item className="subMenuEntry">
+                <div className="subMenuEntryMenuTitle">
+                    <Icon className="menuIcon" type="folder-add" theme="filled"/>
+                    Folder
+                </div>
+            </Menu.Item>
+
+            <Menu.Item className="subMenuEntry">
+                <div className="subMenuEntryMenuTitle">
+                    <Icon className="menuIcon" type="code" theme="filled"/>
+                    Java Source File
+                </div>
+            </Menu.Item>
+
+            <Menu.Item className="subMenuEntry">
+                <div className="subMenuEntryMenuTitle">
+                    <Icon className="menuIcon" type="file-text" theme="filled"/>
+                    Text file
+                </div>
+            </Menu.Item>
+
+            <Menu.Item className="subMenuEntry">
+                <div className="subMenuEntryMenuTitle">
+                    <Icon className="menuIcon" type="file-unknown" theme="filled"/>
+                    Other
+                </div>
+            </Menu.Item>
+
+        </SubMenu>
+    </Menu>
+);
+
 
 export default class Home extends React.Component {
     constructor(props) {
@@ -158,21 +210,21 @@ export default class Home extends React.Component {
 
         return (
             <Layout style={{overflow: "hidden"}}>
-                <Header style={{height: '5vh'}}>
-                    <Menu
-                        theme="dark"
-                        mode="horizontal"
-                        style={{lineHeight: '5vh'}}
-                    >
-                        <Menu.Item key="1">Run</Menu.Item>
-                        <Menu.Item key="2">Save</Menu.Item>
-                        <Menu.Item key="3">New</Menu.Item>
-                        <Menu.Item key="4">Upload</Menu.Item>
-                        <Menu.Item key="5">Theme</Menu.Item>
-                        <Menu.Item key="6">Sign out</Menu.Item>
-                    </Menu>
-                </Header>
-                <Content style={{height: "95vh", display: "flex"}}>
+                <div className="menuBar">
+                    <Dropdown overlay={fileMenu} trigger={["click"]} overlayStyle={{
+                        background: "#3C3F41",
+                        borderRadius: 0,
+                        border: "solid",
+                        borderWidth: 1,
+                        borderColor: "#4b4b4b",
+                        paddingTop: 0,
+                        top: 0,
+                        lineHeight: 1
+                    }}>
+                        <span className="menuText">File</span>
+                    </Dropdown>
+                </div>
+                <Content className="content">
                     <div className="verticalBarLeft"/>
                     <ReflexContainer orientation="horizontal">
                         <ReflexElement>
@@ -188,7 +240,7 @@ export default class Home extends React.Component {
                                             Project Manager
                                         </div>
                                     </div>
-                                    <div style={{marginLeft: 8}}>
+                                    <div style={{marginLeft: 8, marginTop: 2}}>
                                         {this.renderTree()}
                                     </div>
                                 </ReflexElement>
@@ -241,6 +293,7 @@ export default class Home extends React.Component {
                             <div className="consoleFooter"/>
                         </ReflexElement>
                     </ReflexContainer>
+                    <div className="verticalBarRight"/>
                 </Content>
             </Layout>
         )

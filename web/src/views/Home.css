@@ -1,19 +1,58 @@
+@import url('https://fonts.googleapis.com/css?family=Fira+Mono&display=swap');
+@keyframes colors {
+   0% {
+       color:darkslateblue;
+       border-color: darkslateblue;
+   }
+   50% {
+       color: seagreen;
+       border-color: whitesmoke;
+   }
+   100% {
+       color:darkslateblue;
+        border-color:darkslateblue;
+   }
+}
+.ant-carousel  {
+    text-align: center;
+    child-align: middle;
+    line-height: 40vh;
+    margin-right: 10vw;
+    margin-left: 0vw;
+    background: #3C3F41;
+    overflow: hidden;
+    width: 80vw;
+}
+.slick-slide {
+
+    width: 70vw;
+}
+.ant-carousel .slick-slide h3 {
+    color: #fff;
+}
+
+html {
+    scroll-behavior: smooth;
+}
 body {
     margin: 0;
     height:100%;
-    scroll-behavior: smooth;
+
+
 }
+
 .headline {
     color: black;
-    padding-top: 150px;
-    font-family: monospace;
+    padding-top: 50px;
+    font-family: Fira Mono;
     font-size: 30px;
     text-align : center;
+    animation: 0.8s flipInX ease;
 }
 .subtitle {
     color: black;
     padding-top: 40px;
-    font-family: monospace;
+    font-family: Fira Mono;
     font-size: 16px;
     text-align : center;
 }
@@ -22,10 +61,11 @@ body {
     position: fixed;
     width: 100%;
     background-image: linear-gradient(to right, transparent 80%, #0057e6);
+    z-index: 3;
 }
 .loginButtons {
     background-color: #0057e6;
-    font-family: monospace;
+    font-family: Fira Mono;
     font-size: 28px;
     border: none;
     margin-left: 0;
@@ -33,6 +73,7 @@ body {
     cursor: pointer;
     outline: none;
     margin-top: 0px;
+    z-index: 3;
 }
 .loginButtons:hover {
     transition: all 550ms, ease;
@@ -40,6 +81,10 @@ body {
     border-bottom-color: darkblue;
     border-bottom-style: solid;
     border-bottom-width: 3px;
+}
+.firstButtonDiv {
+    text-align: center;
+    padding-top: 10vh;
 }
 .buttonDiv {
     text-align: center;
@@ -49,44 +94,72 @@ body {
     display: table-cell;
     vertical-align: middle;
     border-radius: 100%;
-    border: none;
+    border: 3px solid transparent;
     font-size: 20px;
     height: 40px;
     width: 40px;
     padding: 5px;
     scroll-behavior: smooth;
+    animation-name: colors;
+    animation-duration: 4s;
+    animation-iteration-count: infinite;
+    outline: none;
 }
 .launch:hover {
     color: #313335;
-    background-color: white;
+    background-color: lightseagreen;
     transition: all 330ms, ease;
+    border: 3px lightseagreen solid;
 }
-
-.section {
-    border-top-color: cadetblue;
-    boder-top-style: solid;
-    border-top-width: 5px;
+#section2 {
     margin-top: 20vh;
+
+}
+.section {
+    boder-top: 5px solid cadetblue;
+    boder-bottom: 5px solid cadetblue;
+    margin-top: 5px;
     height: 100vh;
-    background-color: black;
+    background-color: #1b1028;
     scroll-behavior: smooth;
 }
 .itemHeading {
-    color: aliceblue;
+    color: rgba(61, 78, 77, 0.86);
     text-decoration: underline;
-    text-decoration-color: #313335;
-    font-family: monospace;
+    text-decoration-color: #497779;
+    font-family: Fira Mono;
     font-size: 45px;
     text-align: center;
 }
 .helperTitle {
-    color: aqua;
-    font-family: monospace;
+    color: rgb(249, 255, 251);
+    font-family: Fira Mono;
     font-size: 30px;
     text-align: center;
 }
 .talk {
     color: whitesmoke;
-    font-family: monospace;
+    font-family: Fira Mono;
     font-size: 14px;
+    margin-right: 50px;
+    margin-left: 50px;
+    margin-top: 45px;
+}
+.helperImage {
+    display: inline;
+    margin-left: 5vw;
+    margin-right: 5vw;
+    margin-top: 15px;
+    float: right;
+    max-width: 44vw;
+    height: auto;
+    border-radius: 5px;
+}
+.carouselWrapper {
+    align-content: center;
+    margin-left: 10vw;
+}
+.slideImage {
+    width: 80vw;
+    height: 50vh;
 }

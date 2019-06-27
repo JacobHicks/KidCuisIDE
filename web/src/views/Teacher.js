@@ -4,9 +4,14 @@ import {Layout, Menu, Table} from "antd";
 
 const React = require('react');
 const {Header, Content} = Layout;
-const SubMenu = Menu.SubMenu
+const SubMenu = Menu.SubMenu;
 
-const dataSource = [
+const profile = {
+    name: "Sandra",
+    image: ":0",
+};
+
+const classA = [
     {
         key: '1',
         name: 'Mike',
@@ -18,6 +23,20 @@ const dataSource = [
         name: 'John',
         grade: 11,
         time: '1:34',
+    },
+];
+const classB = [
+    {
+        key: '1',
+        name: 'Bob',
+        grade: 12,
+        time: '99:59',
+    },
+    {
+        key: '2',
+        name: 'Jerald',
+        grade: 8,
+        time: '99999:59',
     },
 ];
 
@@ -39,8 +58,18 @@ const columns = [
     },
 ];
 
-
 export default class Teacher extends React.Component {
+    constructor(props){
+        super(props);
+        this.state = {currentClass: classA};
+    }
+
+    changeClass(newClass){
+        this.setState({
+            currentClass: newClass,
+        });
+    }
+
     render() {
         return (
             <Layout style={{overflow: "hidden"}}>
@@ -51,18 +80,18 @@ export default class Teacher extends React.Component {
                         style={{lineHeight: '5vh'}}
                     >
                         <SubMenu title="Classes" key="left" style={{float: 'left'}}>
-                            <Menu.Item key="1">Class A</Menu.Item>
-                            <Menu.Item key="2">Class B</Menu.Item>
+                            <Menu.Item onClick={() => this.changeClass(classA)} key="1">Class A</Menu.Item>
+                            <Menu.Item onClick={() => this.changeClass(classB)} key="2">Class B</Menu.Item>
 
                         </SubMenu>
-                        <SubMenu title="Welcome Name profileicon" key="right" style={{float: 'right'}}>
+                        <SubMenu title={<span>Welcome {profile.name} {profile.image}</span>} key="right" style={{float: 'right'}}>
                             <Menu.Item key="Logout">Logout</Menu.Item>
 
                         </SubMenu>
                     </Menu>
                 </Header>
                 <Content>
-                    <Table dataSource={dataSource} columns={columns} />;
+                    <Table dataSource={this.state.currentClass} columns={columns} />;
                 </Content>
             </Layout>
         )

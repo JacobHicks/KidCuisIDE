@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css?family=Fira+Mono&display=swap');
 @keyframes colors {
    0% {
        color:darkslateblue;
@@ -17,14 +18,14 @@
     child-align: middle;
     line-height: 40vh;
     margin-right: 10vw;
-    margin-left: 10vw;
+    margin-left: 0vw;
     background: #3C3F41;
     overflow: hidden;
     width: 80vw;
 }
 .slick-slide {
-    line-height: 50vh;
-    width: 80vw;
+
+    width: 70vw;
 }
 .ant-carousel .slick-slide h3 {
     color: #fff;
@@ -43,7 +44,7 @@ body {
 .headline {
     color: black;
     padding-top: 50px;
-    font-family: monospace;
+    font-family: Fira Mono;
     font-size: 30px;
     text-align : center;
     animation: 0.8s flipInX ease;
@@ -51,7 +52,7 @@ body {
 .subtitle {
     color: black;
     padding-top: 40px;
-    font-family: monospace;
+    font-family: Fira Mono;
     font-size: 16px;
     text-align : center;
 }
@@ -63,7 +64,7 @@ body {
 }
 .loginButtons {
     background-color: #0057e6;
-    font-family: monospace;
+    font-family: Fira Mono;
     font-size: 28px;
     border: none;
     margin-left: 0;
@@ -124,19 +125,19 @@ body {
     color: aliceblue;
     text-decoration: underline;
     text-decoration-color: #313335;
-    font-family: monospace;
+    font-family: Fira Mono;
     font-size: 45px;
     text-align: center;
 }
 .helperTitle {
     color: aqua;
-    font-family: monospace;
+    font-family: Fira Mono;
     font-size: 30px;
     text-align: center;
 }
 .talk {
     color: whitesmoke;
-    font-family: monospace;
+    font-family: Fira Mono;
     font-size: 14px;
     margin-right: 20px;
     margin-left: 30px;
@@ -155,4 +156,8 @@ body {
 .carouselWrapper {
     align-content: center;
     margin-left: 10vw;
+}
+.slideImage {
+    width: 80vw;
+    height: 50vh;
 }

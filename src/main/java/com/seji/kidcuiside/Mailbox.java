@@ -56,6 +56,7 @@ public class Mailbox {
         ConsoleOutput res = new ConsoleOutput();
         res.setEof(false);
         try {
+            while(outputQueue.get(sessionId)[0] == null);
             if (outputQueue.get(sessionId)[3].equals(true) && ((InputStream) outputQueue.get(sessionId)[0]).available() == 0 && ((InputStream) outputQueue.get(sessionId)[1]).available() == 0) {
                 res.setEof(true);
                 return res;

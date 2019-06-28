@@ -1,6 +1,6 @@
 import {Link} from 'react-router-dom'
 import "./Teacher.css"
-import {Layout, Menu, Table} from "antd";
+import {Layout, Menu, Table, Avatar} from "antd";
 
 const React = require('react');
 const {Header, Content} = Layout;
@@ -84,7 +84,7 @@ export default class Teacher extends React.Component {
                             <Menu.Item onClick={() => this.changeClass(classB)} key="2">Class B</Menu.Item>
 
                         </SubMenu>
-                        <SubMenu title={<span>Welcome {profile.name} {profile.image}</span>} key="right" style={{float: 'right'}}>
+                        <SubMenu title={<span>Welcome {profile.name} <Avatar icon="user"/> </span>} key="right" style={{float: 'right'}}>
                             <Menu.Item key="Logout">Logout</Menu.Item>
 
                         </SubMenu>

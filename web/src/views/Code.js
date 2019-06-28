@@ -174,7 +174,7 @@ export default class Code extends React.Component {
                     root: false
                 },
             },
-            creatingFile: true
+            creatingFile: false
 
         }
 

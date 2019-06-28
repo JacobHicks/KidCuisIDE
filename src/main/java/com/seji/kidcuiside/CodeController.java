@@ -1,6 +1,8 @@
 package com.seji.kidcuiside;
+
 import com.seji.kidcuiside.forms.ConsoleOutput;
 import com.seji.kidcuiside.forms.FullRunRequest;
+import com.seji.kidcuiside.forms.NewRequest;
 import com.seji.kidcuiside.forms.PreRunRequest;
 import org.springframework.web.bind.annotation.*;
 
@@ -25,7 +27,8 @@ public class CodeController {
     }
 
     @GetMapping("/output")
-    public @ResponseBody ConsoleOutput checkMail(@CookieValue(value = "session", defaultValue = "testUser") String sessionId) {
+    public @ResponseBody
+    ConsoleOutput checkMail(@CookieValue(value = "session", defaultValue = "testUser") String sessionId) {
         return Mailbox.getMail(sessionId);
     }
 
@@ -39,5 +42,15 @@ public class CodeController {
         Mailbox.stop(sessionId);
         File dir = new File("Users/" + sessionId);
         dir.delete();
+    }
+
+    @PostMapping("/new-file")
+    public void newDir(@CookieValue(value = "session", defaultValue = "testUser") String sessionId, @RequestBody NewRequest request) {
+        if (request.getPath().contains("..")) {
+            //todo
+        } else if (request.getType().equals("folder")) {
+            File newDir = new File("Users/" + sessionId + "/" + request.getPath() + "/" + request.getName());
+            newDir.mkdirs();
+        }
     }
 }

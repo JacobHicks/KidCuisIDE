@@ -242,11 +242,15 @@
 
 .modalInput {
     background: #3C3F41;
-    border-radius: 0;
+    border-radius: 4px;
     border-width: 1px;
     border-color: #4b4b4b;
     color: #6e6e6e;
-    margin-bottom: 16px;
+    border-style: solid;
+    margin-bottom: 8px;
+    height: 24px;
+    width: 100%;
+    margin-top: 4px;
 }
 
 .modalInputDescriptor {

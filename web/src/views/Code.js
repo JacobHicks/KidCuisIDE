@@ -1,10 +1,10 @@
-import {Link} from 'react-router-dom'
+import {Link} from 'react-router-dom';
 import 'antd/dist/antd.css';
 import 'codemirror/lib/codemirror.css';
 import 'codemirror/theme/darcula.css';
 import {Button, Dropdown, Icon, Input, Layout, Menu, Modal} from "antd";
-import 'react-reflex/styles.css'
-import {ReflexContainer, ReflexSplitter, ReflexElement} from 'react-reflex'
+import 'react-reflex/styles.css';
+import {ReflexContainer, ReflexSplitter, ReflexElement} from 'react-reflex';
 import "./Code.css";
 import "./Scrollbar.css";
 
@@ -47,7 +47,7 @@ export default class Code extends React.Component {
         super(props);
 
         this.fileMenu = (
-            <Menu className="subMenu" onClick={this.handleMenuClick}>
+            <Menu className="subMenu" onClick={(item) => this.handleMenuClick(this.openModal, item)}>
                 <SubMenu
                     className="subMenuEntryMenu"
                     key="new"
@@ -80,7 +80,7 @@ export default class Code extends React.Component {
                         </div>
                     </Menu.Item>
 
-                    <Menu.Item className="subMenuEntry">
+                    <Menu.Item key="newText" className="subMenuEntry">
                         <div className="subMenuEntryMenuTitle">
                             <Icon className="menuIcon" type="file-text" theme="filled"/>
                             Text file
@@ -174,10 +174,13 @@ export default class Code extends React.Component {
                     root: false
                 },
             },
-            creatingFile: false
+            creatingFile: false,
+            newFileType: ""
+        };
 
-        }
-
+        this.handleNewNameChange = this.handleNewNameChange.bind(this);
+        this.handleNewPathChange = this.handleNewPathChange.bind(this);
+        this.createFile = this.createFile.bind(this);
     };
 
     updateCode = (newCode) => {
@@ -217,30 +220,43 @@ export default class Code extends React.Component {
                     className="codeModal"
                     title={
                         <div className="codeModalTitle">
-                            Create new
+                            Create new {this.state.newFileType}
                         </div>
                     }
                     closable={false}
                     visible={this.state.creatingFile}
+
+                    onCancel={() =>
+                        this.setState({
+                            creatingFile: false
+                        })}
+
+                    onOk={() => {
+                        this.setState({
+                            creatingFile: false
+                        });
+
+                        this.createFile();
+                    }}
+
                     okButtonProps={{ghost: true, style: {borderColor: "#4b4b4b", color: "#bbbbbb"}}}
                     cancelButtonProps={{ghost: true, style: {borderColor: "#4b4b4b", color: "#bbbbbb"}}}
                 >
-                    <div style={{display: "flex"}}>
-                        <div className="modalInputDescriptor">
-                            Name:
+                    <form>
+                        <div style={{display: "flex"}}>
+                            <div className="modalInputDescriptor">
+                                Name:
+                            </div>
+                            <input className="modalInput" type="text" value={this.state.newName} onChange={this.handleNewNameChange} />
                         </div>
-                        <Input
-                            className="modalInput"
-                            id="name"
-                        />
-                    </div>
 
-                    <div style={{display: "flex"}}>
-                        <div className="modalInputDescriptor">
-                            Path:
+                        <div style={{display: "flex"}}>
+                            <div className="modalInputDescriptor">
+                                Path:
+                            </div>
+                            <input className="modalInput" type="text" value={this.state.newPath} onChange={this.handleNewPathChange} />
                         </div>
-                        <Input className="modalInput" defaultValue="/"/>
-                    </div>
+                    </form>
                 </Modal>
                 <div className="menuBar">
                     <Dropdown overlay={this.fileMenu} trigger={["click"]} overlayStyle={{
@@ -511,7 +527,6 @@ export default class Code extends React.Component {
                 this.sendMessage(instance, {text: ["\b"]});
             }
         }
-        ;
     };
 
     kill() {
@@ -523,31 +538,61 @@ export default class Code extends React.Component {
         );
     }
 
-    createFile(path, type) {
+    createFile() {
         let order = {
-            path: path,
-            type: type
+            name: this.state.newName,
+            path: this.state.newPath,
+            type: this.state.newFileType
         };
 
-        fetch(serverIp + "/newFile",
+        console.log(order);
+
+        fetch(serverIp + "/new-file",
             {
                 method: "post",
                 credentials: 'include',
+                headers: {
+                    "Content-Type": "application/json",
+                },
                 body: JSON.stringify(order),
             }
         );
+
     }
 
     handleFileNewClick(key) {
         console.log(key);
     }
 
-    handleMenuClick(item) {
+    openModal = type => {
+        this.setState({
+            creatingFile: true,
+            newFileType: type
+        });
+    };
+
+    handleMenuClick(modalFunction, item) {
         const key = item.key;
-        if (key === "newFolder") {
-            Code.newFileModal("Create new folder", "folder", null);
-        }
         console.log(item);
+        if (key === "newFolder") {
+            modalFunction("folder");
+        } else if (key === "newProject") {
+            modalFunction("project");
+        } else if (key === "newJava") {
+            modalFunction("java source file");
+        } else if (key === "newText") {
+            modalFunction("text file");
+        } else if (key === "newOther") {
+            modalFunction("file");
+        }
+    }
+
+    handleNewNameChange(event) {
+        this.setState({newName: event.target.value});
+    }
+
+    handleNewPathChange(event) {
+        this.setState({newPath: event.target.value});
     }
 }
 

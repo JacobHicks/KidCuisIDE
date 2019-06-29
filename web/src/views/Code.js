@@ -59,13 +59,6 @@ export default class Code extends React.Component {
                         </div>
                     }>
 
-                    <Menu.Item key="newProject" className="subMenuEntry">
-                        <div className="subMenuEntryMenuTitle">
-                            <Icon className="menuIcon" type="project" theme="filled"/>
-                            Project
-                        </div>
-                    </Menu.Item>
-
                     <Menu.Item key="newFolder" className="subMenuEntry">
                         <div className="subMenuEntryMenuTitle">
                             <Icon className="menuIcon" type="folder-add" theme="filled"/>
@@ -104,76 +97,7 @@ export default class Code extends React.Component {
             filePath: "",
             fileName: "Main",
             isRunning: false,
-            fileStructure: {
-                0: {
-                    name: "Test Project",
-                    type: "folder",
-                    tags: "",
-                    open: true,
-                    root: true,
-                    children: [1, 4]
-                },
-
-                1: {
-                    name: "src",
-                    type: "folder",
-                    tags: "src",
-                    open: false,
-                    root: false,
-                    children: [
-                        2
-                    ]
-                },
-
-                2: {
-                    name: "Main",
-                    type: "java",
-                    tags: "",
-                    root: false
-                },
-
-                3: {
-                    name: "Fake Project",
-                    type: "folder",
-                    tags: "",
-                    root: true,
-                    open: false
-                },
-
-                4: {
-                    name: "Test Folder",
-                    type: "folder",
-                    tags: "",
-                    open: true,
-                    root: false,
-                    children: [5, 6]
-                },
-
-                5: {
-                    name: "file",
-                    type: "",
-                    tags: "",
-                    open: false,
-                    root: false
-                },
-
-                6: {
-                    name: "folder2",
-                    type: "folder",
-                    tags: "",
-                    open: true,
-                    root: false,
-                    children: [7]
-                },
-
-                7: {
-                    name: "file",
-                    type: "",
-                    tags: "",
-                    open: false,
-                    root: false
-                },
-            },
+            fileStructure: {},
             creatingFile: false,
             newFileType: ""
         };
@@ -181,7 +105,22 @@ export default class Code extends React.Component {
         this.handleNewNameChange = this.handleNewNameChange.bind(this);
         this.handleNewPathChange = this.handleNewPathChange.bind(this);
         this.createFile = this.createFile.bind(this);
+        this.updateFileTree = this.updateFileTree.bind(this);
     };
+
+    componentDidMount() {
+        this.updateFileTree();
+    }
+
+    updateFileTree() {
+        fetch(serverIp + "/tree")
+            .then(response => response.json())
+            .then(data => {
+                this.setState({
+                    fileStructure: data
+                });
+            })
+    }
 
     updateCode = (newCode) => {
         this.setState({
@@ -247,14 +186,16 @@ export default class Code extends React.Component {
                             <div className="modalInputDescriptor">
                                 Name:
                             </div>
-                            <input className="modalInput" type="text" value={this.state.newName} onChange={this.handleNewNameChange} />
+                            <input className="modalInput" type="text" value={this.state.newName}
+                                   onChange={this.handleNewNameChange}/>
                         </div>
 
                         <div style={{display: "flex"}}>
                             <div className="modalInputDescriptor">
                                 Path:
                             </div>
-                            <input className="modalInput" type="text" value={this.state.newPath} onChange={this.handleNewPathChange} />
+                            <input className="modalInput" type="text" value={this.state.newPath}
+                                   onChange={this.handleNewPathChange}/>
                         </div>
                     </form>
                 </Modal>
@@ -359,7 +300,7 @@ export default class Code extends React.Component {
 
     renderNode(node) {
         let markup = [];
-        if (this.state.fileStructure[node].children !== undefined && this.state.fileStructure[node].open) {
+        if (this.state.fileStructure[node].children !== undefined && this.state.fileStructure[node].children !== null && this.state.fileStructure[node].open) {
             for (let i = 0; i < this.state.fileStructure[node].children.length; i++) {
                 markup.push(this.renderNode(this.state.fileStructure[node].children[i]));
             }
@@ -372,6 +313,7 @@ export default class Code extends React.Component {
                     <span style={{fontStyle: this.state.fileStructure[node].root ? "italic" : ""}}>
                         {this.state.fileStructure[node].name}
                     </span>
+                    {this.renderWrite(node)}
                 </div>
                 <div style={{marginLeft: 16}}>
                     {markup}
@@ -384,7 +326,7 @@ export default class Code extends React.Component {
         if (this.state.fileStructure[node].type === "folder") {
             return (
                 <Button className="treeFoldButton"
-                        disabled={this.state.fileStructure[node].children === undefined}
+                        disabled={this.state.fileStructure[node].children === undefined || this.state.fileStructure[node].children == null || this.state.fileStructure[node].children[0] === undefined}
                         onClick={() => {
                             let newStructure = this.state.fileStructure;
                             newStructure[node].open = !newStructure[node].open;
@@ -397,7 +339,36 @@ export default class Code extends React.Component {
                     <Icon type={this.state.fileStructure[node].open ? "caret-down" : "caret-right"}
                           style={{
                               marginRight: 4,
-                              color: this.state.fileStructure[node].children !== undefined ? "#ADADAD" : "#3C3F41"
+                              color: (this.state.fileStructure[node].children !== undefined && this.state.fileStructure[node].children != null && this.state.fileStructure[node].children[0] !== undefined) ? "#ADADAD" : "#3C3F41"
+                          }}
+                    />
+                </Button>
+            )
+        }
+    }
+
+    renderWrite(node) {
+        if (this.state.fileStructure[node].type !== "folder") {
+            return (
+                <Button className="treeFoldButton"
+                        onClick={() => {
+                            let i = node;
+                            console.log(this.state.fileStructure);
+                            let path = "";
+                            while (this.state.fileStructure[i].parent !== -1) {
+                                path = this.state.fileStructure[i].name + "/" + path;
+                                i = this.state.fileStructure[i].parent;
+                            }
+                            path = path.substr(0, path.length - 1);
+                            path += "." + this.state.fileStructure[node].type;
+                            console.log(path);
+                            this.openFile(path);
+                        }}
+                >
+                    <Icon type={this.state.fileStructure[node].open ? "caret-down" : "caret-right"}
+                          style={{
+                              marginRight: 4,
+                              color: (this.state.fileStructure[node].children !== undefined && this.state.fileStructure[node].children != null && this.state.fileStructure[node].children[0] !== undefined) ? "#ADADAD" : "#3C3F41"
                           }}
                     />
                 </Button>
@@ -545,8 +516,6 @@ export default class Code extends React.Component {
             type: this.state.newFileType
         };
 
-        console.log(order);
-
         fetch(serverIp + "/new-file",
             {
                 method: "post",
@@ -556,8 +525,7 @@ export default class Code extends React.Component {
                 },
                 body: JSON.stringify(order),
             }
-        );
-
+        ).then(this.updateFileTree);
     }
 
     handleFileNewClick(key) {
@@ -573,11 +541,8 @@ export default class Code extends React.Component {
 
     handleMenuClick(modalFunction, item) {
         const key = item.key;
-        console.log(item);
         if (key === "newFolder") {
             modalFunction("folder");
-        } else if (key === "newProject") {
-            modalFunction("project");
         } else if (key === "newJava") {
             modalFunction("java source file");
         } else if (key === "newText") {
@@ -594,6 +559,24 @@ export default class Code extends React.Component {
     handleNewPathChange(event) {
         this.setState({newPath: event.target.value});
     }
+
+    openFile(path) {
+        fetch(serverIp + "/load",
+            {
+                method: "post",
+                credentials: 'include',
+                headers: {
+                    "Accept": "application/json"
+                },
+                body: path
+            }
+        ).then(response => response.json())
+            .then(data => {
+                this.setState({
+                    code: data[0]
+                })
+            })
+    };
 }
 
 /*

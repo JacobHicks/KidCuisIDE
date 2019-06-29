@@ -350,25 +350,29 @@ export default class Code extends React.Component {
     renderWrite(node) {
         if (this.state.fileStructure[node].type !== "folder") {
             return (
-                <Button className="treeFoldButton"
+                <Button className="editButton"
+                        ghost
                         onClick={() => {
                             let i = node;
-                            console.log(this.state.fileStructure);
                             let path = "";
                             while (this.state.fileStructure[i].parent !== -1) {
                                 path = this.state.fileStructure[i].name + "/" + path;
                                 i = this.state.fileStructure[i].parent;
                             }
-                            path = path.substr(0, path.length - 1);
-                            path += "." + this.state.fileStructure[node].type;
-                            console.log(path);
-                            this.openFile(path);
+                            this.setState({
+                                filePath: path.substr(0, path.substr(0, path.length - 1).lastIndexOf("/"))
+                            }, () => {
+                                path = path.substr(0, path.length - 1);
+                                path += "." + this.state.fileStructure[node].type;
+                                this.openFile(path);
+                            });
                         }}
                 >
-                    <Icon type={this.state.fileStructure[node].open ? "caret-down" : "caret-right"}
+                    <Icon type="edit"
+                          className="editButton"
                           style={{
-                              marginRight: 4,
-                              color: (this.state.fileStructure[node].children !== undefined && this.state.fileStructure[node].children != null && this.state.fileStructure[node].children[0] !== undefined) ? "#ADADAD" : "#3C3F41"
+                              marginLeft: 4,
+                              color: "#ADADAD"
                           }}
                     />
                 </Button>
@@ -529,7 +533,6 @@ export default class Code extends React.Component {
     }
 
     handleFileNewClick(key) {
-        console.log(key);
     }
 
     openModal = type => {

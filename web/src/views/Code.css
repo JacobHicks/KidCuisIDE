@@ -257,3 +257,10 @@
     padding-top: 4px;
     width: 54px;
 }
+
+.editButton {
+    padding: 0;
+    border: none;
+    margin-top: 0;
+    height: 12px;
+}

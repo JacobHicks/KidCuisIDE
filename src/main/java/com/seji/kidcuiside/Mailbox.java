@@ -61,7 +61,7 @@ public class Mailbox {
                 res.setEof(true);
                 return res;
             } else {
-                while (!outputQueue.containsKey(sessionId) || outputQueue.get(sessionId)[0] == null || ((InputStream) outputQueue.get(sessionId)[0]).available() == 0) {
+                while (((!outputQueue.containsKey(sessionId) || outputQueue.get(sessionId)[0] == null || ((InputStream) outputQueue.get(sessionId)[0]).available() == 0)) && (((InputStream) outputQueue.get(sessionId)[1]) != null || ((InputStream) outputQueue.get(sessionId)[1]).available() <= 0)) {
                     if (outputQueue.get(sessionId)[3].equals(true)) {
                         res.setEof(true);
                         return res;
@@ -75,10 +75,9 @@ public class Mailbox {
                     } else {
                         res.setOutput("");
                     }
-                    InputStream err = (InputStream) outputQueue.get(sessionId)[1];
-                    if (err != null && err.available() > 0) {
-                        byte[] messagebytes = new byte[err.available()];
-                        err.read(messagebytes);
+                    if (((InputStream) outputQueue.get(sessionId)[1]) != null && ((InputStream) outputQueue.get(sessionId)[1]).available() > 0) {
+                        byte[] messagebytes = new byte[((InputStream) outputQueue.get(sessionId)[1]).available()];
+                        ((InputStream) outputQueue.get(sessionId)[1]).read(messagebytes);
                         res.setError(new String(messagebytes));
                     } else {
                         res.setError("");

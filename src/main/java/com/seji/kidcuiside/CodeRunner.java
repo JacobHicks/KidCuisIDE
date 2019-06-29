@@ -51,7 +51,7 @@ class CodeRunner implements Runnable {
                                 try {
                                     switch (runRequest.getLanguage()) {
                                         case ("java"):
-                                            processBuilder.command("javac", file.getAbsolutePath());
+                                            processBuilder.command("C:\\Program Files\\Java\\jdk1.8.0_201\\bin\\javac.exe", file.getAbsolutePath());
                                             break;
                                     }
                                     Process process = processBuilder.start();
@@ -99,10 +99,11 @@ class CodeRunner implements Runnable {
 
     private File saveCode(FullRunRequest runRequest) {
         try {
-            File file = new File("Users/" + runRequest.getSessionId());
+            File file = new File("Users/" + runRequest.getSessionId() + "/" + runRequest.getPath());
             if(!file.exists()) file.mkdir();
-            file = new File("Users/" + runRequest.getSessionId() + "/" + runRequest.getPath() + runRequest.getName() + "." + runRequest.getLanguage());
+            file = new File("Users/" + runRequest.getSessionId() + "/" + runRequest.getPath() + "/" + runRequest.getName() + "." + runRequest.getLanguage());
             if (file.exists()) file.delete();
+            System.out.println(file.getAbsolutePath());
             if (file.createNewFile()) {
                 PrintWriter outputStream = new PrintWriter(file);
                 outputStream.print(runRequest.getCode());

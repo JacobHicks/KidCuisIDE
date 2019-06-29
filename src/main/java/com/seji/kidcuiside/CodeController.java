@@ -123,6 +123,7 @@ public class CodeController {
             sc.useDelimiter("");
             while (sc.hasNext()) code += sc.next();
             res.add(code);
+            sc.close();
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }

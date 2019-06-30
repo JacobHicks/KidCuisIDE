@@ -47,7 +47,7 @@ export default class Home extends React.Component {
                     </div>
                     <div>
                         <h3>
-                            <img className="slideImage" src="https://files.slack.com/files-pri/TD2FXNNPN-FL0EWMFS4/capture.png" alt="A premium cloud-based IDE" />
+                            <img className="slideImage" src="https://files.slack.com/files-pri/TD2FXNNPN-FKU4NH7LZ/capture.png" alt="A premium cloud-based IDE" />
                             <p className={"caption"}><b>A premium Java IDE</b></p>
                         </h3>
                     </div>

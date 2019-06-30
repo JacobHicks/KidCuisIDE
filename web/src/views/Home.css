@@ -51,13 +51,13 @@ body {
 }
 .joinButton {
     background-color: #008CBA;
-    float: left;
     justify-self: center;
-    margin-left: 5vw;
+    margin-top: 5vh;
     color: white;
     border: none;
     border-radius: 4px;
     font-size: 24px;
+
 }
 .joinButton:hover {
     background-color:#008900;
@@ -149,6 +149,15 @@ body {
     margin-left: 10vw;
 }
 .slideImage {
-    width: 80vw;
+    width: 50vw;
+    float: right;
     height: 50vh;
+}
+.caption {
+    color: white;
+    float: right;
+    font-size: 18px;
+    line-height: 4.5;
+    margin-top: 50px;
+
 }

@@ -38,45 +38,41 @@ export default class Home extends React.Component {
                <div className="carouselWrapper animated fadeInUp 3s">
                 <Carousel afterChange={onChange()}>
                     <div>
-                        <img className="slideImage" src="" alt=""/>
+                        <img className="slideImage" src="https://files.slack.com/files-pri/TD2FXNNPN-FKU4NH7LZ/capture.png" alt="Fully-featured IDE"/>
                         <div className="joinDiv">
+
+                            <p className={"caption"}><b>The online IDE for students and learners.</b></p>
                             <a href="/code"><button className="joinButton">Get started!</button></a>
                         </div>
                     </div>
                     <div>
                         <h3>
-                            <img className="slideImage" src="" />
+                            <img className="slideImage" src="https://files.slack.com/files-pri/TD2FXNNPN-FL0EWMFS4/capture.png" alt="A premium cloud-based IDE" />
+                            <p className={"caption"}><b>A premium Java IDE</b></p>
+                        </h3>
+                    </div>
+                    <div>
+                        <h3>
+                            <img className="slideImage" src="https://files.slack.com/files-pri/TD2FXNNPN-FKP2NHT50/capture__1_.png"/>
+                            <p className="caption"><b>Fully colored and easy on the eyes.</b></p>
                         </h3>
                     </div>
                     <div>
                         <h3>
                             <img className="slideImage" src=""/>
+                            <p><b>Supports user input and System.in</b></p>
                         </h3>
-                    </div>
-                    <div>
-                        <h3>4</h3>
                     </div>
                 </Carousel>
                </div>
                 <div className="firstButtonDiv animated bounce infinite slower">
-                    <a href="#section2"><button className="launch" onClick={lunch()}>&#709;</button></a>
+                    <a href="#section2"><button className="launch" onClick={lunch()}>&#8659;</button></a>
                 </div>
                 <div id="section2" className="section">
-                    <h1 className="itemHeading" id="itemHeading1">School Oriented IDE</h1>
-                    <img  className="helperImage left" id="helperImage1"src="https://previews.123rf.com/images/stevanovicigor/stevanovicigor1508/stevanovicigor150800150/43924569-tv-damage-bad-sync-tv-channel-rgb-lcd-television-screen-with-static-noise-from-poor-broadcast-signal.jpg"></img>
+                    <h1 className="itemHeading" id="itemHeading1">Education Oriented IDE</h1>
+                    <img  className="helperImage left" id="helperImage1"src="https://www.top10spysoftware.com/wp-content/uploads/sm.jpg"></img>
 
-                    <p className="talk" id="talk1">"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum." WebIDE comes with teacher and student logins that allow teachers to monitor and work with students individually.</p>
-                    <div className="buttonDiv firstButtonDiv">
-                        <a href="#section3"><button className="launch" >&#709;</button></a>
-                    </div>
-                </div>
-                <div id="section3" className="section">
-                    <h1 className="itemHeading">Ready to work wherever you are.</h1>
-                    <img  className="helperImage" src="https://previews.123rf.com/images/stevanovicigor/stevanovicigor1508/stevanovicigor150800150/43924569-tv-damage-bad-sync-tv-channel-rgb-lcd-television-screen-with-static-noise-from-poor-broadcast-signal.jpg"></img>
-                    <p className="talk">"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum." WebIDE comes with teacher and student logins that allow teachers to monitor and work with students individually.</p>
-                    <div className="buttonDiv firstButtonDiv">
-                        <a href="#section4"><button className="launch" >&#709;</button></a>
-                    </div>
+                    <p className="talk" id="talk1">WebIDE will make both adminstrators' and students' lives easier by allowing them to work wherever they are and on any device of their choosing without having to worry about storage or other typical programming and tech hassles. A student will be more likely to complete their assignments is they can even open on their phones. A cloud based IDE makes it incredibly easy for schools to get started with a computer science program and help the next generation live a better life. WebIDE is a free app that is structured around providng students with a way to practice their computer science skills on the go and in the primary language of high school students which is Java.</p>
                 </div>
             </div>
             </div>

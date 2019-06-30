@@ -54,13 +54,7 @@ export default class Home extends React.Component {
                     <div>
                         <h3>
                             <img className="slideImage" src="https://files.slack.com/files-pri/TD2FXNNPN-FKP2NHT50/capture__1_.png"/>
-                            <p className="caption"><b>Fully colored and easy on the eyes.</b></p>
-                        </h3>
-                    </div>
-                    <div>
-                        <h3>
-                            <img className="slideImage" src=""/>
-                            <p><b>Supports user input and System.in</b></p>
+                            <p className={"caption"}><b>Supports user input and System.in</b></p>
                         </h3>
                     </div>
                 </Carousel>
@@ -75,6 +69,7 @@ export default class Home extends React.Component {
                     <p className="talk" id="talk1">WebIDE will make both adminstrators' and students' lives easier by allowing them to work wherever they are and on any device of their choosing without having to worry about storage or other typical programming and tech hassles. A student will be more likely to complete their assignments is they can even open on their phones. A cloud based IDE makes it incredibly easy for schools to get started with a computer science program and help the next generation live a better life. WebIDE is a free app that is structured around providng students with a way to practice their computer science skills on the go and in the primary language of high school students which is Java.</p>
                 </div>
             </div>
+
             </div>
             </body>
             </html>

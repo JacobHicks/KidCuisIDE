@@ -155,7 +155,7 @@ body {
 }
 .caption {
     color: white;
-    float: right;
+    text-align: center;
     font-size: 18px;
     line-height: 4.5;
     margin-top: 50px;

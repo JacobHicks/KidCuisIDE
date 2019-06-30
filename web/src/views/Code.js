@@ -564,21 +564,42 @@ export default class Code extends React.Component {
     }
 
     openFile(path) {
-        fetch(serverIp + "/load",
+        let codeForm = {
+            name: this.state.fileName,
+            path: this.state.filePath,
+            language: this.state.language,
+            code: this.state.code
+        };
+
+        console.log("Save");
+
+        fetch(serverIp + "/save",
             {
                 method: "post",
-                credentials: 'include',
                 headers: {
+                    "Content-Type": "application/json",
                     "Accept": "application/json"
                 },
-                body: path
+                body: JSON.stringify(codeForm),
+                credentials: 'include'
             }
-        ).then(response => response.json())
-            .then(data => {
-                this.setState({
-                    code: data[0]
+        ).then(
+            fetch(serverIp + "/load",
+                {
+                    method: "post",
+                    credentials: 'include',
+                    headers: {
+                        "Accept": "application/json"
+                    },
+                    body: path
+                }
+            ).then(response => response.json())
+                .then(data => {
+                    this.setState({
+                        code: data[0]
+                    })
                 })
-            })
+        )
     };
 }
 

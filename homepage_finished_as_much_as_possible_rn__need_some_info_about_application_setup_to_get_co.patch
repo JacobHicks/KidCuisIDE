@@ -1,0 +1,226 @@
+Index: web/src/views/Home.css
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- web/src/views/Home.css	(revision 98f8fce6aaf76031e26a95e77ed028e210f57251)
++++ web/src/views/Home.css	(date 1561755700858)
+@@ -2,15 +2,15 @@
+ @keyframes colors {
+    0% {
+        color:darkslateblue;
+-       border-color: darkslateblue;
++       border-color: aquamarine;
+    }
+    50% {
+-       color: seagreen;
++       color: #497779;
+        border-color: whitesmoke;
+    }
+    100% {
+        color:darkslateblue;
+-        border-color:darkslateblue;
++        border-color:aquamarine;
+    }
+ }
+ .ant-carousel  {
+@@ -49,6 +49,23 @@
+     text-align : center;
+     animation: 0.8s flipInX ease;
+ }
++.joinButton {
++    background-color: #008CBA;
++    float: left;
++    justify-self: center;
++    margin-left: 5vw;
++    color: white;
++    border: none;
++    border-radius: 4px;
++    font-size: 24px;
++}
++.joinButton:hover {
++    background-color:#008900;
++    animation: ease 230ms;
++}
++.joinDiv {
++    z-index: 3;
++}
+ .subtitle {
+     color: black;
+     padding-top: 40px;
+@@ -56,42 +73,17 @@
+     font-size: 16px;
+     text-align : center;
+ }
+-.navDiv {
+-    float: right;
+-    position: fixed;
+-    width: 100%;
+-    background-image: linear-gradient(to right, transparent 80%, #0057e6);
+-    z-index: 3;
+-}
+-.loginButtons {
+-    background-color: #0057e6;
+-    font-family: Fira Mono;
+-    font-size: 28px;
+-    border: none;
+-    margin-left: 0;
+-    float: right;
+-    cursor: pointer;
+-    outline: none;
+-    margin-top: 0px;
+-    z-index: 3;
+-}
+-.loginButtons:hover {
+-    transition: all 550ms, ease;
+-    background-color: #008900;
+-    border-bottom-color: darkblue;
+-    border-bottom-style: solid;
+-    border-bottom-width: 3px;
+-}
+ .firstButtonDiv {
+     text-align: center;
+     padding-top: 10vh;
+ }
+ .buttonDiv {
+     text-align: center;
+-    padding-top: 40vh;
++    padding-top: 26vh;
+ }
+ .launch {
+     display: table-cell;
++    background-color: #313335;
+     vertical-align: middle;
+     border-radius: 100%;
+     border: 3px solid transparent;
+@@ -112,45 +104,42 @@
+     border: 3px lightseagreen solid;
+ }
+ #section2 {
+-    margin-top: 20vh;
++    margin-top: 16vh;
+ 
+ }
+ .section {
+-    boder-top: 5px solid cadetblue;
+-    boder-bottom: 5px solid cadetblue;
+-    margin-top: 5px;
++    margin-top: -5px;
+     height: 100vh;
+-    background-color: #1b1028;
+     scroll-behavior: smooth;
+ }
+ .itemHeading {
+-    color: rgba(61, 78, 77, 0.86);
++    color: #3C3F41;
+     text-decoration: underline;
+-    text-decoration-color: #497779;
++    text-decoration-color: #595959;
+     font-family: Fira Mono;
+     font-size: 45px;
+     text-align: center;
+ }
+-.helperTitle {
+-    color: rgb(249, 255, 251);
+-    font-family: Fira Mono;
+-    font-size: 30px;
+-    text-align: center;
+-}
++
+ .talk {
+-    color: whitesmoke;
++    color: darkslategrey;
+     font-family: Fira Mono;
+     font-size: 14px;
+-    margin-right: 50px;
+-    margin-left: 50px;
+-    margin-top: 45px;
++    margin-right: 10vw;
++    margin-left: 10vw;
++    margin-top: 10vw;
+ }
++    .left {
++        float: left;
++    }
++    .right {
++        float: right;
++    }
+ .helperImage {
+     display: inline;
+     margin-left: 5vw;
+     margin-right: 5vw;
+     margin-top: 15px;
+-    float: right;
+     max-width: 44vw;
+     height: auto;
+     border-radius: 5px;
+Index: web/src/views/Home.js
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- web/src/views/Home.js	(revision 98f8fce6aaf76031e26a95e77ed028e210f57251)
++++ web/src/views/Home.js	(date 1561782650571)
+@@ -32,31 +32,25 @@
+             <html>
+             <body>
+             <div className="wrapper">
+-            <div className="navDiv animated fadeInRight 1.5s">
+-                <Link to="/login">
+-                    <button className="loginButtons">Login</button>
+-                </Link>
+-
+-                <Link to="/signup">
+-                    <button className="loginButtons">Signup</button>
+-                </Link>
+-            </div>
+             <div className="">
+-                <h1 className="intro headline test animated fadeInLeft 1.5s"><u>WebIDE</u>: The all-new online IDE.</h1>
++                <h1 className="intro headline test animated fadeInLeftBig 1.5s"><u>WebIDE</u>: The all-new online IDE.</h1>
+                 <h2 className="subtitle animated fadeInRight 2s">The IDE for students and educators</h2>
+                <div className="carouselWrapper animated fadeInUp 3s">
+                 <Carousel afterChange={onChange()}>
+                     <div>
+-                        <img className="slideImage" src="http://torquemag-hhvm.s3.amazonaws.com/uploads/2013/02/steve-jobs.jpeg" alt=""/>
++                        <img className="slideImage" src="" alt=""/>
++                        <div className="joinDiv">
++                            <a href="/code"><button className="joinButton">Get started!</button></a>
++                        </div>
+                     </div>
+                     <div>
+                         <h3>
+-                            <img className="slideImage" src="https://www.copaco.com/Copaco/static/WFS/copaco-Site/Nederland-smb-responsive/copaco-Nederland-smb-responsive/en_US/Services/Cloud/2tCloud-IHJ.jpg" />
++                            <img className="slideImage" src="" />
+                         </h3>
+                     </div>
+                     <div>
+                         <h3>
+-                            <img className="slideImage" src="https://cdn.lynda.com/course/184457/184457-636806635954727169-16x9.jpg"/>
++                            <img className="slideImage" src=""/>
+                         </h3>
+                     </div>
+                     <div>
+@@ -69,20 +63,18 @@
+                 </div>
+                 <div id="section2" className="section">
+                     <h1 className="itemHeading" id="itemHeading1">School Oriented IDE</h1>
+-                    <h2 className="helperTitle" id="helperTitle1">With teacher accounts</h2>
+-                    <img  className="helperImage" id="helperImage1"src="https://previews.123rf.com/images/stevanovicigor/stevanovicigor1508/stevanovicigor150800150/43924569-tv-damage-bad-sync-tv-channel-rgb-lcd-television-screen-with-static-noise-from-poor-broadcast-signal.jpg"></img>
++                    <img  className="helperImage left" id="helperImage1"src="https://previews.123rf.com/images/stevanovicigor/stevanovicigor1508/stevanovicigor150800150/43924569-tv-damage-bad-sync-tv-channel-rgb-lcd-television-screen-with-static-noise-from-poor-broadcast-signal.jpg"></img>
+ 
+                     <p className="talk" id="talk1">"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum." WebIDE comes with teacher and student logins that allow teachers to monitor and work with students individually.</p>
+-                    <div className="buttonDiv firstButtonDiv animated bounce infinite slower">
++                    <div className="buttonDiv firstButtonDiv">
+                         <a href="#section3"><button className="launch" >&#709;</button></a>
+                     </div>
+                 </div>
+                 <div id="section3" className="section">
+                     <h1 className="itemHeading">Ready to work wherever you are.</h1>
+-                    <h2 className="helperTitle">A full featured cloud-based IDE</h2>
+                     <img  className="helperImage" src="https://previews.123rf.com/images/stevanovicigor/stevanovicigor1508/stevanovicigor150800150/43924569-tv-damage-bad-sync-tv-channel-rgb-lcd-television-screen-with-static-noise-from-poor-broadcast-signal.jpg"></img>
+                     <p className="talk">"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum." WebIDE comes with teacher and student logins that allow teachers to monitor and work with students individually.</p>
+-                    <div className="buttonDiv firstButtonDiv animated bounce infinite slower">
++                    <div className="buttonDiv firstButtonDiv">
+                         <a href="#section4"><button className="launch" >&#709;</button></a>
+                     </div>
+                 </div>

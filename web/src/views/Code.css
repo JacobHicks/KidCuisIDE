@@ -236,7 +236,6 @@
 }
 
 .codeModalTitle {
-    font-family: Consolas, Menlo, Monaco, 'Lucida Console', 'Liberation Mono', 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', 'Courier New', monospace, serif;
     color: #A9B7C6;
 }
 
@@ -257,4 +256,11 @@
     color: #a4a4a4;
     padding-top: 4px;
     width: 54px;
+}
+
+.editButton {
+    padding: 0;
+    border: none;
+    margin-top: 0;
+    height: 12px;
 }

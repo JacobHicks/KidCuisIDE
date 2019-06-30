@@ -53,7 +53,7 @@ export default class Home extends React.Component {
                     </div>
                     <div>
                         <h3>
-                            <img className="slideImage" src="https://files.slack.com/files-pri/TD2FXNNPN-FKP2NHT50/capture__1_.png"/>
+                            <img className="slideImage" src="https://files.slack.com/files-pri/TD2FXNNPN-FKP2NHT50/capture__1_.png3"/>
                             <p className={"caption"}><b>Supports user input and System.in</b></p>
                         </h3>
                     </div>

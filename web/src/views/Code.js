@@ -353,13 +353,34 @@ export default class Code extends React.Component {
                 <Button className="editButton"
                         ghost
                         onClick={() => {
+                            let codeForm = {
+                                name: this.state.fileName,
+                                path: this.state.filePath,
+                                language: this.state.language,
+                                code: this.state.code
+                            };
+
+                            fetch(serverIp + "/save",
+                                {
+                                    method: "post",
+                                    headers: {
+                                        "Content-Type": "application/json",
+                                        "Accept": "application/json"
+                                    },
+                                    body: JSON.stringify(codeForm),
+                                    credentials: 'include'
+                                }
+                            );
                             let i = node;
                             let path = "";
                             while (this.state.fileStructure[i].parent !== -1) {
                                 path = this.state.fileStructure[i].name + "/" + path;
                                 i = this.state.fileStructure[i].parent;
                             }
+
+
                             this.setState({
+                                fileName: this.state.fileStructure[node].name,
                                 filePath: path.substr(0, path.substr(0, path.length - 1).lastIndexOf("/"))
                             }, () => {
                                 path = path.substr(0, path.length - 1);
@@ -579,6 +600,7 @@ export default class Code extends React.Component {
                     code: data[0]
                 })
             })
+
     };
 }
 

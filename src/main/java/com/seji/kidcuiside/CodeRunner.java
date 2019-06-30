@@ -49,14 +49,7 @@ class CodeRunner implements Runnable {
                             File file = saveCode(runRequest);
                             if (file != null) {
                                 try {
-                                    switch (runRequest.getLanguage()) {
-                                        case ("java"):
-                                            processBuilder.command("C:\\Program Files\\Java\\jdk1.8.0_201\\bin\\javac.exe", file.getAbsolutePath());
-                                            break;
-                                    }
-                                    Process process = processBuilder.start();
-                                    Mailbox.addOutputTrail(runRequest.getSessionId(), process.getInputStream(), process.getErrorStream());
-                                    while (process.isAlive()) ;
+                                    compilesave(runRequest);
 
                                     int endPathIndex = file.getAbsolutePath().lastIndexOf("\\" + runRequest.getName());
                                     if (endPathIndex == -1)
@@ -67,7 +60,7 @@ class CodeRunner implements Runnable {
                                             break;
                                     }
 
-                                    process = processBuilder.start();
+                                    Process process = processBuilder.start();
                                     Mailbox.addOutputTrail(runRequest.getSessionId(), process.getInputStream(), process.getErrorStream());
                                     Mailbox.addInputTrail(runRequest.getSessionId(), process.getOutputStream());
 
@@ -129,5 +122,24 @@ class CodeRunner implements Runnable {
 
     void start() {
         enabled.set(true);
+    }
+
+    void compilesave(FullRunRequest runRequest) {
+        File file = saveCode(runRequest);
+        if(file != null) {
+            switch (runRequest.getLanguage()) {
+                case ("java"):
+                    processBuilder.command("C:\\Program Files\\Java\\jdk1.8.0_201\\bin\\javac.exe", file.getAbsolutePath());
+                    break;
+            }
+            Process process = null;
+            try {
+                process = processBuilder.start();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            Mailbox.addOutputTrail(runRequest.getSessionId(), process.getInputStream(), process.getErrorStream());
+            while (process.isAlive()) ;
+        }
     }
 }

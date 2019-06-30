@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.*;
@@ -128,4 +129,49 @@ public class CodeController {
         }
         return res;
     }
+
+    @PostMapping("/save")
+    public void save(@CookieValue(value="session", defaultValue = "testUser") String sessionId, @RequestBody PreRunRequest pr) {
+        FullRunRequest runRequest = new FullRunRequest(pr);
+        runRequest.setSessionId(sessionId);
+        ProcessBuilder processBuilder = new ProcessBuilder();
+
+        File file = saveCode(runRequest);
+        if(file != null) {
+            switch (runRequest.getLanguage()) {
+                case ("java"):
+                    processBuilder.command("C:\\Program Files\\Java\\jdk1.8.0_201\\bin\\javac.exe", file.getAbsolutePath());
+                    break;
+            }
+            Process process = null;
+            try {
+                process = processBuilder.start();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            while (process.isAlive());
+        }
+    }
+
+    private File saveCode(FullRunRequest runRequest) {
+        try {
+            File file = new File("Users/" + runRequest.getSessionId() + "/" + runRequest.getPath());
+            if(!file.exists()) file.mkdir();
+            file = new File("Users/" + runRequest.getSessionId() + "/" + runRequest.getPath() + "/" + runRequest.getName() + "." + runRequest.getLanguage());
+            if (file.exists()) file.delete();
+            System.out.println(file.getAbsolutePath());
+            if (file.createNewFile()) {
+                PrintWriter outputStream = new PrintWriter(file);
+                outputStream.print(runRequest.getCode());
+                outputStream.close();
+                return file;
+            } else {
+                throw new IOException("Unable to create new file");
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
 }

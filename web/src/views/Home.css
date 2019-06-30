@@ -2,15 +2,15 @@
 @keyframes colors {
    0% {
        color:darkslateblue;
-       border-color: darkslateblue;
+       border-color: aquamarine;
    }
    50% {
-       color: seagreen;
+       color: #497779;
        border-color: whitesmoke;
    }
    100% {
        color:darkslateblue;
-        border-color:darkslateblue;
+        border-color:aquamarine;
    }
 }
 .ant-carousel  {
@@ -49,6 +49,23 @@ body {
     text-align : center;
     animation: 0.8s flipInX ease;
 }
+.joinButton {
+    background-color: #008CBA;
+    float: left;
+    justify-self: center;
+    margin-left: 5vw;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 24px;
+}
+.joinButton:hover {
+    background-color:#008900;
+    animation: ease 230ms;
+}
+.joinDiv {
+    z-index: 3;
+}
 .subtitle {
     color: black;
     padding-top: 40px;
@@ -56,42 +73,17 @@ body {
     font-size: 16px;
     text-align : center;
 }
-.navDiv {
-    float: right;
-    position: fixed;
-    width: 100%;
-    background-image: linear-gradient(to right, transparent 80%, #0057e6);
-    z-index: 3;
-}
-.loginButtons {
-    background-color: #0057e6;
-    font-family: Fira Mono;
-    font-size: 28px;
-    border: none;
-    margin-left: 0;
-    float: right;
-    cursor: pointer;
-    outline: none;
-    margin-top: 0px;
-    z-index: 3;
-}
-.loginButtons:hover {
-    transition: all 550ms, ease;
-    background-color: #008900;
-    border-bottom-color: darkblue;
-    border-bottom-style: solid;
-    border-bottom-width: 3px;
-}
 .firstButtonDiv {
     text-align: center;
     padding-top: 10vh;
 }
 .buttonDiv {
     text-align: center;
-    padding-top: 40vh;
+    padding-top: 26vh;
 }
 .launch {
     display: table-cell;
+    background-color: #313335;
     vertical-align: middle;
     border-radius: 100%;
     border: 3px solid transparent;
@@ -112,45 +104,42 @@ body {
     border: 3px lightseagreen solid;
 }
 #section2 {
-    margin-top: 20vh;
+    margin-top: 16vh;
 
 }
 .section {
-    boder-top: 5px solid cadetblue;
-    boder-bottom: 5px solid cadetblue;
-    margin-top: 5px;
+    margin-top: -5px;
     height: 100vh;
-    background-color: #1b1028;
     scroll-behavior: smooth;
 }
 .itemHeading {
-    color: rgba(61, 78, 77, 0.86);
+    color: #3C3F41;
     text-decoration: underline;
-    text-decoration-color: #497779;
+    text-decoration-color: #595959;
     font-family: Fira Mono;
     font-size: 45px;
     text-align: center;
 }
-.helperTitle {
-    color: rgb(249, 255, 251);
-    font-family: Fira Mono;
-    font-size: 30px;
-    text-align: center;
-}
+
 .talk {
-    color: whitesmoke;
+    color: darkslategrey;
     font-family: Fira Mono;
     font-size: 14px;
-    margin-right: 50px;
-    margin-left: 50px;
-    margin-top: 45px;
+    margin-right: 10vw;
+    margin-left: 10vw;
+    margin-top: 10vw;
 }
+    .left {
+        float: left;
+    }
+    .right {
+        float: right;
+    }
 .helperImage {
     display: inline;
     margin-left: 5vw;
     margin-right: 5vw;
     margin-top: 15px;
-    float: right;
     max-width: 44vw;
     height: auto;
     border-radius: 5px;

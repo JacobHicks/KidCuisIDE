@@ -38,7 +38,7 @@ export default class Home extends React.Component {
                <div className="carouselWrapper animated fadeInUp 3s">
                 <Carousel afterChange={onChange()}>
                     <div>
-                        <img className="slideImage" src="https://files.slack.com/files-pri/TD2FXNNPN-FKU4NH7LZ/capture.png" alt="Fully-featured IDE"/>
+                        <img className="slideImage" src="https://i.ibb.co/JsZxQ6Z/Screenshot-399.png" alt="Fully-featured IDE"/>
                         <div className="joinDiv">
 
                             <p className={"caption"}><b>The online IDE for students and learners.</b></p>
@@ -47,13 +47,13 @@ export default class Home extends React.Component {
                     </div>
                     <div>
                         <h3>
-                            <img className="slideImage" src="https://files.slack.com/files-pri/TD2FXNNPN-FKU4NH7LZ/capture.png" alt="A premium cloud-based IDE" />
+                            <img className="slideImage" src="https://i.ibb.co/3sYM0R5/Capture.png" alt="A premium cloud-based IDE" />
                             <p className={"caption"}><b>A premium Java IDE</b></p>
                         </h3>
                     </div>
                     <div>
                         <h3>
-                            <img className="slideImage" src="https://files.slack.com/files-pri/TD2FXNNPN-FKP2NHT50/capture__1_.png3"/>
+                            <img className="slideImage" src="https://i.ibb.co/7RLkqxV/Capture-1.png"/>
                             <p className={"caption"}><b>Supports user input and System.in</b></p>
                         </h3>
                     </div>

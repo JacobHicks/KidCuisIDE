@@ -129,7 +129,7 @@ class CodeRunner implements Runnable {
         if(file != null) {
             switch (runRequest.getLanguage()) {
                 case ("java"):
-                    processBuilder.command("C:\\Program Files\\Java\\jdk1.8.0_201\\bin\\javac.exe", file.getAbsolutePath());
+                    processBuilder.command("C:\\Program Files\\Java\\jdk-10\\bin\\javac.exe", file.getAbsolutePath());
                     break;
             }
             Process process = null;

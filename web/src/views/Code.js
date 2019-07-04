@@ -348,7 +348,7 @@ export default class Code extends React.Component {
     }
 
     renderWrite(node) {
-        if (this.state.fileStructure[node].type !== "folder") {
+        if (this.state.fileStructure[node].type !== "folder" && this.state.fileStructure[node].type !== "class") {
             return (
                 <Button className="editButton"
                         ghost
